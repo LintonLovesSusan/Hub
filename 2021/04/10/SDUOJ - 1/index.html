@@ -23,23 +23,23 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+    var CONFIG = {"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
   </script>
-<meta name="description" content="SDUOJ 拉面馆题解 (编码和位运算)数据结构定义t、s数组，分别用于存储面制作完成的时间点和顾客到达的时间点。 定义set st的数组，大小为8（即8个set构成的set数组），用于存储每种面（一种调料组合就被称为”一种”面）制作完成的时间。 算法思路先输入n，m，k。 接下来开始循环处理制作的面，时间复杂度O(n)：用三位二进制数表示面里调料的有无。初始为0，即000。然后初始化一个当前调料">
+<meta name="description" content="数据结构定义t、s数组，分别用于存储面制作完成的时间点和顾客到达的时间点。 定义set st的数组，大小为8（即8个set构成的set数组），用于存储每种面（一种调料组合就被称为”一种”面）制作完成的时间。 算法思路先输入n，m，k。 接下来开始循环处理制作的面，时间复杂度O(n)：用三位二进制数表示面里调料的有无。初始为0，即000。然后初始化一个当前调料为001.根据输入的调料编号，将上述00">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SDUOJ 拉面馆题解 (编码和位运算)">
-<meta property="og:url" content="http://example.com/2021/03/15/SDUOJ%20-%201/index.html">
+<meta property="og:url" content="http://example.com/2021/04/10/SDUOJ%20-%201/index.html">
 <meta property="og:site_name" content="Just Linton&#39;s Hub">
-<meta property="og:description" content="SDUOJ 拉面馆题解 (编码和位运算)数据结构定义t、s数组，分别用于存储面制作完成的时间点和顾客到达的时间点。 定义set st的数组，大小为8（即8个set构成的set数组），用于存储每种面（一种调料组合就被称为”一种”面）制作完成的时间。 算法思路先输入n，m，k。 接下来开始循环处理制作的面，时间复杂度O(n)：用三位二进制数表示面里调料的有无。初始为0，即000。然后初始化一个当前调料">
+<meta property="og:description" content="数据结构定义t、s数组，分别用于存储面制作完成的时间点和顾客到达的时间点。 定义set st的数组，大小为8（即8个set构成的set数组），用于存储每种面（一种调料组合就被称为”一种”面）制作完成的时间。 算法思路先输入n，m，k。 接下来开始循环处理制作的面，时间复杂度O(n)：用三位二进制数表示面里调料的有无。初始为0，即000。然后初始化一个当前调料为001.根据输入的调料编号，将上述00">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-03-15T07:13:06.000Z">
-<meta property="article:modified_time" content="2021-04-09T05:58:20.855Z">
+<meta property="article:published_time" content="2021-04-10T07:13:06.000Z">
+<meta property="article:modified_time" content="2021-04-09T14:14:27.817Z">
 <meta property="article:author" content="Just Linton">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/2021/03/15/SDUOJ%20-%201/">
+<link rel="canonical" href="http://example.com/2021/04/10/SDUOJ%20-%201/">
 
 
 <script class="page-configurations">
@@ -160,7 +160,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SDUOJ-%E6%8B%89%E9%9D%A2%E9%A6%86%E9%A2%98%E8%A7%A3-%E7%BC%96%E7%A0%81%E5%92%8C%E4%BD%8D%E8%BF%90%E7%AE%97"><span class="nav-number">1.</span> <span class="nav-text">SDUOJ 拉面馆题解 (编码和位运算)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.</span> <span class="nav-text">数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E6%80%9D%E8%B7%AF"><span class="nav-number">1.2.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.3.</span> <span class="nav-text">代码实现</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E6%80%9D%E8%B7%AF"><span class="nav-number">2.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.</span> <span class="nav-text">代码实现</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -209,8 +209,6 @@
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
-  <div class="reading-progress-bar"></div>
-  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
@@ -228,7 +226,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/15/SDUOJ%20-%201/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/10/SDUOJ%20-%201/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar2.gif">
@@ -252,14 +250,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2021-03-15 15:13:06" itemprop="dateCreated datePublished" datetime="2021-03-15T15:13:06+08:00">2021-03-15</time>
+      <time title="Created: 2021-04-10 15:13:06" itemprop="dateCreated datePublished" datetime="2021-04-10T15:13:06+08:00">2021-04-10</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-04-09 13:58:20" itemprop="dateModified" datetime="2021-04-09T13:58:20+08:00">2021-04-09</time>
+        <time title="Modified: 2021-04-09 22:14:27" itemprop="dateModified" datetime="2021-04-09T22:14:27+08:00">2021-04-09</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -281,7 +279,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="SDUOJ-拉面馆题解-编码和位运算"><a href="#SDUOJ-拉面馆题解-编码和位运算" class="headerlink" title="SDUOJ 拉面馆题解 (编码和位运算)"></a>SDUOJ 拉面馆题解 (编码和位运算)</h1><h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p>定义t、s数组，分别用于存储面制作完成的时间点和顾客到达的时间点。</p>
+        <h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p>定义t、s数组，分别用于存储面制作完成的时间点和顾客到达的时间点。</p>
 <p>定义set st的数组，大小为8（即8个set构成的set数组），用于存储每种面（一种调料组合就被称为”一种”面）制作完成的时间。</p>
 <h2 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h2><p>先输入n，m，k。</p>
 <p>接下来开始循环处理制作的面，时间复杂度O(n)：用三位二进制数表示面里调料的有无。初始为0，即000。然后初始化一个当前调料为001.根据输入的调料编号，将上述001二进制数左移即可。最后根据上述二进制数的值和1-8依次做或，如果或运算等于后者，则说明该面含有的调料种类是后者的子集。将该碗面制作完成的时间放进st中。</p>
@@ -304,14 +302,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/03/15/SDUOJ%20-%202/" rel="prev" title="SDUOJ 摆放垃圾桶题解 (简单贪心)">
+                <a href="/2021/04/10/SDUOJ%20-%202/" rel="prev" title="SDUOJ 摆放垃圾桶题解 (简单贪心)">
                   <i class="fa fa-chevron-left"></i> SDUOJ 摆放垃圾桶题解 (简单贪心)
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/03/15/hello-everyone/" rel="next" title="hello everyone">
-                  hello everyone <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -366,7 +361,7 @@
 
   
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
   
 
