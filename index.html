@@ -219,7 +219,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/10/SDUOJ%20-%201/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/09/SDUOJ%20-%2014/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar2.gif">
@@ -232,7 +232,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/04/10/SDUOJ%20-%201/" class="post-title-link" itemprop="url">SDUOJ 拉面馆题解 (编码和位运算)</a>
+          <a href="/2021/04/09/SDUOJ%20-%2014/" class="post-title-link" itemprop="url">SDUOJ 看电影题解（流水线调度问题）</a>
         </h2>
 
         <div class="post-meta-container">
@@ -242,16 +242,92 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
+      
 
-      <time title="Created: 2021-04-10 15:13:06" itemprop="dateCreated datePublished" datetime="2021-04-10T15:13:06+08:00">2021-04-10</time>
+      <time title="Created: 2021-04-09 15:13:06 / Modified: 22:20:43" itemprop="dateCreated datePublished" datetime="2021-04-09T15:13:06+08:00">2021-04-09</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-04-09 22:14:27" itemprop="dateModified" datetime="2021-04-09T22:14:27+08:00">2021-04-09</time>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
       </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p>定义person结构体，存储a、b。</p>
+<p>重载小于运算符，使该结构体的排序规则符合Johnson法则。</p>
+<h2 id="Johnson法则"><a href="#Johnson法则" class="headerlink" title="Johnson法则"></a>Johnson法则</h2><p>对一个人，如果它的A时间&lt;=B时间，则与其同类的排序规则是按a升序；如果它的A时间&lt;B时间，则与同类的排序规则是按b降序。最后，将上述后一类人连接到前一类人的末尾，组成的整个序列就是最优的流水线调度序列。</p>
+<h2 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h2><p>根据Johnson法则构造一个最优序列，按如下算法计算总时间即可：</p>
+<p>对于A影院，无脑累加时间，并记录每个人观影结束时间。</p>
+<p>对于B影院，如果当前累计时间小于下一个要来B看电影的人在A的结束时间，就让当前累计时间直接等于该人在A的结束时间。之后把该人在B看电影的花费时间再累加上去即可。</p>
+<p>最后输出A影院时间累计和B影院时间累计的较大的一个。</p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF = <span class="number">1e9</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Person</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">1</span>, b = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">bool</span> isA;</span><br><span class="line">	Person(<span class="keyword">int</span> a_, <span class="keyword">int</span> b_, <span class="keyword">bool</span> isA_) :a(a_), b(b_), isA(isA_) &#123;&#125;;</span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(<span class="keyword">const</span> Person&amp; p) <span class="keyword">const</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> (isA) <span class="keyword">return</span> a &lt; p.a;</span><br><span class="line">		<span class="keyword">return</span> b &gt; p.b;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;a, b;</span><br><span class="line"><span class="built_in">vector</span>&lt;Person&gt; peopleA;</span><br><span class="line"><span class="built_in">vector</span>&lt;Person&gt; peopleB;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; aEnd;</span><br><span class="line"><span class="keyword">int</span> aTimeAcc = <span class="number">0</span>, bEnd = <span class="number">0</span>, bCntr = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">//freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.in&quot;,&quot;r&quot;,stdin);</span></span><br><span class="line">	<span class="comment">//freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.out&quot;, &quot;w&quot;, stdout);</span></span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)<span class="built_in">cin</span> &gt;&gt; a[i];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)<span class="built_in">cin</span> &gt;&gt; b[i];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)a[i] &lt;= b[i] ? peopleA.emplace_back(a[i], b[i], <span class="literal">true</span>) : peopleB.emplace_back(a[i], b[i], <span class="literal">false</span>);</span><br><span class="line">	sort(peopleA.begin(), peopleA.end());</span><br><span class="line">	sort(peopleB.begin(), peopleB.end());</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> ite = peopleA.begin(); ite != peopleA.end(); ite++) &#123;</span><br><span class="line">		aTimeAcc += ite-&gt;a;</span><br><span class="line">		aEnd.push_back(aTimeAcc);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> ite = peopleB.begin(); ite != peopleB.end(); ite++) &#123;</span><br><span class="line">		aTimeAcc += ite-&gt;a;</span><br><span class="line">		aEnd.push_back(aTimeAcc);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> ite = peopleA.begin(); ite != peopleA.end(); ite++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (bEnd &lt; aEnd[bCntr]) bEnd = aEnd[bCntr];</span><br><span class="line">		bEnd += ite-&gt;b;</span><br><span class="line">		bCntr++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> ite = peopleB.begin(); ite != peopleB.end(); ite++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (bEnd &lt; aEnd[bCntr]) bEnd = aEnd[bCntr];</span><br><span class="line">		bEnd += ite-&gt;b;</span><br><span class="line">		bCntr++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; max(bEnd, aTimeAcc) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/09/SDUOJ%20-%2011/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar2.gif">
+      <meta itemprop="name" content="Just Linton">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Just Linton's Hub">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/04/09/SDUOJ%20-%2011/" class="post-title-link" itemprop="url">SDUOJ 拉面馆题解 (编码和位运算)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-04-09 15:13:06 / Modified: 22:20:35" itemprop="dateCreated datePublished" datetime="2021-04-09T15:13:06+08:00">2021-04-09</time>
+    </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -305,7 +381,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/10/SDUOJ%20-%202/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/09/SDUOJ%20-%2012/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar2.gif">
@@ -318,7 +394,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/04/10/SDUOJ%20-%202/" class="post-title-link" itemprop="url">SDUOJ 摆放垃圾桶题解 (简单贪心)</a>
+          <a href="/2021/04/09/SDUOJ%20-%2012/" class="post-title-link" itemprop="url">SDUOJ 摆放垃圾桶题解 (简单贪心)</a>
         </h2>
 
         <div class="post-meta-container">
@@ -328,16 +404,10 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
+      
 
-      <time title="Created: 2021-04-10 15:13:06" itemprop="dateCreated datePublished" datetime="2021-04-10T15:13:06+08:00">2021-04-10</time>
+      <time title="Created: 2021-04-09 15:13:06 / Modified: 22:20:27" itemprop="dateCreated datePublished" datetime="2021-04-09T15:13:06+08:00">2021-04-09</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-04-09 22:14:39" itemprop="dateModified" datetime="2021-04-09T22:14:39+08:00">2021-04-09</time>
-      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -367,94 +437,6 @@
 <p>之后，如果垃圾桶不够，就从r往l遍历，如果放了桶就跳过，如果没放过桶就ans++，并且更新此处的sts为true，并让exist++，代表该区间又多了一个桶。如果exist够了k，则及时终止。时间复杂度O（n）。</p>
 <p>输出结果即可。</p>
 <h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> INF = <span class="number">1e9</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">requirment</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> l;</span><br><span class="line">	<span class="keyword">int</span> r;</span><br><span class="line">	<span class="keyword">int</span> k;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span>&lt; (requirment re)<span class="keyword">const</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> r &lt; re.r;</span><br><span class="line">	&#125;</span><br><span class="line">	requirment(<span class="keyword">int</span> l_, <span class="keyword">int</span> r_, <span class="keyword">int</span> k_) :l(l_), r(r_), k(k_) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"><span class="keyword">int</span> l, r, k;</span><br><span class="line"><span class="keyword">int</span> exsist, ans;</span><br><span class="line"><span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">bool</span>&gt; sts;</span><br><span class="line"><span class="built_in">multiset</span>&lt;requirment&gt; inputs;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">//freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.in&quot;,&quot;r&quot;,stdin);</span></span><br><span class="line">	<span class="comment">//freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.out&quot;, &quot;w&quot;, stdout);</span></span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> yq = <span class="number">1</span>; yq &lt;= m; yq++) &#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d %d %d&quot;</span>, &amp;l, &amp;r, &amp;k);</span><br><span class="line">		inputs.emplace(l, r, k);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//sort(inputs.begin(), inputs.end());</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> ite = inputs.begin(); ite != inputs.end(); ite++) &#123;</span><br><span class="line">		exsist = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = ite-&gt;r; i &gt;= ite-&gt;l; i--) <span class="keyword">if</span> (sts[i]) &#123;</span><br><span class="line">			exsist++;</span><br><span class="line">			<span class="keyword">if</span> (exsist &gt;= ite-&gt;k)<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (exsist &lt; ite-&gt;k) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = ite-&gt;r; i &gt;= ite-&gt;l; i--) &#123;</span><br><span class="line">				<span class="keyword">if</span> (exsist &gt;= ite-&gt;k)<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">if</span> (!sts[i]) &#123;</span><br><span class="line">					sts[i] = <span class="literal">true</span>;</span><br><span class="line">					exsist++;</span><br><span class="line">					ans++;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/10/SDUOJ%20-%204/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar2.gif">
-      <meta itemprop="name" content="Just Linton">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Just Linton's Hub">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/04/10/SDUOJ%20-%204/" class="post-title-link" itemprop="url">SDUOJ 看电影题解（流水线调度问题）</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-04-10 15:13:06" itemprop="dateCreated datePublished" datetime="2021-04-10T15:13:06+08:00">2021-04-10</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-04-09 22:14:46" itemprop="dateModified" datetime="2021-04-09T22:14:46+08:00">2021-04-09</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p>定义person结构体，存储a、b。</p>
-<p>重载小于运算符，使该结构体的排序规则符合Johnson法则。</p>
-<h2 id="Johnson法则"><a href="#Johnson法则" class="headerlink" title="Johnson法则"></a>Johnson法则</h2><p>对一个人，如果它的A时间&lt;=B时间，则与其同类的排序规则是按a升序；如果它的A时间&lt;B时间，则与同类的排序规则是按b降序。最后，将上述后一类人连接到前一类人的末尾，组成的整个序列就是最优的流水线调度序列。</p>
-<h2 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h2><p>根据Johnson法则构造一个最优序列，按如下算法计算总时间即可：</p>
-<p>对于A影院，无脑累加时间，并记录每个人观影结束时间。</p>
-<p>对于B影院，如果当前累计时间小于下一个要来B看电影的人在A的结束时间，就让当前累计时间直接等于该人在A的结束时间。之后把该人在B看电影的花费时间再累加上去即可。</p>
-<p>最后输出A影院时间累计和B影院时间累计的较大的一个。</p>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF = <span class="number">1e9</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Person</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">1</span>, b = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">bool</span> isA;</span><br><span class="line">	Person(<span class="keyword">int</span> a_, <span class="keyword">int</span> b_, <span class="keyword">bool</span> isA_) :a(a_), b(b_), isA(isA_) &#123;&#125;;</span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(<span class="keyword">const</span> Person&amp; p) <span class="keyword">const</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> (isA) <span class="keyword">return</span> a &lt; p.a;</span><br><span class="line">		<span class="keyword">return</span> b &gt; p.b;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;a, b;</span><br><span class="line"><span class="built_in">vector</span>&lt;Person&gt; peopleA;</span><br><span class="line"><span class="built_in">vector</span>&lt;Person&gt; peopleB;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; aEnd;</span><br><span class="line"><span class="keyword">int</span> aTimeAcc = <span class="number">0</span>, bEnd = <span class="number">0</span>, bCntr = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">//freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.in&quot;,&quot;r&quot;,stdin);</span></span><br><span class="line">	<span class="comment">//freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.out&quot;, &quot;w&quot;, stdout);</span></span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)<span class="built_in">cin</span> &gt;&gt; a[i];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)<span class="built_in">cin</span> &gt;&gt; b[i];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)a[i] &lt;= b[i] ? peopleA.emplace_back(a[i], b[i], <span class="literal">true</span>) : peopleB.emplace_back(a[i], b[i], <span class="literal">false</span>);</span><br><span class="line">	sort(peopleA.begin(), peopleA.end());</span><br><span class="line">	sort(peopleB.begin(), peopleB.end());</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> ite = peopleA.begin(); ite != peopleA.end(); ite++) &#123;</span><br><span class="line">		aTimeAcc += ite-&gt;a;</span><br><span class="line">		aEnd.push_back(aTimeAcc);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> ite = peopleB.begin(); ite != peopleB.end(); ite++) &#123;</span><br><span class="line">		aTimeAcc += ite-&gt;a;</span><br><span class="line">		aEnd.push_back(aTimeAcc);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> ite = peopleA.begin(); ite != peopleA.end(); ite++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (bEnd &lt; aEnd[bCntr]) bEnd = aEnd[bCntr];</span><br><span class="line">		bEnd += ite-&gt;b;</span><br><span class="line">		bCntr++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> ite = peopleB.begin(); ite != peopleB.end(); ite++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (bEnd &lt; aEnd[bCntr]) bEnd = aEnd[bCntr];</span><br><span class="line">		bEnd += ite-&gt;b;</span><br><span class="line">		bCntr++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; max(bEnd, aTimeAcc) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
