@@ -1,528 +1,490 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html>
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="Hexo Theme Keep">
-    <meta name="description" content="Hexo Theme Keep">
-    <meta name="author" content="Just Linton">
-    
-    <title>
-        
-        Just Linton| 个人博客
+	<link rel="bookmark"  type="image/x-icon"  href="/img/lgo23.png"/>
+	<link rel="shortcut icon" href="/img/lgo23.png">
+	
+			    <title>
+    Just Linton | 个人博客
     </title>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="shortcut icon" href="/images/lgo23.png">
-    <link rel="stylesheet" href="/css/font-awesome.min.css">
-    <script id="hexo-configurations">
-    let KEEP = window.KEEP || {};
-    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en"};
-    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/lgo23.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":false,"background_img":"/images/bgw.jpg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.1"};
-    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
-  </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/mic_main.css" />
+    <link rel="stylesheet" href="/css/dropdownMenu.css" />
+    <meta name="keywords" content="miccall" />
+    
+    	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	 
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css" />
+    </noscript>
+    <style type="text/css">
+        body:before {
+          content: ' ';
+          position: fixed;
+          top: 0;
+          background: url('/img/bg45.jpg') center 0 no-repeat;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          background-size: cover; 
+        }
+    </style>
+
+			    
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script async type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+	
 <meta name="generator" content="Hexo 5.4.0"></head>
-
-
-<body>
-<div class="progress-bar-container">
     
-
-    
-</div>
-
-
-<main class="page-container">
-
-    
-
-    <div class="page-main-content">
-
-        <div class="page-main-content-top">
-            <header class="header-wrapper">
-
-    <div class="header-content">
-        <div class="left">
-            <a class="logo-title" href="/">
-                Just Linton| 个人博客
-            </a>
+		<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in overlay">
+        <!-- Intro 头部显示 s -->
+                <div id="intro">
+            <h1>This is<br />
+                        Just Linton </h1>
+            <p> God helps Those Who Helps Themselves.
+            </p>
+            <ul class="actions">
+                <li><a href="#header" class="button icon solo fa-arrow-down scrolly">Continue</a></li>
+            </ul>
         </div>
-
-        <div class="right">
-            <div class="pc">
-                <ul class="menu-list">
-                    
-                        <li class="menu-item">
-                            <a class="active"
-                               href="/"
-                            >
-                                HOME
-                            </a>
-                        </li>
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/archives"
-                            >
-                                ARCHIVES
-                            </a>
-                        </li>
-                    
-                    
-                </ul>
-            </div>
-            <div class="mobile">
-                
-                <div class="icon-item menu-bar">
-                    <div class="menu-bar-middle"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="header-drawer">
-        <ul class="drawer-menu-list">
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class="active"
-                       href="/">HOME</a>
-                </li>
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/archives">ARCHIVES</a>
-                </li>
-            
-        </ul>
-    </div>
-
-    <div class="window-mask"></div>
-
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">Just Linton.</a>
 </header>
+        <!-- Header 头部logo end -->
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special" >
+            <ul class="menu links" >
+			<!-- Homepage  主页  --> 
+			<li >
+	            <a href="/" rel="nofollow">Home</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">Tags</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="category-link" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a></li><li><a class="category-link" href="/categories/%E6%9D%82%E8%B0%88/%E6%B5%8B%E8%AF%95/">测试</a></li><li><a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li><li><a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/SDUOJ/">SDUOJ</a>
+	                    </ul>
+	        </li>
+	        
+	        <!-- archives  归档   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">Archived</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="archive-link" href="/archives/2021/04/">April 2021</a></li><li><a class="archive-link" href="/archives/2021/03/">March 2021</a>
+	                    </ul>
+	        </li>
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+		        <li>
+		            <a href="/about/" title="About">
+		                About
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a target="_blank" rel="noopener" href="http://114.215.149.199/" title="Projects">
+		                Projects
+		            </a>
+		        </li>
+		        
 
 
+            </ul>
+            <!-- icons 图标   -->
+			<ul class="icons">
+                    
+                    <li>
+                        <a title="github" href="https://github.com/JustLinton" target="_blank" rel="noopener">
+                            <i class="icon fa fa-github"></i>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a title="twitter" href="https://twitter.com/Linton_Collin" target="_blank" rel="noopener">
+                            <i class="icon fa fa-twitter"></i>
+                        </a>
+                    </li>
+                    
+			</ul>
+</nav>
+        <!-- Nav 导航条 end -->
+        <!-- Main 主要部分 start -->
+        
+        <!-- Main-first -->
+                    <div id="main">
+            <!-- Main first s-->
+            <article id="me" class="panel">
+                <header style="color: #000000">
+                    <h1>Linton's Dev Space</h1>
+                    <p>Click To View All My Projects</p>
+                </header>
+                <a target="_blank" rel="noopener" href="http://114.215.149.199/" class="jumplink pic">
+                    <span class="arrow icon fa-chevron-right"><span></span></span>
+                    <img src="/img/me.jpg" alt="" />
+                </a>
+            </article>
+            <!-- Main first e-->
         </div>
 
-        <div class="page-main-content-middle">
-
-            <div class="main-content">
-
-                
-                    <div class="home-content-container fade-in-down-animation">
-    <ul class="home-article-list">
         
-            <li class="home-article-item">
+        <!-- 文章列表   s -->
+        <div id="main" style="background-color: transparent; padding:0;">
+        <section class="link_container" style="margin-top: 0; background-color: transparent; ">
+            <div class="link_row">
+                <!-- 文章sample  s-->
 
                 
-
-                <h3 class="home-article-title">
-                    <a href="/2021/04/13/SDUOJ013/">
-                        SDUOJ 划分石头题解 (二分查找)
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        题目描述海边有很多好看的石头🪨，war把它们收集起来依次排成一排，一共n个，第i个石头的重量为w_iw**i。他想将其分成m段，每一段连续，并且重量和最大的段的和最小。请你帮帮他～
-输入描述第一行为n(1≤n≤10^5)(1≤n≤105)，m(m≤...
-                    
+                <div class="6u 12u(narrower)">
+                    <section class="link_box special">
+                       <a href="/2021/04/13/SDUOJ013/">
+                        <div class="page_title" style="background-image: url();background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;">
+                            <!--标题-->
+                            <h2 class="page_title_text"> SDUOJ 划分石头题解 (二分查找) </h2>
+                            <!--段落-->
+                        </div>
+                        </a>
+                        <div class="home-post-info">
+                            <!-- Author Avatar -->
+                            <div class="home-post-info-author-avatar">
+                                <h6><span class="home-post-info-data">2021-04-13</span></h6>
+                                <div class="home-post-info-Category">
+                                    <!-- Category -->
+                                    <span>
+                            <h6>
+                            <a class="post_category-link" target="_blank" rel="noopener" href="http://localhost:4000/categories/Algorithm/">
+                                <a class="post_category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>, <a class="post_category-link" href="/categories/%E7%AE%97%E6%B3%95/SDUOJ/">SDUOJ</a></a>
+                            </h6>
+                        </span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Apr 13 2021 15:13:06 GMT+0800">2021-04-13</span></span>
-        
-        
-    </div>
-
-    <a href="/2021/04/13/SDUOJ013/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/04/12/SDUOJ009/">
-                        SDUOJ 时间复杂度题解 (模拟)
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        问题描述分析算法的时间复杂度是评价算法性能的重要方式之一，对于同一问题来说，拥有线性时间复杂度的算法往往比拥有平方级别时间复杂度的算法要快很多，因此拥有线性时间复杂度的算法往往优于拥有平方级别时间复杂度的算法。
-通常，可以根据输入n的值确定算法的运行...
-                    
+                <!-- 文章sample  e-->
+            
+                <div class="6u 12u(narrower)">
+                    <section class="link_box special">
+                       <a href="/2021/04/12/SDUOJ009/">
+                        <div class="page_title" style="background-image: url();background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;">
+                            <!--标题-->
+                            <h2 class="page_title_text"> SDUOJ 时间复杂度题解 (模拟) </h2>
+                            <!--段落-->
+                        </div>
+                        </a>
+                        <div class="home-post-info">
+                            <!-- Author Avatar -->
+                            <div class="home-post-info-author-avatar">
+                                <h6><span class="home-post-info-data">2021-04-12</span></h6>
+                                <div class="home-post-info-Category">
+                                    <!-- Category -->
+                                    <span>
+                            <h6>
+                            <a class="post_category-link" target="_blank" rel="noopener" href="http://localhost:4000/categories/Algorithm/">
+                                <a class="post_category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>, <a class="post_category-link" href="/categories/%E7%AE%97%E6%B3%95/SDUOJ/">SDUOJ</a></a>
+                            </h6>
+                        </span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Apr 12 2021 15:13:06 GMT+0800">2021-04-12</span></span>
-        
-        
-    </div>
-
-    <a href="/2021/04/12/SDUOJ009/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/04/12/SDUOJ008/">
-                        SDUOJ TT与可怜的猫题解 (水题)
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        题目描述自从 TT 成为了助教，他就热衷于给同学们解答疑问，于是他就没有时间进行陪他的猫猫玩了，真是一只可怜的小猫。
-
-TT 在同一时间会与很多同学同时用 QQ（TT特供版） 进行答疑，有时 TT 开启一个新的窗口，开始一个新的答疑对话；有时 TT ...
-                    
+                <!-- 文章sample  e-->
+            
+                <div class="6u 12u(narrower)">
+                    <section class="link_box special">
+                       <a href="/2021/04/12/SDUOJ008/">
+                        <div class="page_title" style="background-image: url();background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;">
+                            <!--标题-->
+                            <h2 class="page_title_text"> SDUOJ TT与可怜的猫题解 (水题) </h2>
+                            <!--段落-->
+                        </div>
+                        </a>
+                        <div class="home-post-info">
+                            <!-- Author Avatar -->
+                            <div class="home-post-info-author-avatar">
+                                <h6><span class="home-post-info-data">2021-04-12</span></h6>
+                                <div class="home-post-info-Category">
+                                    <!-- Category -->
+                                    <span>
+                            <h6>
+                            <a class="post_category-link" target="_blank" rel="noopener" href="http://localhost:4000/categories/Algorithm/">
+                                <a class="post_category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>, <a class="post_category-link" href="/categories/%E7%AE%97%E6%B3%95/SDUOJ/">SDUOJ</a></a>
+                            </h6>
+                        </span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Apr 12 2021 15:13:06 GMT+0800">2021-04-12</span></span>
-        
-        
-    </div>
-
-    <a href="/2021/04/12/SDUOJ008/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/04/12/SDUOJ010/">
-                        SDUOJ 公路修建题解 (并查集)
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        问题描述你现在是城市的主人现在有 nn 个村庄，要修建 mm 条路，每修建一条路，道路是双向的，输出至少还需要修建几条，可以让所有村庄互相可达。一开始路为 00 条
-数据保证有解
-输入格式第一行两个整数 n,mn,m , 0\le n,m\le10^...
-                    
+                <!-- 文章sample  e-->
+            
+                <div class="6u 12u(narrower)">
+                    <section class="link_box special">
+                       <a href="/2021/04/12/SDUOJ010/">
+                        <div class="page_title" style="background-image: url();background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;">
+                            <!--标题-->
+                            <h2 class="page_title_text"> SDUOJ 公路修建题解 (并查集) </h2>
+                            <!--段落-->
+                        </div>
+                        </a>
+                        <div class="home-post-info">
+                            <!-- Author Avatar -->
+                            <div class="home-post-info-author-avatar">
+                                <h6><span class="home-post-info-data">2021-04-12</span></h6>
+                                <div class="home-post-info-Category">
+                                    <!-- Category -->
+                                    <span>
+                            <h6>
+                            <a class="post_category-link" target="_blank" rel="noopener" href="http://localhost:4000/categories/Algorithm/">
+                                <a class="post_category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>, <a class="post_category-link" href="/categories/%E7%AE%97%E6%B3%95/SDUOJ/">SDUOJ</a></a>
+                            </h6>
+                        </span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Apr 12 2021 15:13:06 GMT+0800">2021-04-12</span></span>
-        
-        
-    </div>
-
-    <a href="/2021/04/12/SDUOJ010/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/04/12/SDUOJ011/">
-                        SDUOJ 网络铺设题解 (BFS链式前向星)
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        问题描述你现在是城市的主人现在有 nn 个村庄，已经修建了 n-1n−1 条道路，使得各个村庄作为节点，路作为边，构成一棵树。假设第 aa 个村庄到第 bb 个村庄有路相连，则从 aa 走到 bb 或者从 bb 走到 aa 需要走 1\text{m}...
-                    
+                <!-- 文章sample  e-->
+            
+                <div class="6u 12u(narrower)">
+                    <section class="link_box special">
+                       <a href="/2021/04/12/SDUOJ011/">
+                        <div class="page_title" style="background-image: url();background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;">
+                            <!--标题-->
+                            <h2 class="page_title_text"> SDUOJ 网络铺设题解 (BFS链式前向星) </h2>
+                            <!--段落-->
+                        </div>
+                        </a>
+                        <div class="home-post-info">
+                            <!-- Author Avatar -->
+                            <div class="home-post-info-author-avatar">
+                                <h6><span class="home-post-info-data">2021-04-12</span></h6>
+                                <div class="home-post-info-Category">
+                                    <!-- Category -->
+                                    <span>
+                            <h6>
+                            <a class="post_category-link" target="_blank" rel="noopener" href="http://localhost:4000/categories/Algorithm/">
+                                <a class="post_category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>, <a class="post_category-link" href="/categories/%E7%AE%97%E6%B3%95/SDUOJ/">SDUOJ</a></a>
+                            </h6>
+                        </span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Apr 12 2021 15:13:06 GMT+0800">2021-04-12</span></span>
-        
-        
-    </div>
-
-    <a href="/2021/04/12/SDUOJ011/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/04/12/SDUOJ012/">
-                        SDUOJ 水渠设计题解 (贪心、最小生成树)
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        问题描述你现在是城市的主人现在有 nn 个田地需要灌溉。可以选择修建 mm 个引水渠，第 ii 条从第 aa 个田地到第 bb 个田地，花费 cc 元。现在可以买任意多个抽水机，买一个抽水机需要花费 pp 元。如果在一个田地旁边安置一个抽水机，则该田...
-                    
+                <!-- 文章sample  e-->
+            
+                <div class="6u 12u(narrower)">
+                    <section class="link_box special">
+                       <a href="/2021/04/12/SDUOJ012/">
+                        <div class="page_title" style="background-image: url();background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;">
+                            <!--标题-->
+                            <h2 class="page_title_text"> SDUOJ 水渠设计题解 (贪心、最小生成树) </h2>
+                            <!--段落-->
+                        </div>
+                        </a>
+                        <div class="home-post-info">
+                            <!-- Author Avatar -->
+                            <div class="home-post-info-author-avatar">
+                                <h6><span class="home-post-info-data">2021-04-12</span></h6>
+                                <div class="home-post-info-Category">
+                                    <!-- Category -->
+                                    <span>
+                            <h6>
+                            <a class="post_category-link" target="_blank" rel="noopener" href="http://localhost:4000/categories/Algorithm/">
+                                <a class="post_category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>, <a class="post_category-link" href="/categories/%E7%AE%97%E6%B3%95/SDUOJ/">SDUOJ</a></a>
+                            </h6>
+                        </span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Apr 12 2021 15:13:06 GMT+0800">2021-04-12</span></span>
-        
-        
-    </div>
-
-    <a href="/2021/04/12/SDUOJ012/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/04/11/SA1/">
-                        一文搞懂后缀数组的倍增实现
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        什么是后缀数组 (Suffix Array)前置知识：字符串排序对字符串之间的排序我们给出以下定义：
-关于字符串的大小比较,是指通常所说的“字典顺序”比较,也就是对于两个字符串u、v, 令 i 从 1开始顺次比较 u[i] 和 v[i]。
- 如果u[...
-                    
+                <!-- 文章sample  e-->
+            
+                <div class="6u 12u(narrower)">
+                    <section class="link_box special">
+                       <a href="/2021/04/11/SA1/">
+                        <div class="page_title" style="background-image: url();background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;">
+                            <!--标题-->
+                            <h2 class="page_title_text"> 一文搞懂后缀数组的倍增实现 </h2>
+                            <!--段落-->
+                        </div>
+                        </a>
+                        <div class="home-post-info">
+                            <!-- Author Avatar -->
+                            <div class="home-post-info-author-avatar">
+                                <h6><span class="home-post-info-data">2021-04-11</span></h6>
+                                <div class="home-post-info-Category">
+                                    <!-- Category -->
+                                    <span>
+                            <h6>
+                            <a class="post_category-link" target="_blank" rel="noopener" href="http://localhost:4000/categories/Algorithm/">
+                                <a class="post_category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></a>
+                            </h6>
+                        </span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun Apr 11 2021 15:13:06 GMT+0800">2021-04-11</span></span>
-        
-        
-    </div>
-
-    <a href="/2021/04/11/SA1/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/04/09/SDUOJ%20-%205/">
-                        SDUOJ 拉面馆题解 (编码和位运算)
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        数据结构首先定义t、s数组，分别用于存储面制作完成的时间点和顾客到达的时间点。
-定义set st的数组，大小为8（即8个set构成的set数组），用于存储每种面（一种调料组合就被称为”一种”面）制作完成的时间。
-算法思路先输入n，m，k。
-接下来开始...
-                    
+                <!-- 文章sample  e-->
+            
+                <div class="6u 12u(narrower)">
+                    <section class="link_box special">
+                       <a href="/2021/04/09/SDUOJ%20-%205/">
+                        <div class="page_title" style="background-image: url();background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;">
+                            <!--标题-->
+                            <h2 class="page_title_text"> SDUOJ 拉面馆题解 (编码和位运算) </h2>
+                            <!--段落-->
+                        </div>
+                        </a>
+                        <div class="home-post-info">
+                            <!-- Author Avatar -->
+                            <div class="home-post-info-author-avatar">
+                                <h6><span class="home-post-info-data">2021-04-09</span></h6>
+                                <div class="home-post-info-Category">
+                                    <!-- Category -->
+                                    <span>
+                            <h6>
+                            <a class="post_category-link" target="_blank" rel="noopener" href="http://localhost:4000/categories/Algorithm/">
+                                <a class="post_category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></a>
+                            </h6>
+                        </span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Apr 09 2021 15:13:06 GMT+0800">2021-04-09</span></span>
-        
-        
-    </div>
-
-    <a href="/2021/04/09/SDUOJ%20-%205/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/04/09/SDUOJ%20-%206/">
-                        SDUOJ 看电影题解（流水线调度问题）
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        数据结构首先定义person结构体，存储a、b。
-重载小于运算符，使该结构体的排序规则符合Johnson法则。
-Johnson法则对一个人，如果它的A时间&lt;=B时间，则与其同类的排序规则是按a升序；如果它的A时间&lt;B时间，则与同类的排序规...
-                    
+                <!-- 文章sample  e-->
+            
+                <div class="6u 12u(narrower)">
+                    <section class="link_box special">
+                       <a href="/2021/04/09/SDUOJ%20-%206/">
+                        <div class="page_title" style="background-image: url();background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;">
+                            <!--标题-->
+                            <h2 class="page_title_text"> SDUOJ 看电影题解（流水线调度问题） </h2>
+                            <!--段落-->
+                        </div>
+                        </a>
+                        <div class="home-post-info">
+                            <!-- Author Avatar -->
+                            <div class="home-post-info-author-avatar">
+                                <h6><span class="home-post-info-data">2021-04-09</span></h6>
+                                <div class="home-post-info-Category">
+                                    <!-- Category -->
+                                    <span>
+                            <h6>
+                            <a class="post_category-link" target="_blank" rel="noopener" href="http://localhost:4000/categories/Algorithm/">
+                                <a class="post_category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></a>
+                            </h6>
+                        </span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Apr 09 2021 15:13:06 GMT+0800">2021-04-09</span></span>
-        
-        
-    </div>
-
-    <a href="/2021/04/09/SDUOJ%20-%206/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/04/09/SDUOJ%20-%207/">
-                        SDUOJ 摆放垃圾桶题解 (简单贪心)
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        数据结构首先定义struct requirement，其中存放每个要求的l、r、k。
-定义exsist，当前区间存在的垃圾桶个数。
-ans，输出结果。
-map sts，用于模拟数组，给出每个下标处是否有垃圾桶。
-算法思路先输入并构造各个要求。
-对于每...
-                    
+                <!-- 文章sample  e-->
+            
+                <div class="6u 12u(narrower)">
+                    <section class="link_box special">
+                       <a href="/2021/04/09/SDUOJ%20-%207/">
+                        <div class="page_title" style="background-image: url();background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;">
+                            <!--标题-->
+                            <h2 class="page_title_text"> SDUOJ 摆放垃圾桶题解 (简单贪心) </h2>
+                            <!--段落-->
+                        </div>
+                        </a>
+                        <div class="home-post-info">
+                            <!-- Author Avatar -->
+                            <div class="home-post-info-author-avatar">
+                                <h6><span class="home-post-info-data">2021-04-09</span></h6>
+                                <div class="home-post-info-Category">
+                                    <!-- Category -->
+                                    <span>
+                            <h6>
+                            <a class="post_category-link" target="_blank" rel="noopener" href="http://localhost:4000/categories/Algorithm/">
+                                <a class="post_category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></a>
+                            </h6>
+                        </span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Apr 09 2021 15:13:06 GMT+0800">2021-04-09</span></span>
-        
-        
-    </div>
-
-    <a href="/2021/04/09/SDUOJ%20-%207/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-    </ul>
-
-    <div class="home-paginator">
-        <div class="paginator">
-    
-
-    
-        <a class="next btn"
-           href="/page/2/"
-        >Next</a>
-    
-</div>
-
-    </div>
-</div>
-
-
-                
+                <!-- 文章sample  e-->
+            
             </div>
-
+        </section>
         </div>
-
-        <div class="page-main-content-bottom">
-            <footer class="footer">
-    <div class="info-container">
-        <div class="copyright-info info-item">
-            &copy;
-            
-              <span>2020</span>&nbsp;-&nbsp;
-            
-            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Just Linton</a>
-        </div>
-        
-        <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.1</a>
-        </div>
-        
-    </div>
+        <!-- 文章列表   end -->
+        <!-- Main 主要部分 end -->
+        <!-- footer  页码 start-->
+        <footer style="text-align: center; padding-top: 2em;">
+  
+    <div class="pagination" >
+        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">nex</a>
+    </div>  
+    
 </footer>
 
+        <!-- footer  页码 end-->
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy;2020 - 2021<a target="_blank" rel="noopener" href="https://hub.linton.cool/" style="border-bottom: none;">Just Linton</a></li>
+                <li>Design: <a target="_blank" rel="noopener" href="https://hub.linton.cool/ " style="border-bottom: none;">Just Linton</a></li>
+            </ul>
+            
+					<span id="busuanzi_container_site_pv">关于作者更多项目，欢迎访问 <a target="_blank" rel="noopener" href="https://dev.linton.cool/ " style="border-bottom: none;">dev.linton.cool</a></span>
+                <span id="busuanzi_container_site_pv"></br>访问量 <span id="busuanzi_value_site_pv"></span></span>
+		
+			
         </div>
+        <!-- Copyright 版权 end -->
     </div>
-
-    
-
-    <div class="right-bottom-side-tools">
-        <div class="side-tools-container">
-    <ul class="side-tools-list">
-        <li class="tools-item tool-font-adjust-plus flex-center">
-            <i class="fas fa-search-plus"></i>
-        </li>
-
-        <li class="tools-item tool-font-adjust-minus flex-center">
-            <i class="fas fa-search-minus"></i>
-        </li>
-
-        <li class="tools-item tool-expand-width flex-center">
-            <i class="fas fa-arrows-alt-h"></i>
-        </li>
-
-        <li class="tools-item tool-dark-light-toggle flex-center">
-            <i class="fas fa-moon"></i>
-        </li>
-
-        <!-- rss -->
-        
-
-        
-            <li class="tools-item tool-scroll-to-top flex-center">
-                <i class="fas fa-arrow-up"></i>
-            </li>
-        
-
-        <li class="tools-item tool-scroll-to-bottom flex-center">
-            <i class="fas fa-arrow-down"></i>
-        </li>
-    </ul>
-
-    <ul class="exposed-tools-list">
-        <li class="tools-item tool-toggle-show flex-center">
-            <i class="fas fa-cog fa-spin"></i>
-        </li>
-        
-    </ul>
-</div>
-
-    </div>
-
-    
-
-    <div class="image-viewer-container">
-    <img src="">
-</div>
-
-
-    
-
-</main>
-
-
-
-
-<script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/header-shrink.js"></script><script src="/js/back2top.js"></script><script src="/js/dark-light-toggle.js"></script>
-
-
-
-
-
-
-
-<div class="post-scripts">
-    
-</div>
-
-
-
+    <!-- Wrapper 外包 e-->
+    <!-- Scripts -->
 </body>
+
+ 	
 </html>

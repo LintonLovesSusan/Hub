@@ -1,41 +1,49 @@
-KEEP.initLazyLoad = () => {
-  const imgs = document.querySelectorAll('img');
-  let now = Date.now();
-  let needLoad = true;
+(function (window) {
+	var images = Array.prototype.slice.call(document.querySelectorAll('img[srcset]'));
 
-  function lazyload(imgs) {
-    now = Date.now();
-    needLoad = Array.from(imgs).some(i => i.hasAttribute('lazyload'));
+	function elementInViewport(el) {
+		var rect = el.getBoundingClientRect();
+		var height = window.innerHeight || document.documentElement.clientHeight;
+		return (
+			rect.top >= 0
+			&& rect.left >= 0
+			&& rect.top <= height * 3
+		);
+	}
+	function loadImage(el, fn) {
+		var img = new Image(), src = el.getAttribute('src');
+		img.onload = function () {
+			el.srcset = src;
+			fn ? fn() : null;
+		};
+		img.srcset = src;
+	}
 
-    const h = window.innerHeight;
-    const s = document.documentElement.scrollTop || document.body.scrollTop;
+	function processImages() {
+		for (var i = 0; i < images.length; i++) {
+			if (elementInViewport(images[i])) {
+				(function(index){
+					var loadingImage = images[index];
+					loadImage(loadingImage, function () {
+						images = images.filter(function(t) {
+							return loadingImage !== t;
+						});
+					});
+				})(i);
+			}
+		}
+	}
 
-    imgs.forEach(img => {
-      if (img.hasAttribute('lazyload') && !img.hasAttribute('loading')) {
+	function throttle(method, context) {
+		clearTimeout(method.tId);
+		method.tId = setTimeout(function () {
+				method.call(context);
+		}, 100);
+	}
 
-        if ((h + s) > img.offsetTop) {
-          img.setAttribute('loading', true);
-          const loadImageTimeout = setTimeout(() => {
-            const temp = new Image();
-            const src = img.getAttribute('data-src');
-            temp.src = src;
-            temp.onload = () => {
-              img.src = src;
-              img.removeAttribute('lazyload');
-              img.removeAttribute('loading');
-              clearTimeout(loadImageTimeout);
-            }
-          }, 500);
-        }
-      }
-    });
-  }
+	processImages();
 
-  lazyload(imgs);
-
-  window.onscroll = () => {
-    if (Date.now() - now > 50 && needLoad) {
-      lazyload(imgs);
-    }
-  }
-}
+	window.addEventListener('scroll', function () {
+		throttle(processImages, window);
+	});
+})(this);

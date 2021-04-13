@@ -1,176 +1,158 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html>
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="Hexo Theme Keep">
-    <meta name="description" content="Hexo Theme Keep">
-    <meta name="author" content="Just Linton">
-    
-    <title>
-        
-            SDUOJ 看电影题解（流水线调度问题） |
-        
-        Just Linton| 个人博客
+	<link rel="bookmark"  type="image/x-icon"  href="/img/lgo23.png"/>
+	<link rel="shortcut icon" href="/img/lgo23.png">
+	
+			    <title>
+    Just Linton | 个人博客
     </title>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="shortcut icon" href="/images/lgo23.png">
-    <link rel="stylesheet" href="/css/font-awesome.min.css">
-    <script id="hexo-configurations">
-    let KEEP = window.KEEP || {};
-    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en"};
-    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/lgo23.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":false,"background_img":"/images/bgw.jpg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.1"};
-    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
-  </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/mic_main.css" />
+    <link rel="stylesheet" href="/css/dropdownMenu.css" />
+    <meta name="keywords" content="miccall" />
+    
+    	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	 
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css" />
+    </noscript>
+    <style type="text/css">
+        body:before {
+          content: ' ';
+          position: fixed;
+          top: 0;
+          background: url('/img/bg45.jpg') center 0 no-repeat;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          background-size: cover; 
+        }
+    </style>
+
+			    
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script async type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+	
 <meta name="generator" content="Hexo 5.4.0"></head>
-
-
-<body>
-<div class="progress-bar-container">
     
+		
+<!-- Layouts -->
 
-    
-</div>
 
 
-<main class="page-container">
-
-    
-
-    <div class="page-main-content">
-
-        <div class="page-main-content-top">
-            <header class="header-wrapper">
-
-    <div class="header-content">
-        <div class="left">
-            <a class="logo-title" href="/">
-                Just Linton| 个人博客
-            </a>
-        </div>
-
-        <div class="right">
-            <div class="pc">
-                <ul class="menu-list">
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/"
-                            >
-                                HOME
-                            </a>
-                        </li>
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/archives"
-                            >
-                                ARCHIVES
-                            </a>
-                        </li>
-                    
-                    
-                </ul>
-            </div>
-            <div class="mobile">
-                
-                <div class="icon-item menu-bar">
-                    <div class="menu-bar-middle"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="header-drawer">
-        <ul class="drawer-menu-list">
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/">HOME</a>
-                </li>
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/archives">ARCHIVES</a>
-                </li>
-            
-        </ul>
-    </div>
-
-    <div class="window-mask"></div>
-
+<!--  代码渲染  -->
+<link rel="stylesheet" href="/css/prism_default.css" />
+<link rel="stylesheet" href="/css/typo.css" />
+<!-- 文章页 -->
+<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro 头部显示 s -->
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">Just Linton.</a>
 </header>
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special" >
+            <ul class="menu links" >
+			<!-- Homepage  主页  --> 
+			<li >
+	            <a href="/" rel="nofollow">Home</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">Tags</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="category-link" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a></li><li><a class="category-link" href="/categories/%E6%9D%82%E8%B0%88/%E6%B5%8B%E8%AF%95/">测试</a></li><li><a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li><li><a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/SDUOJ/">SDUOJ</a>
+	                    </ul>
+	        </li>
+	        
+	        <!-- archives  归档   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">Archived</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="archive-link" href="/archives/2021/04/">April 2021</a></li><li><a class="archive-link" href="/archives/2021/03/">March 2021</a>
+	                    </ul>
+	        </li>
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+		        <li>
+		            <a href="/about/" title="About">
+		                About
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a target="_blank" rel="noopener" href="http://114.215.149.199/" title="Projects">
+		                Projects
+		            </a>
+		        </li>
+		        
 
 
-        </div>
-
-        <div class="page-main-content-middle">
-
-            <div class="main-content">
-
-                
-                    <div class="fade-in-down-animation">
-    <div class="article-content-container">
-
-        <div class="article-title">
-            <span class="title-hover-animation">SDUOJ 看电影题解（流水线调度问题）</span>
-        </div>
-
-        
-            <div class="article-header">
-                <div class="avatar">
-                    <img src="/images/avatar.svg">
-                </div>
-                <div class="info">
-                    <div class="author">
-                        <span class="name">Just Linton</span>
-                        
-                            <span class="author-label">Lv2</span>
-                        
-                    </div>
-                    <div class="meta-info">
-                        <div class="article-meta-info">
-    <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2021-04-09 15:13:06
-    </span>
-    
-        <span class="article-categories article-meta-item">
-            <i class="fas fa-folder"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/categories/%E7%AE%97%E6%B3%95/">算法</a>&nbsp;
-                    </li>
-                
             </ul>
-        </span>
-    
-    
-        <span class="article-tags article-meta-item">
-            <i class="fas fa-tags"></i>&nbsp;
-            <ul>
-                
+            <!-- icons 图标   -->
+			<ul class="icons">
+                    
                     <li>
-                        <a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>&nbsp;
+                        <a title="github" href="https://github.com/JustLinton" target="_blank" rel="noopener">
+                            <i class="icon fa fa-github"></i>
+                        </a>
                     </li>
-                
-            </ul>
-        </span>
-    
+                    
+                    <li>
+                        <a title="twitter" href="https://twitter.com/Linton_Collin" target="_blank" rel="noopener">
+                            <i class="icon fa fa-twitter"></i>
+                        </a>
+                    </li>
+                    
+			</ul>
+</nav>
 
-    
-    
-    
-    
-</div>
-
-                    </div>
-                </div>
+        <div id="main" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url();background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >SDUOJ 看电影题解（流水线调度问题）</h2></a>
             </div>
-        
-
-        <div class="article-content markdown-body">
-            <h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p>首先定义person结构体，存储a、b。</p>
+            <!-- Post -->
+            <div class="typo" style="padding: 3rem;">
+                <h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p>首先定义person结构体，存储a、b。</p>
 <p>重载小于运算符，使该结构体的排序规则符合Johnson法则。</p>
 <h2 id="Johnson法则"><a href="#Johnson法则" class="headerlink" title="Johnson法则"></a>Johnson法则</h2><p>对一个人，如果它的A时间&lt;=B时间，则与其同类的排序规则是按a升序；如果它的A时间&lt;B时间，则与同类的排序规则是按b降序。最后，将上述后一类人连接到前一类人的末尾，组成的整个序列就是最优的流水线调度序列。</p>
 <h2 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h2><p>根据Johnson法则构造一个最优序列，按如下算法计算总时间即可：</p>
@@ -180,162 +162,60 @@
 <h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF = <span class="number">1e9</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Person</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">1</span>, b = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">bool</span> isA;</span><br><span class="line">	Person(<span class="keyword">int</span> a_, <span class="keyword">int</span> b_, <span class="keyword">bool</span> isA_) :a(a_), b(b_), isA(isA_) &#123;&#125;;</span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(<span class="keyword">const</span> Person&amp; p) <span class="keyword">const</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> (isA) <span class="keyword">return</span> a &lt; p.a;</span><br><span class="line">		<span class="keyword">return</span> b &gt; p.b;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;a, b;</span><br><span class="line"><span class="built_in">vector</span>&lt;Person&gt; peopleA;</span><br><span class="line"><span class="built_in">vector</span>&lt;Person&gt; peopleB;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; aEnd;</span><br><span class="line"><span class="keyword">int</span> aTimeAcc = <span class="number">0</span>, bEnd = <span class="number">0</span>, bCntr = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">//freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.in&quot;,&quot;r&quot;,stdin);</span></span><br><span class="line">	<span class="comment">//freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.out&quot;, &quot;w&quot;, stdout);</span></span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)<span class="built_in">cin</span> &gt;&gt; a[i];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)<span class="built_in">cin</span> &gt;&gt; b[i];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)a[i] &lt;= b[i] ? peopleA.emplace_back(a[i], b[i], <span class="literal">true</span>) : peopleB.emplace_back(a[i], b[i], <span class="literal">false</span>);</span><br><span class="line">	sort(peopleA.begin(), peopleA.end());</span><br><span class="line">	sort(peopleB.begin(), peopleB.end());</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> ite = peopleA.begin(); ite != peopleA.end(); ite++) &#123;</span><br><span class="line">		aTimeAcc += ite-&gt;a;</span><br><span class="line">		aEnd.push_back(aTimeAcc);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> ite = peopleB.begin(); ite != peopleB.end(); ite++) &#123;</span><br><span class="line">		aTimeAcc += ite-&gt;a;</span><br><span class="line">		aEnd.push_back(aTimeAcc);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> ite = peopleA.begin(); ite != peopleA.end(); ite++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (bEnd &lt; aEnd[bCntr]) bEnd = aEnd[bCntr];</span><br><span class="line">		bEnd += ite-&gt;b;</span><br><span class="line">		bCntr++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> ite = peopleB.begin(); ite != peopleB.end(); ite++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (bEnd &lt; aEnd[bCntr]) bEnd = aEnd[bCntr];</span><br><span class="line">		bEnd += ite-&gt;b;</span><br><span class="line">		bCntr++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; max(bEnd, aTimeAcc) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
-        </div>
-
-        
-
-        
-            <div class="article-nav">
-                
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2021/04/09/SDUOJ%20-%205/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">SDUOJ 拉面馆题解 (编码和位运算)</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
-                
-                    <div class="article-next">
-                        <a class="next"
-                           rel="next"
-                           href="/2021/04/09/SDUOJ%20-%207/"
-                        >
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">SDUOJ 摆放垃圾桶题解 (简单贪心)</span>
-                                <span class="post-nav-item">Next posts</span>
-                            </span>
-                            <span class="right arrow-icon flex-center">
-                              <i class="fas fa-chevron-right"></i>
-                            </span>
-                        </a>
-                    </div>
-                
-            </div>
-        
-
-        
-    </div>
-</div>
-
-
-                
             </div>
 
-        </div>
-
-        <div class="page-main-content-bottom">
-            <footer class="footer">
-    <div class="info-container">
-        <div class="copyright-info info-item">
-            &copy;
+            <!-- Post Comments -->
             
-              <span>2020</span>&nbsp;-&nbsp;
+    <!-- 使用 DISQUS -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://example.com/2021/04/09/SDUOJ%20-%206/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://example.com/2021/04/09/SDUOJ%20-%206/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+
+<script type="text/ls-javascript" id="disqus-thread-script">
+    queue.offer(function() {
+            (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document;
+                var s = d.createElement('script');
+                s.src = '//http-miccall-tech.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', + new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        });
+</script>
+
+</div>
+
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+
+        </div>
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy;2020 - 2021<a target="_blank" rel="noopener" href="https://hub.linton.cool/" style="border-bottom: none;">Just Linton</a></li>
+                <li>Design: <a target="_blank" rel="noopener" href="https://hub.linton.cool/ " style="border-bottom: none;">Just Linton</a></li>
+            </ul>
             
-            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Just Linton</a>
-        </div>
-        
-        <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.1</a>
-        </div>
-        
-    </div>
-</footer>
-
+					<span id="busuanzi_container_site_pv">关于作者更多项目，欢迎访问 <a target="_blank" rel="noopener" href="https://dev.linton.cool/ " style="border-bottom: none;">dev.linton.cool</a></span>
+                <span id="busuanzi_container_site_pv"></br>访问量 <span id="busuanzi_value_site_pv"></span></span>
+		
+			
         </div>
     </div>
-
-    
-        <div class="post-tools">
-            <div class="post-tools-container">
-    <ul class="tools-list">
-        <!-- TOC aside toggle -->
-        
-
-        <!-- go comment -->
-        
-    </ul>
-</div>
-
-        </div>
-    
-
-    <div class="right-bottom-side-tools">
-        <div class="side-tools-container">
-    <ul class="side-tools-list">
-        <li class="tools-item tool-font-adjust-plus flex-center">
-            <i class="fas fa-search-plus"></i>
-        </li>
-
-        <li class="tools-item tool-font-adjust-minus flex-center">
-            <i class="fas fa-search-minus"></i>
-        </li>
-
-        <li class="tools-item tool-expand-width flex-center">
-            <i class="fas fa-arrows-alt-h"></i>
-        </li>
-
-        <li class="tools-item tool-dark-light-toggle flex-center">
-            <i class="fas fa-moon"></i>
-        </li>
-
-        <!-- rss -->
-        
-
-        
-            <li class="tools-item tool-scroll-to-top flex-center">
-                <i class="fas fa-arrow-up"></i>
-            </li>
-        
-
-        <li class="tools-item tool-scroll-to-bottom flex-center">
-            <i class="fas fa-arrow-down"></i>
-        </li>
-    </ul>
-
-    <ul class="exposed-tools-list">
-        <li class="tools-item tool-toggle-show flex-center">
-            <i class="fas fa-cog fa-spin"></i>
-        </li>
-        
-    </ul>
-</div>
-
-    </div>
-
-    
-
-    <div class="image-viewer-container">
-    <img src="">
-</div>
-
-
-    
-
-</main>
-
-
-
-<script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/header-shrink.js"></script><script src="/js/back2top.js"></script><script src="/js/dark-light-toggle.js"></script>
-
-
-
-
-
-
-
-<div class="post-scripts">
-    
-</div>
-
-
-
 </body>
+
+
+
+ 	
 </html>
