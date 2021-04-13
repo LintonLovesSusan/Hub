@@ -1,158 +1,234 @@
-<!DOCTYPE HTML>
-<html>
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
 
 <head>
-	<link rel="bookmark"  type="image/x-icon"  href="/img/lgo23.png"/>
-	<link rel="shortcut icon" href="/img/lgo23.png">
-	
-			    <title>
-    Just Linton | 个人博客
-    </title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="/css/mic_main.css" />
-    <link rel="stylesheet" href="/css/dropdownMenu.css" />
-    <meta name="keywords" content="miccall" />
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Just Linton">
+  <meta name="keywords" content="">
+  
+  <title>SDUOJ 划分石头题解 (二分查找) - Just Linton | 个人博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
     
-    	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-	 
-    <noscript>
-        <link rel="stylesheet" href="/css/noscript.css" />
-    </noscript>
-    <style type="text/css">
-        body:before {
-          content: ' ';
-          position: fixed;
-          top: 0;
-          background: url('/img/bg45.jpg') center 0 no-repeat;
-          right: 0;
-          bottom: 0;
-          left: 0;
-          background-size: cover; 
-        }
-    </style>
-
-			    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.6.0/styles/github-gist.min.css" />
+    
   
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
 
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script async type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
   
 
 
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/jquery.scrollex.min.js"></script>
-    <script src="/js/jquery.scrolly.min.js"></script>
-    <script src="/js/skel.min.js"></script>
-    <script src="/js/util.js"></script>
-    <script src="/js/main.js"></script>
-	
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.4.0"></head>
-    
-		
-<!-- Layouts -->
 
 
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
 
-<!--  代码渲染  -->
-<link rel="stylesheet" href="/css/prism_default.css" />
-<link rel="stylesheet" href="/css/typo.css" />
-<!-- 文章页 -->
-<body class="is-loading">
-    <!-- Wrapper 外包 s-->
-    <div id="wrapper" class="fade-in">
-        <!-- Intro 头部显示 s -->
-        <!-- Intro 头部显示 e -->
-        <!-- Header 头部logo start -->
-        <header id="header">
-    <a href="/" class="logo">Just Linton.</a>
-</header>
-        <!-- Nav 导航条 start -->
-        <nav id="nav" class="special" >
-            <ul class="menu links" >
-			<!-- Homepage  主页  --> 
-			<li >
-	            <a href="/" rel="nofollow">Home</a>
-	        </li>
-			<!-- categories_name  分类   --> 
-	        
-	        <li class="active">
-	            <a href="#s1">Tags</a>
-	                    <ul class="submenu">
-	                        <li>
-	                        <a class="category-link" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a></li><li><a class="category-link" href="/categories/%E6%9D%82%E8%B0%88/%E6%B5%8B%E8%AF%95/">测试</a></li><li><a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li><li><a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/SDUOJ/">SDUOJ</a>
-	                    </ul>
-	        </li>
-	        
-	        <!-- archives  归档   --> 
-	        
-	        <li class="active">
-	            <a href="#s1">Archived</a>
-	                    <ul class="submenu">
-	                        <li>
-	                        <a class="archive-link" href="/archives/2021/04/">April 2021</a></li><li><a class="archive-link" href="/archives/2021/03/">March 2021</a>
-	                    </ul>
-	        </li>
-	        
-	        
-		        <!-- Pages 自定义   -->
-		        
-		        <li>
-		            <a href="/about/" title="About">
-		                About
-		            </a>
-		        </li>
-		        
-		        <li>
-		            <a target="_blank" rel="noopener" href="http://114.215.149.199/" title="Projects">
-		                Projects
-		            </a>
-		        </li>
-		        
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
 
-
-            </ul>
-            <!-- icons 图标   -->
-			<ul class="icons">
-                    
-                    <li>
-                        <a title="github" href="https://github.com/JustLinton" target="_blank" rel="noopener">
-                            <i class="icon fa fa-github"></i>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a title="twitter" href="https://twitter.com/Linton_Collin" target="_blank" rel="noopener">
-                            <i class="icon fa fa-twitter"></i>
-                        </a>
-                    </li>
-                    
-			</ul>
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
 </nav>
 
-        <div id="main" >
-            <div class ="post_page_title_img" style="height: 25rem;background-image: url();background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
-                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >SDUOJ 划分石头题解 (二分查找)</h2></a>
-            </div>
-            <!-- Post -->
-            <div class="typo" style="padding: 3rem;">
-                <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>海边有很多好看的石头🪨，war把它们收集起来依次排成一排，一共n个，第i个石头的重量为w_i<em>w**i</em>。他想将其分成m段，每一段连续，并且<strong>重量和</strong>最大的段的<strong>和最小</strong>。请你帮帮他～</p>
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="SDUOJ 划分石头题解 (二分查找)">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-04-13 15:13" pubdate>
+        April 13, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      565 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      7
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">SDUOJ 划分石头题解 (二分查找)</h1>
+            
+            <div class="markdown-body">
+              <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>海边有很多好看的石头🪨，war把它们收集起来依次排成一排，一共n个，第i个石头的重量为w_i<em>w**i</em>。他想将其分成m段，每一段连续，并且<strong>重量和</strong>最大的段的<strong>和最小</strong>。请你帮帮他～</p>
 <h2 id="输入描述"><a href="#输入描述" class="headerlink" title="输入描述"></a>输入描述</h2><p>第一行为n(1≤n≤10^5)(1≤<em>n</em>≤105)，m(m≤n)(<em>m</em>≤<em>n</em>)。</p>
 <p>第二行n个数，第i个数为w_i(0≤wi≤10^9)<em>w**i</em>(0≤<em>w**i</em>≤109)，中间有空格。</p>
 <h2 id="输出描述"><a href="#输出描述" class="headerlink" title="输出描述"></a>输出描述</h2><p>输出只有一个数，<strong>重量和</strong>最大的段的和。</p>
@@ -180,63 +256,220 @@
 <p>判断函数的关键，在于输入一个判断值d作为每段的质量，判断尽量<code>以此为最小质量</code>，能否分得<code>&lt;=m</code>段。因为如果d过小，显然分段数量要很大。如果d足够大了，分段数量就可以&lt;=m，那么显然<code>能满足</code>“可以分到m段”的条件。</p>
 <p>具体实现方式在于，按顺序遍历所有石头，并计算当前段的质量和。如果当前质量和+下一石头质量超过了d，则分段数++，其余量归零。</p>
 <h2 id="关键问题"><a href="#关键问题" class="headerlink" title="关键问题"></a>关键问题</h2><p>可以通过输入来确定二分答案的上下界，加快速度。</p>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF = <span class="number">1e9</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; stones;</span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"><span class="keyword">int</span> maxMass, inputSum;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">C</span><span class="params">(<span class="keyword">int</span> d)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> massSum = <span class="number">0</span>, divides = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (massSum + stones[i] &gt; d) &#123;</span><br><span class="line">			divides++;</span><br><span class="line">			massSum = stones[i];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> massSum += stones[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (divides &gt;= m)<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> lb = maxMass, ub = inputSum, mid = <span class="number">0</span>, ans = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (lb&lt;=ub)</span><br><span class="line">	&#123;</span><br><span class="line">		mid = (ub + lb) / <span class="number">2</span>;</span><br><span class="line">		<span class="keyword">if</span> (C(mid)) &#123;</span><br><span class="line">			ans = mid;</span><br><span class="line">			ub = mid - <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> lb = mid + <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">//freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.in&quot;,&quot;r&quot;,stdin);</span></span><br><span class="line">	<span class="comment">//freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.out&quot;, &quot;w&quot;, stdout);</span></span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; stones[i]; </span><br><span class="line">		<span class="keyword">if</span> (stones[i] &gt; maxMass)maxMass = stones[i];</span><br><span class="line">		inputSum += stones[i];</span><br><span class="line">	&#125;</span><br><span class="line">	solve();</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> INF = <span class="hljs-number">1e9</span>;<br><br><span class="hljs-built_in">unordered_map</span>&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>&gt; stones;<br><span class="hljs-keyword">int</span> n, m;<br><span class="hljs-keyword">int</span> maxMass, inputSum;<br><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">C</span><span class="hljs-params">(<span class="hljs-keyword">int</span> d)</span> </span>&#123;<br>	<span class="hljs-keyword">int</span> massSum = <span class="hljs-number">0</span>, divides = <span class="hljs-number">0</span>;<br><br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>		<span class="hljs-keyword">if</span> (massSum + stones[i] &gt; d) &#123;<br>			divides++;<br>			massSum = stones[i];<br>		&#125;<br>		<span class="hljs-keyword">else</span> massSum += stones[i];<br>	&#125;<br>	<span class="hljs-keyword">if</span> (divides &gt;= m)<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">solve</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-keyword">int</span> lb = maxMass, ub = inputSum, mid = <span class="hljs-number">0</span>, ans = <span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">while</span> (lb&lt;=ub)<br>	&#123;<br>		mid = (ub + lb) / <span class="hljs-number">2</span>;<br>		<span class="hljs-keyword">if</span> (C(mid)) &#123;<br>			ans = mid;<br>			ub = mid - <span class="hljs-number">1</span>;<br>		&#125;<br>		<span class="hljs-keyword">else</span> lb = mid + <span class="hljs-number">1</span>;<br>	&#125;<br>	<span class="hljs-built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="hljs-built_in">endl</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-comment">//freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.in&quot;,&quot;r&quot;,stdin);</span><br>	<span class="hljs-comment">//freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.out&quot;, &quot;w&quot;, stdout);</span><br>	<span class="hljs-built_in">cin</span> &gt;&gt; n &gt;&gt; m;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>		<span class="hljs-built_in">cin</span> &gt;&gt; stones[i]; <br>		<span class="hljs-keyword">if</span> (stones[i] &gt; maxMass)maxMass = stones[i];<br>		inputSum += stones[i];<br>	&#125;<br>	solve();<br>&#125;<br><br></code></pre></td></tr></table></figure>
 
 
             </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%AE%97%E6%B3%95/SDUOJ/">SDUOJ</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%AE%97%E6%B3%95/">算法</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/04/12/SDUOJ008/">
+                        <span class="hidden-mobile">SDUOJ TT与可怜的猫题解 (水题)</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
 
-            <!-- Post Comments -->
             
-    <!-- 使用 DISQUS -->
-<div id="disqus-comment">
-    <div id="disqus_thread"></div>
-
-<script type="text/javascript">
-    var disqus_config = function () {
-        this.page.url = 'http://example.com/2021/04/13/SDUOJ013/';  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = 'http://example.com/2021/04/13/SDUOJ013/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-    };
-</script>
-
-<script type="text/ls-javascript" id="disqus-thread-script">
-    queue.offer(function() {
-            (function() { // DON'T EDIT BELOW THIS LINE
-                var d = document;
-                var s = d.createElement('script');
-                s.src = '//http-miccall-tech.disqus.com/embed.js';
-                s.setAttribute('data-timestamp', + new Date());
-                (d.head || d.body).appendChild(s);
-            })();
-        });
-</script>
-
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
 </div>
 
-<style>
-    #disqus-comment{
-        background-color: #eee;
-        padding: 2pc;
-    }
-</style>
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
 
 
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
         </div>
-        <!-- Copyright 版权 start -->
-                <div id="copyright">
-            <ul>
-                <li>&copy;2020 - 2021<a target="_blank" rel="noopener" href="https://hub.linton.cool/" style="border-bottom: none;">Just Linton</a></li>
-                <li>Design: <a target="_blank" rel="noopener" href="https://hub.linton.cool/ " style="border-bottom: none;">Just Linton</a></li>
-            </ul>
-            
-					<span id="busuanzi_container_site_pv">关于作者更多项目，欢迎访问 <a target="_blank" rel="noopener" href="https://dev.linton.cool/ " style="border-bottom: none;">dev.linton.cool</a></span>
-                <span id="busuanzi_container_site_pv"></br>访问量 <span id="busuanzi_value_site_pv"></span></span>
-		
-			
-        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
     </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.2/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
 </body>
-
-
-
- 	
 </html>
