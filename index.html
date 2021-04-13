@@ -219,6 +219,279 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/12/SDUOJ009/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar2.gif">
+      <meta itemprop="name" content="Just Linton">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Just Linton's Hub">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/04/12/SDUOJ009/" class="post-title-link" itemprop="url">SDUOJ 时间复杂度题解 (模拟)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-04-12 15:13:06" itemprop="dateCreated datePublished" datetime="2021-04-12T15:13:06+08:00">2021-04-12</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-04-13 17:40:44" itemprop="dateModified" datetime="2021-04-13T17:40:44+08:00">2021-04-13</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/SDUOJ/" itemprop="url" rel="index"><span itemprop="name">SDUOJ</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>分析算法的时间复杂度是评价算法性能的重要方式之一，对于同一问题来说，拥有线性时间复杂度的算法往往比拥有平方级别时间复杂度的算法要快很多，因此拥有线性时间复杂度的算法往往优于拥有平方级别时间复杂度的算法。</p>
+<p>通常，可以根据输入n的值确定算法的运行时间，n可以表示要排序的对象数，多边形顶点数等等。现给出一段简易的程序，程序规则如下，其中<number>可以是任何非负整数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt; Program &gt; ::&#x3D; &quot;BEGIN&quot; &lt; Statementlist &gt; &quot;END&quot; </span><br><span class="line"></span><br><span class="line">&lt; Statementlist &gt; ::&#x3D; &lt; Statement &gt; | &lt; Statement &gt; &lt; Statementlist &gt; </span><br><span class="line"></span><br><span class="line">&lt; Statement &gt; ::&#x3D; &lt; LOOP-Statement &gt; | &lt; OP-Statement &gt; </span><br><span class="line"></span><br><span class="line">&lt; LOOP-Statement &gt; ::&#x3D; &lt; LOOP-Header &gt; &lt; Statementlist &gt; &quot;END&quot; </span><br><span class="line"></span><br><span class="line">&lt; LOOP-Header &gt; ::&#x3D; &quot;LOOP&quot; &lt; number &gt; | &quot;LOOP n&quot; </span><br><span class="line"></span><br><span class="line">&lt; OP-Statement &gt; ::&#x3D; &quot;OP&quot; &lt; number &gt;</span><br></pre></td></tr></table></figure>
+
+<p>针对该规则下的程序的运行时间可以如下计算：执行OP语句所花费的时间与其参数指定的时间相同（即为number）。LOOP语句到其对应的END之间所有语句执行的次数与LOOP后的参数相同（即为number或n）。程序运行时间是其组成部分的时间总和。因此，总运行时间通常取决于n。</p>
+<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h3><p>输入一段程序，空格和换行符可以出现在程序中的任何位置，但不能出现在关键字BEGIN，END，LOOP和OP中或整数值中。LOOP的循环嵌套深度最多为10。</p>
+<h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h3><p>以n为单位输出程序的运行时间，即输出一个化简后的Y（Y&lt;=10）次多项式，形如“Runtime = a<em>n^10+b</em>n^9+ . . . +i<em>n^2+ j</em>n+k”，若n的某一项系数为0则直接省略该项,若系数为1则省略其系数。<br>如果运行时间为0，则只需打印 “Runtime = 0”。</p>
+<h3 id="样例输入"><a href="#样例输入" class="headerlink" title="样例输入"></a>样例输入</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">BEGIN</span><br><span class="line">   LOOP n</span><br><span class="line">     LOOP n</span><br><span class="line">       OP 3</span><br><span class="line">       OP 4</span><br><span class="line">       LOOP 4</span><br><span class="line">         OP 3</span><br><span class="line">       END</span><br><span class="line">     END</span><br><span class="line">   END</span><br><span class="line">   OP 7</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
+
+<h3 id="样例输出"><a href="#样例输出" class="headerlink" title="样例输出"></a>样例输出</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Runtime &#x3D; 19*n^2+7</span><br></pre></td></tr></table></figure>
+
+<h3 id="样例说明"><a href="#样例说明" class="headerlink" title="样例说明"></a>样例说明</h3><p>Runtime = n*(n*(3+4+4<em>3))+7=19</em>n^2+7</p>
+<h3 id="数据范围说明"><a href="#数据范围说明" class="headerlink" title="数据范围说明"></a>数据范围说明</h3><p>LOOP循环嵌套深度&lt;=10且关键字总数不超过50<br>且所有运算均在int范围内进行<br>对于测试点1，保证只包含OP语句<br>对于测试点2,3，保证只有一段Statementlist且只有一层循环<br>对于测试点4，保证只有一段Statementlist</p>
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><h4 id="输入过程中的数据结构"><a href="#输入过程中的数据结构" class="headerlink" title="输入过程中的数据结构"></a>输入过程中的数据结构</h4><table>
+<thead>
+<tr>
+<th>标识符</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>depth</td>
+<td>当前嵌套层数</td>
+</tr>
+<tr>
+<td>args[0…14]</td>
+<td>下标的含义是n的幂次。表示最终化简式中，对应n的此幂次的项系数（多开余量）</td>
+</tr>
+<tr>
+<td>ops[0…14]</td>
+<td>对应depth的这一层的循环次数。</td>
+</tr>
+<tr>
+<td>op</td>
+<td>当前关键字。包括LOOP、BEGIN、END、OP。</td>
+</tr>
+<tr>
+<td>op2</td>
+<td>第二关键字。</td>
+</tr>
+<tr>
+<td>cur_arg</td>
+<td>当前处理输入所在的层数往回走，记录经过的嵌套层的所有循环次数的乘积（指数字，除了n）。</td>
+</tr>
+<tr>
+<td>n_depth</td>
+<td>当前处理输入所在的层数往回走，记录一共经过了多少层循环次数为n的嵌套层。</td>
+</tr>
+</tbody></table>
+<h4 id="解答过程中的数据结构"><a href="#解答过程中的数据结构" class="headerlink" title="解答过程中的数据结构"></a>解答过程中的数据结构</h4><table>
+<thead>
+<tr>
+<th>标识符</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>fa</td>
+<td>用于标志当前项是否为式子的第一项（即前面无需跟“+”）。</td>
+</tr>
+<tr>
+<td>fb</td>
+<td>用于标志整个程序的复杂度是否对于n的各个幂次来说，都是0.如果各个幂次都是0，则可以直接输出time=0.</td>
+</tr>
+</tbody></table>
+<h2 id="算法设计"><a href="#算法设计" class="headerlink" title="算法设计"></a>算法设计</h2><h4 id="处理输入，并当场完成“多项式化简”"><a href="#处理输入，并当场完成“多项式化简”" class="headerlink" title="处理输入，并当场完成“多项式化简”"></a>处理输入，并当场完成“多项式化简”</h4><p>维护depth，一开始为0.</p>
+<p>开始while循环，当depth=-1时结束。因为这时读入了程序结束的那个END。</p>
+<p>每次处理时，分三种情况。</p>
+<p>如果读入END，则depth–即可。因为END了，下一次再处理读入时，就从上一级做即可。</p>
+<p>如果读入LOOP，则若n，记录当前depth的ops为-1，否则为操作数。即把这层循环的次数记录下来。</p>
+<p>如果读入OP，则初始化cur_arg和n_depth，从它的上层(即depth-1)开始循环，一直到0层，考察本层的循环次数。如果为n则n_depth++，否则cur_arg直接乘循环次数。最后处理n_depth，即让n幂次为n_depth的系数加上刚才的cur_arg*操作数即可。这样就站在某个幂次的n的角度，更新了其前面的系数。</p>
+<h4 id="处理前面化简好的n的各次幂的系数，并按幂次从高到低输出"><a href="#处理前面化简好的n的各次幂的系数，并按幂次从高到低输出" class="headerlink" title="处理前面化简好的n的各次幂的系数，并按幂次从高到低输出"></a>处理前面化简好的n的各次幂的系数，并按幂次从高到低输出</h4><p>维护fa，fb，都先初始化为0.</p>
+<p>循环11次（因为幂次取值范围是0…10），每次循环先检查args[i]是否为0：</p>
+<p>如果为0说明这一项不存在（因为系数是0），跳过。</p>
+<p>如果不为0说明这一项的系数就是args[i]。</p>
+<p>args[i]不为零，进入打印的过程：先把fb置1。</p>
+<p>每次打印，分fa为1和为0两种情况。如果为0，则打印时加个“+”，否则不加。当然每次打印如果fa=0，则立即置1.</p>
+<p>打印只需要对i==0、i==1两种情况进行特殊处理。前者是n不加”^”,后者是不含n。</p>
+<p>走完11次循环，如果fb仍为0，则单独处理，输出time=0即可。</p>
+<h2 id="关键问题"><a href="#关键问题" class="headerlink" title="关键问题"></a>关键问题</h2><p>千万不能去模拟手动化简多项式的过程。否则非常麻烦。</p>
+<p>在输入的过程中直接针对n的各个幂次计算他们的系数，高效而精妙。</p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> ops[<span class="number">15</span>];</span><br><span class="line"><span class="keyword">int</span> args[<span class="number">15</span>];</span><br><span class="line"><span class="built_in">string</span> op, op2;</span><br><span class="line"><span class="keyword">int</span> fa, fb;</span><br><span class="line"><span class="keyword">int</span> depth;</span><br><span class="line"><span class="keyword">int</span> cur_arg, n_depth;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sti</span><span class="params">(<span class="built_in">string</span> str)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; str.length(); i++)res = res * <span class="number">10</span> + str[i] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Runtime = &quot;</span>;</span><br><span class="line">	fa = fb = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">11</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">		<span class="keyword">if</span> (args[i] == <span class="number">0</span>)<span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			fb = <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span> (i == <span class="number">0</span>)&#123;</span><br><span class="line">				<span class="keyword">if</span> (fa == <span class="number">0</span>)</span><br><span class="line">				&#123;</span><br><span class="line">					fa = <span class="number">1</span>;</span><br><span class="line">					<span class="built_in">cout</span> &lt;&lt; args[i];</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;+&quot;</span> &lt;&lt; args[i];</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (i == <span class="number">1</span>)&#123;</span><br><span class="line">				<span class="keyword">if</span> (fa == <span class="number">0</span>)&#123;</span><br><span class="line">					fa = <span class="number">1</span>;</span><br><span class="line">					<span class="keyword">if</span> (args[i] != <span class="number">1</span>) <span class="built_in">cout</span> &lt;&lt; args[i] &lt;&lt; <span class="string">&quot;*n&quot;</span>;</span><br><span class="line">					<span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;n&quot;</span>;</span><br><span class="line">				&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">					<span class="keyword">if</span> (args[i] != <span class="number">1</span>) <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;+&quot;</span> &lt;&lt; args[i] &lt;&lt; <span class="string">&quot;*n&quot;</span>;</span><br><span class="line">					<span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;+n&quot;</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">				<span class="keyword">if</span> (fa == <span class="number">0</span>)&#123;</span><br><span class="line">					fa = <span class="number">1</span>;</span><br><span class="line">					<span class="keyword">if</span> (args[i] != <span class="number">1</span>)</span><br><span class="line">						<span class="built_in">cout</span> &lt;&lt; args[i] &lt;&lt; <span class="string">&quot;*n^&quot;</span> &lt;&lt; i;</span><br><span class="line">					<span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;n^&quot;</span> &lt;&lt; i;</span><br><span class="line">				&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">					<span class="keyword">if</span> (args[i] != <span class="number">1</span>) <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;+&quot;</span> &lt;&lt; args[i] &lt;&lt; <span class="string">&quot;*n^&quot;</span> &lt;&lt; i;</span><br><span class="line">					<span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;+n^&quot;</span> &lt;&lt; i;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (fb == <span class="number">0</span>)<span class="built_in">cout</span> &lt;&lt; <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">puts</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">//freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.in&quot;, &quot;r&quot;, stdin);</span></span><br><span class="line">	<span class="comment">//freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.out&quot;, &quot;w&quot;, stdout);</span></span><br><span class="line"></span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; op;</span><br><span class="line">	depth = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">memset</span>(args, <span class="number">0</span>, <span class="keyword">sizeof</span>(args));</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (depth != <span class="number">-1</span>)&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; op;</span><br><span class="line">		<span class="keyword">if</span> (op == <span class="string">&quot;LOOP&quot;</span>)&#123;</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; op2;</span><br><span class="line">			<span class="keyword">if</span> (op2 == <span class="string">&quot;n&quot;</span>) ops[depth++] = <span class="number">-1</span>;</span><br><span class="line">			<span class="keyword">else</span> ops[depth++] = sti(op2);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (op == <span class="string">&quot;END&quot;</span>)depth--;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (op == <span class="string">&quot;OP&quot;</span>)&#123;</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; op2;</span><br><span class="line">			cur_arg = <span class="number">1</span>;</span><br><span class="line">			n_depth = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = depth - <span class="number">1</span>; j &gt;= <span class="number">0</span>; j--)&#123;</span><br><span class="line">				<span class="keyword">if</span> (ops[j] == <span class="number">-1</span>)n_depth++;</span><br><span class="line">				<span class="keyword">else</span> cur_arg = cur_arg * ops[j];</span><br><span class="line">			&#125;</span><br><span class="line">			args[n_depth] = args[n_depth] + cur_arg * sti(op2);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	solve();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/12/SDUOJ008/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar2.gif">
+      <meta itemprop="name" content="Just Linton">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Just Linton's Hub">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/04/12/SDUOJ008/" class="post-title-link" itemprop="url">SDUOJ TT与可怜的猫题解 (水题)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-04-12 15:13:06" itemprop="dateCreated datePublished" datetime="2021-04-12T15:13:06+08:00">2021-04-12</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-04-13 17:40:52" itemprop="dateModified" datetime="2021-04-13T17:40:52+08:00">2021-04-13</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/SDUOJ/" itemprop="url" rel="index"><span itemprop="name">SDUOJ</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>自从 TT 成为了助教，他就热衷于给同学们解答疑问，于是他就没有时间进行陪他的猫猫玩了，真是一只可怜的小猫。</p>
+<p><img src="https://oj.qd.sdu.edu.cn/api/filesys/download/158001115693068325/TTandCat.png" alt="TTandCat.png"></p>
+<p>TT 在同一时间会与很多同学同时用 QQ（TT特供版） 进行答疑，有时 TT <strong>开启</strong>一个新的窗口，开始一个新的答疑对话；有时 TT <strong>关闭</strong>一个窗口，结束一段答疑； 有时，为了及时回答着急的同学，TT会把一个对话窗口设置为<strong>置顶</strong>状态（置顶状态是一种虚拟的状态，窗口的实际位置并不会发生改变）。</p>
+<p>你可以将 TT 的聊天窗口想象成一个队列。如果现在没有窗口处于<strong>置顶</strong>状态，那么在队列中位列第一窗口视为在<strong>顶层</strong>，否则处于<strong>置顶</strong>状态的窗口视为在<strong>顶层</strong>。请注意，不可能同时存在两个窗口处于<strong>置顶</strong>状态（也就是说，处于置顶状态的窗口，要么不存在，要么只有一个）。如果当前<strong>置顶</strong>的窗口被关闭了，则剩余队列中第一窗口视为在<strong>顶层</strong>。</p>
+<p>TT 为了安抚自己的猫，于是给猫猫看自己的聊天记录解闷，根据猫猫看屏幕中窗口的时间，TT 给每个窗口分配了一个<strong>喜爱度</strong>，TT 认为<strong>喜爱度</strong>越高，猫猫越开心。由于猫猫具有不确定的生物特性，所以所有的<strong>喜爱度</strong>都是<strong>不同</strong>的。</p>
+<p>作为 TT 特供版QQ的研发人员，你要负责完成的工作是为软件记录 TT 的操作，形成一个日志系统。日志有固定的记录格式：<code>OpId #X: MSG.</code> ，其中 X<em>X</em> 是操作的编号，而 <code>MSG</code> 是日志的提示信息，需要使用特定的字符串进行替换。</p>
+<p>TT 可能会用到的操作如下：</p>
+<ol>
+<li><strong>Add u:</strong> TT 打开一个喜爱度为 u<em>u</em> 的新窗口，若 u<em>u</em> 不与当前窗口队列中的某个窗口重复，则该新窗口将新建成功，并成为窗口队列中的最后一个窗口。 如果创建成功，则 <code>MSG</code> 记录 <code>success</code>。 否则， <code>MSG</code> 记录 <code>same likeness </code>。</li>
+<li><strong>Close u:</strong> TT 关掉了一个喜爱度为 u<em>u</em> 的窗口，如果该窗口存在，则将其关闭，<code>MSG</code> 记录 <code>close u with c</code>，u<em>u</em> 表示喜爱度，c<em>c</em> 表示该窗口上次打开至今交流的话的数量。若该窗口不存在，则<code>MSG</code> 记录<code>invalid likeness</code>。</li>
+<li><strong>Chat w:</strong> TT 和<strong>顶层</strong>窗口交流了 w<em>w</em> 句话，如果当前队列中没有窗口，则<code>MSG</code> 记录<code>empty</code>，否则记录 <code>success</code>。</li>
+<li><strong>Rotate x:</strong> 将队列中第 x<em>x</em> 个窗口放在队首，若 x<em>x</em> 大于当前队列中窗口数或小于 11 ，则<code>MSG</code> 记录<code>out of range</code>，否则记录<code>success</code>。举个例子，目前队列中有喜爱度为 5,3,2,8 的四个窗口，Rotate 3 之后，会将喜爱度为 2 的第 3 个窗口放在首位，结果为 2,5,3,8。</li>
+<li><strong>Prior:</strong> TT 将目前喜爱度最大的窗口放在队首，如果当前队列中没有窗口，则<code>MSG</code> 记录<code>empty</code>，否则记录 <code>success</code>。</li>
+<li><strong>Choose u:</strong> TT 将喜爱度为 u<em>u</em> 的窗口放在队首，如果喜爱度为 u<em>u</em> 的窗口存在，则<code>MSG</code> 记录<code>success</code>，否则记录<code>invalid likeness</code>。</li>
+<li><strong>Top u:</strong> TT 将喜爱度为 u<em>u</em> 的窗口设定为<strong>置顶</strong>状态，如果喜爱度为 u<em>u</em> 的窗口存在，则<code>MSG</code> 记录<code>success</code>，否则记录<code>invalid likeness</code>。注意，处于<strong>置顶</strong>状态的窗口最多不超过一个，也就是说，如果在此次设定前已经有处于置顶状态的窗口，则原有<strong>置顶</strong>状态的窗口的<strong>置顶</strong>状态将会消失。（<strong>置顶</strong>只是一种虚拟的状态，原窗口在队列中的位置不会发生变化）</li>
+<li><strong>Untop:</strong> TT 取消当前处于<strong>置顶</strong>状态窗口的<strong>置顶</strong>状态。如果当前没有窗口处于<strong>置顶</strong>状态，则<code>MSG</code> 记录<code>no such person</code>，否则记录<code>success</code>。</li>
+</ol>
+<p>最后，由于TT要给自己的猫猫树立一个讲文明有礼貌的榜样，所以在上述操作完成后，还要进行若干次操作，这些操作是：与当前队列中所有说过话的窗口说拜拜。<code>MSG</code> 记录<code>Bye u: c</code>， u<em>u</em> 表示喜爱度，c<em>c</em> 表示该窗口上次打开至今交流的话的数量。即：TT 先和位于<strong>顶层</strong>的窗口说拜拜，然后将其关闭，如果TT没有和当前<strong>顶层</strong>窗口说过话，则直接将其关闭，如此操作下去，直到队列为空。</p>
+<h2 id="输入描述"><a href="#输入描述" class="headerlink" title="输入描述"></a>输入描述</h2><p>第一行包含一个整数 T (T \leq 5)<em>T</em>(<em>T</em>≤5)，表示数据组数。</p>
+<p>对于每组数据，第一行一个 n<em>n</em>，表示执行的操作数，其中 0&lt;n\leq 50000&lt;<em>n</em>≤5000。接下来 n<em>n</em> 行，每行输入一个操作，保证所有输入数据中的整数不大于 10^9109。</p>
+<h2 id="输出描述"><a href="#输出描述" class="headerlink" title="输出描述"></a>输出描述</h2><p>对于每个指定的操作，按照日志的格式，每个操作行。对于最后的非指定操作，同样按照日志的格式，每个操作一行。</p>
+<h2 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h2><p>比较简单的模拟</p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">int</span> dataGroupCnt;</span><br><span class="line"><span class="keyword">int</span> opCnt;<span class="comment">//本组操作数量</span></span><br><span class="line"><span class="built_in">string</span> curOp;<span class="comment">//当前操作</span></span><br><span class="line">ll curArg;</span><br><span class="line">ll topped = <span class="number">-1</span>;</span><br><span class="line"><span class="built_in">deque</span>&lt;ll&gt; windows;</span><br><span class="line"><span class="built_in">set</span>&lt;ll&gt; windowsSet;</span><br><span class="line"><span class="built_in">unordered_map</span>&lt;ll, ll&gt; chatsPerWindow;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> opid[] = <span class="string">&quot;OpId #&quot;</span>, col[] = <span class="string">&quot;: &quot;</span>, dot[] = <span class="string">&quot;.&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// freopen(&quot;/home/linton/Desktop/CSP/a.in&quot;, &quot;r&quot;, stdin);</span></span><br><span class="line">    <span class="comment">// freopen(&quot;/home/linton/Desktop/CSP/a.out&quot;, &quot;w&quot;, stdout);</span></span><br><span class="line">    <span class="comment">// freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.in&quot;, &quot;r&quot;, stdin);</span></span><br><span class="line">    <span class="comment">// freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.out&quot;, &quot;w&quot;, stdout);</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; dataGroupCnt;</span><br><span class="line">    <span class="keyword">while</span> (dataGroupCnt--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; opCnt;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> o = <span class="number">1</span>; o &lt;= opCnt; o++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; curOp;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (curOp == <span class="string">&quot;Add&quot;</span>) &#123;</span><br><span class="line"></span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>, &amp;curArg);</span><br><span class="line">                <span class="keyword">if</span> (!windowsSet.count(curArg)) &#123;</span><br><span class="line">                    windowsSet.insert(curArg);</span><br><span class="line">                    windows.push_back(curArg);</span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">&quot;%s%lld%s%s%s\n&quot;</span>, opid, o, col, <span class="string">&quot;success&quot;</span>, dot);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">&quot;%s%lld%s%s%s\n&quot;</span>, opid, o, col, <span class="string">&quot;same likeness&quot;</span>, dot);</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (curOp == <span class="string">&quot;Close&quot;</span>) &#123;</span><br><span class="line"></span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>, &amp;curArg);</span><br><span class="line">                <span class="keyword">if</span> (windowsSet.count(curArg)) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (topped == curArg)topped = <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">                    windowsSet.erase(curArg);</span><br><span class="line">                    windows.erase(find(windows.begin(), windows.end(), curArg));</span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">&quot;%s%lld%s%s%lld%s%lld%s\n&quot;</span>, opid, o, col, <span class="string">&quot;close &quot;</span>, curArg, <span class="string">&quot; with &quot;</span>, chatsPerWindow[curArg], dot);</span><br><span class="line">                    chatsPerWindow[curArg] = <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">&quot;%s%lld%s%s%s\n&quot;</span>, opid, o, col, <span class="string">&quot;invalid likeness&quot;</span>, dot);</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (curOp == <span class="string">&quot;Chat&quot;</span>) &#123;</span><br><span class="line"></span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>, &amp;curArg);</span><br><span class="line">                <span class="keyword">if</span> (topped != <span class="number">-1</span>) &#123;</span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">&quot;%s%lld%s%s%s\n&quot;</span>, opid, o, col, <span class="string">&quot;success&quot;</span>, dot);</span><br><span class="line">                    chatsPerWindow[topped] += curArg;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">if</span> (!windows.empty()) &#123;</span><br><span class="line">                        <span class="built_in">printf</span>(<span class="string">&quot;%s%lld%s%s%s\n&quot;</span>, opid, o, col, <span class="string">&quot;success&quot;</span>, dot);</span><br><span class="line">                        chatsPerWindow[windows.front()] += curArg;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">&quot;%s%lld%s%s%s\n&quot;</span>, opid, o, col, <span class="string">&quot;empty&quot;</span>, dot);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (curOp == <span class="string">&quot;Rotate&quot;</span>) &#123;</span><br><span class="line"></span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>, &amp;curArg);</span><br><span class="line">                <span class="keyword">if</span> (curArg &gt; windows.size()||curArg&lt;<span class="number">1</span>)<span class="built_in">printf</span>(<span class="string">&quot;%s%lld%s%s%s\n&quot;</span>, opid, o, col, <span class="string">&quot;out of range&quot;</span>, dot);</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">auto</span> ite = windows.begin();</span><br><span class="line">                    ite += curArg - <span class="number">1</span>;</span><br><span class="line">                    <span class="keyword">int</span> value = *ite;</span><br><span class="line">                    windows.erase(ite);</span><br><span class="line">                  </span><br><span class="line">                    windows.push_front(value);</span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">&quot;%s%lld%s%s%s\n&quot;</span>, opid, o, col, <span class="string">&quot;success&quot;</span>, dot);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (curOp == <span class="string">&quot;Prior&quot;</span>) &#123;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (!windows.empty()) &#123;</span><br><span class="line">                    <span class="keyword">int</span> maxLikeness = *(windowsSet.rbegin());</span><br><span class="line">                    <span class="keyword">auto</span> ite = find(windows.begin(), windows.end(), maxLikeness);</span><br><span class="line">                    <span class="keyword">int</span> value = *ite;</span><br><span class="line">                    windows.erase(ite);                   </span><br><span class="line">                    windows.push_front(value);</span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">&quot;%s%lld%s%s%s\n&quot;</span>, opid, o, col, <span class="string">&quot;success&quot;</span>, dot);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">&quot;%s%lld%s%s%s\n&quot;</span>, opid, o, col, <span class="string">&quot;empty&quot;</span>, dot);</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (curOp == <span class="string">&quot;Choose&quot;</span>) &#123;</span><br><span class="line"></span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>, &amp;curArg);</span><br><span class="line">                <span class="keyword">if</span> (windowsSet.count(curArg)) &#123;</span><br><span class="line">                    <span class="keyword">auto</span> ite = find(windows.begin(), windows.end(), curArg);</span><br><span class="line">                    <span class="keyword">int</span> value = *ite;</span><br><span class="line">                    windows.erase(ite);                               </span><br><span class="line">                    windows.push_front(value);</span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">&quot;%s%lld%s%s%s\n&quot;</span>, opid, o, col, <span class="string">&quot;success&quot;</span>, dot);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">&quot;%s%lld%s%s%s\n&quot;</span>, opid, o, col, <span class="string">&quot;invalid likeness&quot;</span>, dot);</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (curOp == <span class="string">&quot;Top&quot;</span>) &#123;</span><br><span class="line"></span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>, &amp;curArg);</span><br><span class="line">                <span class="keyword">if</span> (windowsSet.count(curArg)) &#123;</span><br><span class="line">                    topped = curArg;</span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">&quot;%s%lld%s%s%s\n&quot;</span>, opid, o, col, <span class="string">&quot;success&quot;</span>, dot);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">&quot;%s%lld%s%s%s\n&quot;</span>, opid, o, col, <span class="string">&quot;invalid likeness&quot;</span>, dot);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (curOp == <span class="string">&quot;Untop&quot;</span>) &#123;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (topped != <span class="number">-1</span>) &#123;</span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">&quot;%s%lld%s%s%s\n&quot;</span>, opid, o, col, <span class="string">&quot;success&quot;</span>, dot);</span><br><span class="line">                    topped = <span class="number">-1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">&quot;%s%lld%s%s%s\n&quot;</span>, opid, o, col, <span class="string">&quot;no such person&quot;</span>, dot);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//  for(auto i= windows.begin();i!=windows.end();i++)cout&lt;&lt;*i&lt;&lt;&quot;,&quot;&lt;&lt;chatsPerWindow[*i]&lt;&lt;&quot; &quot;;</span></span><br><span class="line"><span class="comment">//         cout&lt;&lt;endl;</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> curUser = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// for(auto i= windows.begin();i!=windows.end();i++)cout&lt;&lt;*i&lt;&lt;&quot;,&quot;&lt;&lt;chatsPerWindow[*i]&lt;&lt;&quot; &quot;;</span></span><br><span class="line">        <span class="comment">// cout&lt;&lt;endl;</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(topped!=<span class="number">-1</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span> (chatsPerWindow[topped])<span class="built_in">printf</span>(<span class="string">&quot;%s%lld%s%s%lld%s%lld%s\n&quot;</span>, opid, ++opCnt, col, <span class="string">&quot;Bye &quot;</span>, topped, <span class="string">&quot;: &quot;</span>, chatsPerWindow[topped], dot);</span><br><span class="line">            windows.erase(find(windows.begin(), windows.end(), topped));</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> (!windows.empty())</span><br><span class="line">        &#123;</span><br><span class="line">            curUser = windows.front();</span><br><span class="line">            <span class="keyword">if</span> (chatsPerWindow[curUser]) <span class="built_in">printf</span>(<span class="string">&quot;%s%lld%s%s%lld%s%lld%s\n&quot;</span>, opid, ++opCnt, col, <span class="string">&quot;Bye &quot;</span>, curUser, <span class="string">&quot;: &quot;</span>, chatsPerWindow[curUser], dot);</span><br><span class="line">            windows.pop_front();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        topped = <span class="number">-1</span>;</span><br><span class="line">        windowsSet.clear();</span><br><span class="line">        chatsPerWindow.clear();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/11/SA1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
