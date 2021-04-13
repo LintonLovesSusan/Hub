@@ -93,18 +93,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                Home
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" target="_blank" rel="noopener" href="http://114.215.149.199/">
                 <i class="iconfont icon-tags-fill"></i>
                 个人项目/Projects
@@ -176,7 +164,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      669 字
+      704 字
     </span>
   
 
@@ -232,7 +220,68 @@
 <h2 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h2><p>先输入n，m，k。</p>
 <p>接下来开始循环处理制作的面，时间复杂度O(n)：用三位二进制数表示面里调料的有无。初始为0，即000。然后初始化一个当前调料为001.根据输入的调料编号，将上述001二进制数左移即可。最后根据上述二进制数的值和1-8依次做或，如果或运算等于后者，则说明该面含有的调料种类是后者的子集。将该碗面制作完成的时间放进st中。</p>
 <p>接下来循环处理客人的到达，时间复杂度O(m*n): 用完全相同的方式得出客人需要的面的二进制数，并从st集合对应下标中取begin（利用set的有序性得到最早制作完成的面）。如果st集合该下标为空，代表需要的面不存在，则输出angry即可。否则存在，则需要删除这碗面：注意要再遍历set数组，把其中具有与此相同制作时间的面删除。</p>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> inf = <span class="hljs-number">200010</span>;<br><span class="hljs-built_in">set</span>&lt;<span class="hljs-keyword">int</span>&gt; st[<span class="hljs-number">8</span>];     <br><span class="hljs-keyword">int</span> t[inf], s[inf]; <span class="hljs-comment">//t[i]:每碗面制作完成的时间点</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">int</span> n, m, k; <span class="hljs-comment">//n:制作的面的数量 m:顾客的数量 k:配料的种类数</span><br>    <span class="hljs-built_in">cin</span> &gt;&gt; n &gt;&gt; m &gt;&gt; k;<br><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>    &#123;<br>        <span class="hljs-built_in">cin</span> &gt;&gt; t[i];<br>    &#125;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>    &#123;<br>        <span class="hljs-keyword">int</span> kk, v = <span class="hljs-number">0</span>;<br>            <span class="hljs-built_in">cin</span> &gt;&gt; kk;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= kk; j++)<br>        &#123;<br>            <span class="hljs-keyword">int</span> x; <span class="hljs-comment">//该碗面含有的配料编号</span><br>            <span class="hljs-built_in">cin</span> &gt;&gt; x;<br>            v |= (<span class="hljs-number">1</span> &lt;&lt; (x - <span class="hljs-number">1</span>)); <br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt; <span class="hljs-number">8</span>; j++)<br>        &#123;<br>            <span class="hljs-keyword">if</span> ((v &amp; j) == j) <br>            &#123;<br>                st[j].emplace(t[i]); <br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; i++)<br>    &#123;<br>        <span class="hljs-built_in">cin</span> &gt;&gt; s[i]; <br>    &#125;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; i++)<br>    &#123;<br>        <span class="hljs-keyword">int</span> cc, v = <span class="hljs-number">0</span>; <span class="hljs-comment">//cc:客人喜爱配料的种类数</span><br>        <span class="hljs-built_in">cin</span> &gt;&gt; cc;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= cc; j++)<br>        &#123;<br>            <span class="hljs-keyword">int</span> x;<br>            <span class="hljs-built_in">cin</span> &gt;&gt; x;<br>            v |= (<span class="hljs-number">1</span> &lt;&lt; (x - <span class="hljs-number">1</span>)); <br>        &#125; <span class="hljs-comment">// 代表该客人喜欢吃的配料</span><br>            <span class="hljs-keyword">if</span> (st[v].empty())     <span class="hljs-comment">//该客人喜欢吃的配料没有对应的面</span><br>            &#123;<br>                <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;Angry\n&quot;</span>;<br>            &#125;<br>            <span class="hljs-keyword">else</span><br>            &#123;<br>                <span class="hljs-keyword">int</span> vv = *st[v].rbegin();    /<br>                <span class="hljs-built_in">cout</span> &lt;&lt; (s[i] - vv) &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>; <br>                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt; <span class="hljs-number">8</span>; j++)<br>                &#123;<br>                    st[j].erase(vv); <br>                &#125;<br>            &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;bits&#x2F;stdc++.h&gt;
+using namespace std;
+const int inf &#x3D; 200010;
+set&lt;int&gt; st[8];     
+int t[inf], s[inf]; &#x2F;&#x2F;t[i]:每碗面制作完成的时间点
+int main()
+&#123;
+    int n, m, k; &#x2F;&#x2F;n:制作的面的数量 m:顾客的数量 k:配料的种类数
+    cin &gt;&gt; n &gt;&gt; m &gt;&gt; k;
+
+    for (int i &#x3D; 1; i &lt;&#x3D; n; i++)
+    &#123;
+        cin &gt;&gt; t[i];
+    &#125;
+    for (int i &#x3D; 1; i &lt;&#x3D; n; i++)
+    &#123;
+        int kk, v &#x3D; 0;
+            cin &gt;&gt; kk;
+        for (int j &#x3D; 1; j &lt;&#x3D; kk; j++)
+        &#123;
+            int x; &#x2F;&#x2F;该碗面含有的配料编号
+            cin &gt;&gt; x;
+            v |&#x3D; (1 &lt;&lt; (x - 1)); 
+        &#125;
+        for (int j &#x3D; 1; j &lt; 8; j++)
+        &#123;
+            if ((v &amp; j) &#x3D;&#x3D; j) 
+            &#123;
+                st[j].emplace(t[i]); 
+            &#125;
+        &#125;
+    &#125;
+    for (int i &#x3D; 1; i &lt;&#x3D; m; i++)
+    &#123;
+        cin &gt;&gt; s[i]; 
+    &#125;
+    for (int i &#x3D; 1; i &lt;&#x3D; m; i++)
+    &#123;
+        int cc, v &#x3D; 0; &#x2F;&#x2F;cc:客人喜爱配料的种类数
+        cin &gt;&gt; cc;
+        for (int j &#x3D; 1; j &lt;&#x3D; cc; j++)
+        &#123;
+            int x;
+            cin &gt;&gt; x;
+            v |&#x3D; (1 &lt;&lt; (x - 1)); 
+        &#125; &#x2F;&#x2F; 代表该客人喜欢吃的配料
+            if (st[v].empty())     &#x2F;&#x2F;该客人喜欢吃的配料没有对应的面
+            &#123;
+                cout &lt;&lt; &quot;Angry\n&quot;;
+            &#125;
+            else
+            &#123;
+                int vv &#x3D; *st[v].rbegin();    &#x2F;
+                cout &lt;&lt; (s[i] - vv) &lt;&lt; &#39;\n&#39;; 
+                for (int j &#x3D; 1; j &lt; 8; j++)
+                &#123;
+                    st[j].erase(vv); 
+                &#125;
+            &#125;
+    &#125;
+    return 0;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 
             </div>
@@ -268,9 +317,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/04/11/SA1/">
+                      <a href="/2021/04/09/SDUOJ%20-%206/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">一文搞懂后缀数组的倍增实现</span>
+                        <span class="hidden-mobile">SDUOJ 看电影题解（流水线调度问题）</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -278,8 +327,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/04/09/SDUOJ%20-%206/">
-                        <span class="hidden-mobile">SDUOJ 看电影题解（流水线调度问题）</span>
+                      <a href="/2021/04/09/SDUOJ%20-%207/">
+                        <span class="hidden-mobile">SDUOJ 摆放垃圾桶题解 (简单贪心)</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

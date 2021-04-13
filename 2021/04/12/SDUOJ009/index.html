@@ -93,18 +93,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                Home
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" target="_blank" rel="noopener" href="http://114.215.149.199/">
                 <i class="iconfont icon-tags-fill"></i>
                 个人项目/Projects
@@ -186,7 +174,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      23
+      25
        分钟
     </span>
   
@@ -229,14 +217,35 @@
             <div class="markdown-body">
               <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>分析算法的时间复杂度是评价算法性能的重要方式之一，对于同一问题来说，拥有线性时间复杂度的算法往往比拥有平方级别时间复杂度的算法要快很多，因此拥有线性时间复杂度的算法往往优于拥有平方级别时间复杂度的算法。</p>
 <p>通常，可以根据输入n的值确定算法的运行时间，n可以表示要排序的对象数，多边形顶点数等等。现给出一段简易的程序，程序规则如下，其中<number>可以是任何非负整数：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs language">&lt; Program &gt; ::&#x3D; &quot;BEGIN&quot; &lt; Statementlist &gt; &quot;END&quot; <br><br>&lt; Statementlist &gt; ::&#x3D; &lt; Statement &gt; | &lt; Statement &gt; &lt; Statementlist &gt; <br><br>&lt; Statement &gt; ::&#x3D; &lt; LOOP-Statement &gt; | &lt; OP-Statement &gt; <br><br>&lt; LOOP-Statement &gt; ::&#x3D; &lt; LOOP-Header &gt; &lt; Statementlist &gt; &quot;END&quot; <br><br>&lt; LOOP-Header &gt; ::&#x3D; &quot;LOOP&quot; &lt; number &gt; | &quot;LOOP n&quot; <br><br>&lt; OP-Statement &gt; ::&#x3D; &quot;OP&quot; &lt; number &gt;<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-language" data-language="language"><code class="language-language">&lt; Program &gt; ::&#x3D; &quot;BEGIN&quot; &lt; Statementlist &gt; &quot;END&quot; 
+
+&lt; Statementlist &gt; ::&#x3D; &lt; Statement &gt; | &lt; Statement &gt; &lt; Statementlist &gt; 
+
+&lt; Statement &gt; ::&#x3D; &lt; LOOP-Statement &gt; | &lt; OP-Statement &gt; 
+
+&lt; LOOP-Statement &gt; ::&#x3D; &lt; LOOP-Header &gt; &lt; Statementlist &gt; &quot;END&quot; 
+
+&lt; LOOP-Header &gt; ::&#x3D; &quot;LOOP&quot; &lt; number &gt; | &quot;LOOP n&quot; 
+
+&lt; OP-Statement &gt; ::&#x3D; &quot;OP&quot; &lt; number &gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 <p>针对该规则下的程序的运行时间可以如下计算：执行OP语句所花费的时间与其参数指定的时间相同（即为number）。LOOP语句到其对应的END之间所有语句执行的次数与LOOP后的参数相同（即为number或n）。程序运行时间是其组成部分的时间总和。因此，总运行时间通常取决于n。</p>
 <h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h3><p>输入一段程序，空格和换行符可以出现在程序中的任何位置，但不能出现在关键字BEGIN，END，LOOP和OP中或整数值中。LOOP的循环嵌套深度最多为10。</p>
 <h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h3><p>以n为单位输出程序的运行时间，即输出一个化简后的Y（Y&lt;=10）次多项式，形如“Runtime = a<em>n^10+b</em>n^9+ . . . +i<em>n^2+ j</em>n+k”，若n的某一项系数为0则直接省略该项,若系数为1则省略其系数。<br>如果运行时间为0，则只需打印 “Runtime = 0”。</p>
-<h3 id="样例输入"><a href="#样例输入" class="headerlink" title="样例输入"></a>样例输入</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs language">BEGIN<br>   LOOP n<br>     LOOP n<br>       OP 3<br>       OP 4<br>       LOOP 4<br>         OP 3<br>       END<br>     END<br>   END<br>   OP 7<br>END<br></code></pre></td></tr></table></figure>
+<h3 id="样例输入"><a href="#样例输入" class="headerlink" title="样例输入"></a>样例输入</h3><div class="code-wrapper"><pre class="line-numbers language-language" data-language="language"><code class="language-language">BEGIN
+   LOOP n
+     LOOP n
+       OP 3
+       OP 4
+       LOOP 4
+         OP 3
+       END
+     END
+   END
+   OP 7
+END<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
-<h3 id="样例输出"><a href="#样例输出" class="headerlink" title="样例输出"></a>样例输出</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs language">Runtime &#x3D; 19*n^2+7<br></code></pre></td></tr></table></figure>
+<h3 id="样例输出"><a href="#样例输出" class="headerlink" title="样例输出"></a>样例输出</h3><div class="code-wrapper"><pre class="line-numbers language-language" data-language="language"><code class="language-language">Runtime &#x3D; 19*n^2+7<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 
 <h3 id="样例说明"><a href="#样例说明" class="headerlink" title="样例说明"></a>样例说明</h3><p>Runtime = n*(n*(3+4+4<em>3))+7=19</em>n^2+7</p>
 <h3 id="数据范围说明"><a href="#数据范围说明" class="headerlink" title="数据范围说明"></a>数据范围说明</h3><p>LOOP循环嵌套深度&lt;=10且关键字总数不超过50<br>且所有运算均在int范围内进行<br>对于测试点1，保证只包含OP语句<br>对于测试点2,3，保证只有一段Statementlist且只有一层循环<br>对于测试点4，保证只有一段Statementlist</p>
@@ -308,7 +317,96 @@
 <p>走完11次循环，如果fb仍为0，则单独处理，输出time=0即可。</p>
 <h2 id="关键问题"><a href="#关键问题" class="headerlink" title="关键问题"></a>关键问题</h2><p>千万不能去模拟手动化简多项式的过程。否则非常麻烦。</p>
 <p>在输入的过程中直接针对n的各个幂次计算他们的系数，高效而精妙。</p>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><br><span class="hljs-keyword">int</span> ops[<span class="hljs-number">15</span>];<br><span class="hljs-keyword">int</span> args[<span class="hljs-number">15</span>];<br><span class="hljs-built_in">string</span> op, op2;<br><span class="hljs-keyword">int</span> fa, fb;<br><span class="hljs-keyword">int</span> depth;<br><span class="hljs-keyword">int</span> cur_arg, n_depth;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sti</span><span class="hljs-params">(<span class="hljs-built_in">string</span> str)</span></span>&#123;<br>	<span class="hljs-keyword">int</span> res = <span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; str.length(); i++)res = res * <span class="hljs-number">10</span> + str[i] - <span class="hljs-string">&#x27;0&#x27;</span>;<br>	<span class="hljs-keyword">return</span> res;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">solve</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;Runtime = &quot;</span>;<br>	fa = fb = <span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">11</span>; i &gt;= <span class="hljs-number">0</span>; i--)&#123;<br>		<span class="hljs-keyword">if</span> (args[i] == <span class="hljs-number">0</span>)<span class="hljs-keyword">continue</span>;<br>		<span class="hljs-keyword">else</span> &#123;<br>			fb = <span class="hljs-number">1</span>;<br>			<span class="hljs-keyword">if</span> (i == <span class="hljs-number">0</span>)&#123;<br>				<span class="hljs-keyword">if</span> (fa == <span class="hljs-number">0</span>)<br>				&#123;<br>					fa = <span class="hljs-number">1</span>;<br>					<span class="hljs-built_in">cout</span> &lt;&lt; args[i];<br>				&#125;<br>				<span class="hljs-keyword">else</span> <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;+&quot;</span> &lt;&lt; args[i];<br>			&#125;<br>			<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (i == <span class="hljs-number">1</span>)&#123;<br>				<span class="hljs-keyword">if</span> (fa == <span class="hljs-number">0</span>)&#123;<br>					fa = <span class="hljs-number">1</span>;<br>					<span class="hljs-keyword">if</span> (args[i] != <span class="hljs-number">1</span>) <span class="hljs-built_in">cout</span> &lt;&lt; args[i] &lt;&lt; <span class="hljs-string">&quot;*n&quot;</span>;<br>					<span class="hljs-keyword">else</span> <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;n&quot;</span>;<br>				&#125;<span class="hljs-keyword">else</span>&#123;<br>					<span class="hljs-keyword">if</span> (args[i] != <span class="hljs-number">1</span>) <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;+&quot;</span> &lt;&lt; args[i] &lt;&lt; <span class="hljs-string">&quot;*n&quot;</span>;<br>					<span class="hljs-keyword">else</span> <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;+n&quot;</span>;<br>				&#125;<br>			&#125;<span class="hljs-keyword">else</span>&#123;<br>				<span class="hljs-keyword">if</span> (fa == <span class="hljs-number">0</span>)&#123;<br>					fa = <span class="hljs-number">1</span>;<br>					<span class="hljs-keyword">if</span> (args[i] != <span class="hljs-number">1</span>)<br>						<span class="hljs-built_in">cout</span> &lt;&lt; args[i] &lt;&lt; <span class="hljs-string">&quot;*n^&quot;</span> &lt;&lt; i;<br>					<span class="hljs-keyword">else</span> <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;n^&quot;</span> &lt;&lt; i;<br>				&#125;<span class="hljs-keyword">else</span>&#123;<br>					<span class="hljs-keyword">if</span> (args[i] != <span class="hljs-number">1</span>) <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;+&quot;</span> &lt;&lt; args[i] &lt;&lt; <span class="hljs-string">&quot;*n^&quot;</span> &lt;&lt; i;<br>					<span class="hljs-keyword">else</span> <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;+n^&quot;</span> &lt;&lt; i;<br>				&#125;<br>			&#125;<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">if</span> (fb == <span class="hljs-number">0</span>)<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-number">0</span>;<br>	<span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-comment">//freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.in&quot;, &quot;r&quot;, stdin);</span><br>	<span class="hljs-comment">//freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.out&quot;, &quot;w&quot;, stdout);</span><br><br>	ios::sync_with_stdio(<span class="hljs-literal">false</span>);<br>	<span class="hljs-built_in">cin</span> &gt;&gt; op;<br>	depth = <span class="hljs-number">0</span>;<br>	<span class="hljs-built_in">memset</span>(args, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(args));<br><br>	<span class="hljs-keyword">while</span> (depth != <span class="hljs-number">-1</span>)&#123;<br>		<span class="hljs-built_in">cin</span> &gt;&gt; op;<br>		<span class="hljs-keyword">if</span> (op == <span class="hljs-string">&quot;LOOP&quot;</span>)&#123;<br>			<span class="hljs-built_in">cin</span> &gt;&gt; op2;<br>			<span class="hljs-keyword">if</span> (op2 == <span class="hljs-string">&quot;n&quot;</span>) ops[depth++] = <span class="hljs-number">-1</span>;<br>			<span class="hljs-keyword">else</span> ops[depth++] = sti(op2);<br>		&#125;<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (op == <span class="hljs-string">&quot;END&quot;</span>)depth--;<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (op == <span class="hljs-string">&quot;OP&quot;</span>)&#123;<br>			<span class="hljs-built_in">cin</span> &gt;&gt; op2;<br>			cur_arg = <span class="hljs-number">1</span>;<br>			n_depth = <span class="hljs-number">0</span>;<br>			<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = depth - <span class="hljs-number">1</span>; j &gt;= <span class="hljs-number">0</span>; j--)&#123;<br>				<span class="hljs-keyword">if</span> (ops[j] == <span class="hljs-number">-1</span>)n_depth++;<br>				<span class="hljs-keyword">else</span> cur_arg = cur_arg * ops[j];<br>			&#125;<br>			args[n_depth] = args[n_depth] + cur_arg * sti(op2);<br>		&#125;<br>	&#125;<br><br>	solve();<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;bits&#x2F;stdc++.h&gt;
+using namespace std;
+
+int ops[15];
+int args[15];
+string op, op2;
+int fa, fb;
+int depth;
+int cur_arg, n_depth;
+
+int sti(string str)&#123;
+	int res &#x3D; 0;
+	for (int i &#x3D; 0; i &lt; str.length(); i++)res &#x3D; res * 10 + str[i] - &#39;0&#39;;
+	return res;
+&#125;
+
+void solve() &#123;
+	cout &lt;&lt; &quot;Runtime &#x3D; &quot;;
+	fa &#x3D; fb &#x3D; 0;
+	for (int i &#x3D; 11; i &gt;&#x3D; 0; i--)&#123;
+		if (args[i] &#x3D;&#x3D; 0)continue;
+		else &#123;
+			fb &#x3D; 1;
+			if (i &#x3D;&#x3D; 0)&#123;
+				if (fa &#x3D;&#x3D; 0)
+				&#123;
+					fa &#x3D; 1;
+					cout &lt;&lt; args[i];
+				&#125;
+				else cout &lt;&lt; &quot;+&quot; &lt;&lt; args[i];
+			&#125;
+			else if (i &#x3D;&#x3D; 1)&#123;
+				if (fa &#x3D;&#x3D; 0)&#123;
+					fa &#x3D; 1;
+					if (args[i] !&#x3D; 1) cout &lt;&lt; args[i] &lt;&lt; &quot;*n&quot;;
+					else cout &lt;&lt; &quot;n&quot;;
+				&#125;else&#123;
+					if (args[i] !&#x3D; 1) cout &lt;&lt; &quot;+&quot; &lt;&lt; args[i] &lt;&lt; &quot;*n&quot;;
+					else cout &lt;&lt; &quot;+n&quot;;
+				&#125;
+			&#125;else&#123;
+				if (fa &#x3D;&#x3D; 0)&#123;
+					fa &#x3D; 1;
+					if (args[i] !&#x3D; 1)
+						cout &lt;&lt; args[i] &lt;&lt; &quot;*n^&quot; &lt;&lt; i;
+					else cout &lt;&lt; &quot;n^&quot; &lt;&lt; i;
+				&#125;else&#123;
+					if (args[i] !&#x3D; 1) cout &lt;&lt; &quot;+&quot; &lt;&lt; args[i] &lt;&lt; &quot;*n^&quot; &lt;&lt; i;
+					else cout &lt;&lt; &quot;+n^&quot; &lt;&lt; i;
+				&#125;
+			&#125;
+		&#125;
+	&#125;
+	if (fb &#x3D;&#x3D; 0)cout &lt;&lt; 0;
+	puts(&quot;\n&quot;);
+&#125;
+
+int main()&#123;
+	&#x2F;&#x2F;freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.in&quot;, &quot;r&quot;, stdin);
+	&#x2F;&#x2F;freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.out&quot;, &quot;w&quot;, stdout);
+
+	ios::sync_with_stdio(false);
+	cin &gt;&gt; op;
+	depth &#x3D; 0;
+	memset(args, 0, sizeof(args));
+
+	while (depth !&#x3D; -1)&#123;
+		cin &gt;&gt; op;
+		if (op &#x3D;&#x3D; &quot;LOOP&quot;)&#123;
+			cin &gt;&gt; op2;
+			if (op2 &#x3D;&#x3D; &quot;n&quot;) ops[depth++] &#x3D; -1;
+			else ops[depth++] &#x3D; sti(op2);
+		&#125;
+		else if (op &#x3D;&#x3D; &quot;END&quot;)depth--;
+		else if (op &#x3D;&#x3D; &quot;OP&quot;)&#123;
+			cin &gt;&gt; op2;
+			cur_arg &#x3D; 1;
+			n_depth &#x3D; 0;
+			for (int j &#x3D; depth - 1; j &gt;&#x3D; 0; j--)&#123;
+				if (ops[j] &#x3D;&#x3D; -1)n_depth++;
+				else cur_arg &#x3D; cur_arg * ops[j];
+			&#125;
+			args[n_depth] &#x3D; args[n_depth] + cur_arg * sti(op2);
+		&#125;
+	&#125;
+
+	solve();
+	return 0;
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 
             </div>
@@ -346,9 +444,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/04/12/SDUOJ008/">
+                      <a href="/2021/04/12/SDUOJ011/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">SDUOJ TT与可怜的猫题解 (水题)</span>
+                        <span class="hidden-mobile">SDUOJ 网络铺设题解 (BFS链式前向星)</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -356,8 +454,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/04/12/SDUOJ010/">
-                        <span class="hidden-mobile">SDUOJ 公路修建题解 (并查集)</span>
+                      <a href="/2021/04/12/SDUOJ012/">
+                        <span class="hidden-mobile">SDUOJ 水渠设计题解 (贪心、最小生成树)</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

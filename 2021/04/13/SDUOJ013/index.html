@@ -93,18 +93,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                Home
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" target="_blank" rel="noopener" href="http://114.215.149.199/">
                 <i class="iconfont icon-tags-fill"></i>
                 个人项目/Projects
@@ -176,7 +164,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      565 字
+      591 字
     </span>
   
 
@@ -186,7 +174,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      8
        分钟
     </span>
   
@@ -255,7 +243,55 @@
 <p>判断函数的关键，在于输入一个判断值d作为每段的质量，判断尽量<code>以此为最小质量</code>，能否分得<code>&lt;=m</code>段。因为如果d过小，显然分段数量要很大。如果d足够大了，分段数量就可以&lt;=m，那么显然<code>能满足</code>“可以分到m段”的条件。</p>
 <p>具体实现方式在于，按顺序遍历所有石头，并计算当前段的质量和。如果当前质量和+下一石头质量超过了d，则分段数++，其余量归零。</p>
 <h2 id="关键问题"><a href="#关键问题" class="headerlink" title="关键问题"></a>关键问题</h2><p>可以通过输入来确定二分答案的上下界，加快速度。</p>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> INF = <span class="hljs-number">1e9</span>;<br><br><span class="hljs-built_in">unordered_map</span>&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>&gt; stones;<br><span class="hljs-keyword">int</span> n, m;<br><span class="hljs-keyword">int</span> maxMass, inputSum;<br><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">C</span><span class="hljs-params">(<span class="hljs-keyword">int</span> d)</span> </span>&#123;<br>	<span class="hljs-keyword">int</span> massSum = <span class="hljs-number">0</span>, divides = <span class="hljs-number">0</span>;<br><br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>		<span class="hljs-keyword">if</span> (massSum + stones[i] &gt; d) &#123;<br>			divides++;<br>			massSum = stones[i];<br>		&#125;<br>		<span class="hljs-keyword">else</span> massSum += stones[i];<br>	&#125;<br>	<span class="hljs-keyword">if</span> (divides &gt;= m)<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">solve</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-keyword">int</span> lb = maxMass, ub = inputSum, mid = <span class="hljs-number">0</span>, ans = <span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">while</span> (lb&lt;=ub)<br>	&#123;<br>		mid = (ub + lb) / <span class="hljs-number">2</span>;<br>		<span class="hljs-keyword">if</span> (C(mid)) &#123;<br>			ans = mid;<br>			ub = mid - <span class="hljs-number">1</span>;<br>		&#125;<br>		<span class="hljs-keyword">else</span> lb = mid + <span class="hljs-number">1</span>;<br>	&#125;<br>	<span class="hljs-built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="hljs-built_in">endl</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-comment">//freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.in&quot;,&quot;r&quot;,stdin);</span><br>	<span class="hljs-comment">//freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.out&quot;, &quot;w&quot;, stdout);</span><br>	<span class="hljs-built_in">cin</span> &gt;&gt; n &gt;&gt; m;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>		<span class="hljs-built_in">cin</span> &gt;&gt; stones[i]; <br>		<span class="hljs-keyword">if</span> (stones[i] &gt; maxMass)maxMass = stones[i];<br>		inputSum += stones[i];<br>	&#125;<br>	solve();<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;bits&#x2F;stdc++.h&gt;
+
+using namespace std;
+const int INF &#x3D; 1e9;
+
+unordered_map&lt;int, int&gt; stones;
+int n, m;
+int maxMass, inputSum;
+
+bool C(int d) &#123;
+	int massSum &#x3D; 0, divides &#x3D; 0;
+
+	for (int i &#x3D; 1; i &lt;&#x3D; n; i++) &#123;
+		if (massSum + stones[i] &gt; d) &#123;
+			divides++;
+			massSum &#x3D; stones[i];
+		&#125;
+		else massSum +&#x3D; stones[i];
+	&#125;
+	if (divides &gt;&#x3D; m)return false;
+	return true;
+&#125;
+
+void solve() &#123;
+	int lb &#x3D; maxMass, ub &#x3D; inputSum, mid &#x3D; 0, ans &#x3D; 0;
+	while (lb&lt;&#x3D;ub)
+	&#123;
+		mid &#x3D; (ub + lb) &#x2F; 2;
+		if (C(mid)) &#123;
+			ans &#x3D; mid;
+			ub &#x3D; mid - 1;
+		&#125;
+		else lb &#x3D; mid + 1;
+	&#125;
+	cout &lt;&lt; ans &lt;&lt; endl;
+&#125;
+
+int main() &#123;
+	&#x2F;&#x2F;freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.in&quot;,&quot;r&quot;,stdin);
+	&#x2F;&#x2F;freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.out&quot;, &quot;w&quot;, stdout);
+	cin &gt;&gt; n &gt;&gt; m;
+	for (int i &#x3D; 1; i &lt;&#x3D; n; i++) &#123;
+		cin &gt;&gt; stones[i]; 
+		if (stones[i] &gt; maxMass)maxMass &#x3D; stones[i];
+		inputSum +&#x3D; stones[i];
+	&#125;
+	solve();
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 
             </div>
@@ -297,8 +333,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/04/12/SDUOJ008/">
-                        <span class="hidden-mobile">SDUOJ TT与可怜的猫题解 (水题)</span>
+                      <a href="/2021/04/12/SDUOJ010/">
+                        <span class="hidden-mobile">SDUOJ 公路修建题解 (并查集)</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

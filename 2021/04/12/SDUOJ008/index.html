@@ -93,18 +93,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                Home
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" target="_blank" rel="noopener" href="http://114.215.149.199/">
                 <i class="iconfont icon-tags-fill"></i>
                 个人项目/Projects
@@ -186,7 +174,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      31
+      32
        分钟
     </span>
   
@@ -249,7 +237,166 @@
 <p>对于每组数据，第一行一个 n<em>n</em>，表示执行的操作数，其中 0&lt;n\leq 50000&lt;<em>n</em>≤5000。接下来 n<em>n</em> 行，每行输入一个操作，保证所有输入数据中的整数不大于 10^9109。</p>
 <h2 id="输出描述"><a href="#输出描述" class="headerlink" title="输出描述"></a>输出描述</h2><p>对于每个指定的操作，按照日志的格式，每个操作行。对于最后的非指定操作，同样按照日志的格式，每个操作一行。</p>
 <h2 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h2><p>比较简单的模拟</p>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><br><br><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;<br><span class="hljs-keyword">int</span> dataGroupCnt;<br><span class="hljs-keyword">int</span> opCnt;<span class="hljs-comment">//本组操作数量</span><br><span class="hljs-built_in">string</span> curOp;<span class="hljs-comment">//当前操作</span><br>ll curArg;<br>ll topped = <span class="hljs-number">-1</span>;<br><span class="hljs-built_in">deque</span>&lt;ll&gt; windows;<br><span class="hljs-built_in">set</span>&lt;ll&gt; windowsSet;<br><span class="hljs-built_in">unordered_map</span>&lt;ll, ll&gt; chatsPerWindow;<br><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> opid[] = <span class="hljs-string">&quot;OpId #&quot;</span>, col[] = <span class="hljs-string">&quot;: &quot;</span>, dot[] = <span class="hljs-string">&quot;.&quot;</span>;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">// freopen(&quot;/home/linton/Desktop/CSP/a.in&quot;, &quot;r&quot;, stdin);</span><br>    <span class="hljs-comment">// freopen(&quot;/home/linton/Desktop/CSP/a.out&quot;, &quot;w&quot;, stdout);</span><br>    <span class="hljs-comment">// freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.in&quot;, &quot;r&quot;, stdin);</span><br>    <span class="hljs-comment">// freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.out&quot;, &quot;w&quot;, stdout);</span><br><br><br>    <span class="hljs-built_in">cin</span> &gt;&gt; dataGroupCnt;<br>    <span class="hljs-keyword">while</span> (dataGroupCnt--)<br>    &#123;<br>        <span class="hljs-built_in">cin</span> &gt;&gt; opCnt;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> o = <span class="hljs-number">1</span>; o &lt;= opCnt; o++)<br>        &#123;<br>            <span class="hljs-built_in">cin</span> &gt;&gt; curOp;<br><br>            <span class="hljs-keyword">if</span> (curOp == <span class="hljs-string">&quot;Add&quot;</span>) &#123;<br><br>                <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld&quot;</span>, &amp;curArg);<br>                <span class="hljs-keyword">if</span> (!windowsSet.count(curArg)) &#123;<br>                    windowsSet.insert(curArg);<br>                    windows.push_back(curArg);<br>                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s%lld%s%s%s\n&quot;</span>, opid, o, col, <span class="hljs-string">&quot;success&quot;</span>, dot);<br>                &#125;<br>                <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s%lld%s%s%s\n&quot;</span>, opid, o, col, <span class="hljs-string">&quot;same likeness&quot;</span>, dot);<br><br>            &#125;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (curOp == <span class="hljs-string">&quot;Close&quot;</span>) &#123;<br><br>                <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld&quot;</span>, &amp;curArg);<br>                <span class="hljs-keyword">if</span> (windowsSet.count(curArg)) &#123;<br>                    <span class="hljs-keyword">if</span> (topped == curArg)topped = <span class="hljs-number">-1</span>;<br><br>                    windowsSet.erase(curArg);<br>                    windows.erase(find(windows.begin(), windows.end(), curArg));<br>                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s%lld%s%s%lld%s%lld%s\n&quot;</span>, opid, o, col, <span class="hljs-string">&quot;close &quot;</span>, curArg, <span class="hljs-string">&quot; with &quot;</span>, chatsPerWindow[curArg], dot);<br>                    chatsPerWindow[curArg] = <span class="hljs-number">0</span>;<br>                &#125;<br>                <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s%lld%s%s%s\n&quot;</span>, opid, o, col, <span class="hljs-string">&quot;invalid likeness&quot;</span>, dot);<br><br>            &#125;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (curOp == <span class="hljs-string">&quot;Chat&quot;</span>) &#123;<br><br>                <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld&quot;</span>, &amp;curArg);<br>                <span class="hljs-keyword">if</span> (topped != <span class="hljs-number">-1</span>) &#123;<br>                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s%lld%s%s%s\n&quot;</span>, opid, o, col, <span class="hljs-string">&quot;success&quot;</span>, dot);<br>                    chatsPerWindow[topped] += curArg;<br>                &#125;<br>                <span class="hljs-keyword">else</span> &#123;<br>                    <span class="hljs-keyword">if</span> (!windows.empty()) &#123;<br>                        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s%lld%s%s%s\n&quot;</span>, opid, o, col, <span class="hljs-string">&quot;success&quot;</span>, dot);<br>                        chatsPerWindow[windows.front()] += curArg;<br>                    &#125;<br>                    <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s%lld%s%s%s\n&quot;</span>, opid, o, col, <span class="hljs-string">&quot;empty&quot;</span>, dot);<br>                &#125;<br><br>            &#125;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (curOp == <span class="hljs-string">&quot;Rotate&quot;</span>) &#123;<br><br>                <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld&quot;</span>, &amp;curArg);<br>                <span class="hljs-keyword">if</span> (curArg &gt; windows.size()||curArg&lt;<span class="hljs-number">1</span>)<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s%lld%s%s%s\n&quot;</span>, opid, o, col, <span class="hljs-string">&quot;out of range&quot;</span>, dot);<br>                <span class="hljs-keyword">else</span> &#123;<br>                    <span class="hljs-keyword">auto</span> ite = windows.begin();<br>                    ite += curArg - <span class="hljs-number">1</span>;<br>                    <span class="hljs-keyword">int</span> value = *ite;<br>                    windows.erase(ite);<br>                  <br>                    windows.push_front(value);<br>                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s%lld%s%s%s\n&quot;</span>, opid, o, col, <span class="hljs-string">&quot;success&quot;</span>, dot);<br>                &#125;<br><br>            &#125;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (curOp == <span class="hljs-string">&quot;Prior&quot;</span>) &#123;<br><br>                <span class="hljs-keyword">if</span> (!windows.empty()) &#123;<br>                    <span class="hljs-keyword">int</span> maxLikeness = *(windowsSet.rbegin());<br>                    <span class="hljs-keyword">auto</span> ite = find(windows.begin(), windows.end(), maxLikeness);<br>                    <span class="hljs-keyword">int</span> value = *ite;<br>                    windows.erase(ite);                   <br>                    windows.push_front(value);<br>                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s%lld%s%s%s\n&quot;</span>, opid, o, col, <span class="hljs-string">&quot;success&quot;</span>, dot);<br>                &#125;<br>                <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s%lld%s%s%s\n&quot;</span>, opid, o, col, <span class="hljs-string">&quot;empty&quot;</span>, dot);<br><br>            &#125;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (curOp == <span class="hljs-string">&quot;Choose&quot;</span>) &#123;<br><br>                <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld&quot;</span>, &amp;curArg);<br>                <span class="hljs-keyword">if</span> (windowsSet.count(curArg)) &#123;<br>                    <span class="hljs-keyword">auto</span> ite = find(windows.begin(), windows.end(), curArg);<br>                    <span class="hljs-keyword">int</span> value = *ite;<br>                    windows.erase(ite);                               <br>                    windows.push_front(value);<br>                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s%lld%s%s%s\n&quot;</span>, opid, o, col, <span class="hljs-string">&quot;success&quot;</span>, dot);<br>                &#125;<br>                <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s%lld%s%s%s\n&quot;</span>, opid, o, col, <span class="hljs-string">&quot;invalid likeness&quot;</span>, dot);<br><br>            &#125;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (curOp == <span class="hljs-string">&quot;Top&quot;</span>) &#123;<br><br>                <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld&quot;</span>, &amp;curArg);<br>                <span class="hljs-keyword">if</span> (windowsSet.count(curArg)) &#123;<br>                    topped = curArg;<br>                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s%lld%s%s%s\n&quot;</span>, opid, o, col, <span class="hljs-string">&quot;success&quot;</span>, dot);<br>                &#125;<br>                <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s%lld%s%s%s\n&quot;</span>, opid, o, col, <span class="hljs-string">&quot;invalid likeness&quot;</span>, dot);<br>            &#125;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (curOp == <span class="hljs-string">&quot;Untop&quot;</span>) &#123;<br><br>                <span class="hljs-keyword">if</span> (topped != <span class="hljs-number">-1</span>) &#123;<br>                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s%lld%s%s%s\n&quot;</span>, opid, o, col, <span class="hljs-string">&quot;success&quot;</span>, dot);<br>                    topped = <span class="hljs-number">-1</span>;<br>                &#125;<br>                <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s%lld%s%s%s\n&quot;</span>, opid, o, col, <span class="hljs-string">&quot;no such person&quot;</span>, dot);<br>            &#125;<br><br><br><span class="hljs-comment">//  for(auto i= windows.begin();i!=windows.end();i++)cout&lt;&lt;*i&lt;&lt;&quot;,&quot;&lt;&lt;chatsPerWindow[*i]&lt;&lt;&quot; &quot;;</span><br><span class="hljs-comment">//         cout&lt;&lt;endl;</span><br>        &#125;<br><br>        <span class="hljs-keyword">int</span> curUser = <span class="hljs-number">0</span>;<br><br>        <span class="hljs-comment">// for(auto i= windows.begin();i!=windows.end();i++)cout&lt;&lt;*i&lt;&lt;&quot;,&quot;&lt;&lt;chatsPerWindow[*i]&lt;&lt;&quot; &quot;;</span><br>        <span class="hljs-comment">// cout&lt;&lt;endl;</span><br><br>        <span class="hljs-keyword">if</span>(topped!=<span class="hljs-number">-1</span>)&#123;<br>            <span class="hljs-keyword">if</span> (chatsPerWindow[topped])<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s%lld%s%s%lld%s%lld%s\n&quot;</span>, opid, ++opCnt, col, <span class="hljs-string">&quot;Bye &quot;</span>, topped, <span class="hljs-string">&quot;: &quot;</span>, chatsPerWindow[topped], dot);<br>            windows.erase(find(windows.begin(), windows.end(), topped));<br>        &#125;<br>        <br>        <span class="hljs-keyword">while</span> (!windows.empty())<br>        &#123;<br>            curUser = windows.front();<br>            <span class="hljs-keyword">if</span> (chatsPerWindow[curUser]) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s%lld%s%s%lld%s%lld%s\n&quot;</span>, opid, ++opCnt, col, <span class="hljs-string">&quot;Bye &quot;</span>, curUser, <span class="hljs-string">&quot;: &quot;</span>, chatsPerWindow[curUser], dot);<br>            windows.pop_front();<br>        &#125;<br><br>        topped = <span class="hljs-number">-1</span>;<br>        windowsSet.clear();<br>        chatsPerWindow.clear();<br><br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;bits&#x2F;stdc++.h&gt;
+using namespace std;
+
+
+typedef long long ll;
+int dataGroupCnt;
+int opCnt;&#x2F;&#x2F;本组操作数量
+string curOp;&#x2F;&#x2F;当前操作
+ll curArg;
+ll topped &#x3D; -1;
+deque&lt;ll&gt; windows;
+set&lt;ll&gt; windowsSet;
+unordered_map&lt;ll, ll&gt; chatsPerWindow;
+
+const char opid[] &#x3D; &quot;OpId #&quot;, col[] &#x3D; &quot;: &quot;, dot[] &#x3D; &quot;.&quot;;
+
+int main() &#123;
+    &#x2F;&#x2F; freopen(&quot;&#x2F;home&#x2F;linton&#x2F;Desktop&#x2F;CSP&#x2F;a.in&quot;, &quot;r&quot;, stdin);
+    &#x2F;&#x2F; freopen(&quot;&#x2F;home&#x2F;linton&#x2F;Desktop&#x2F;CSP&#x2F;a.out&quot;, &quot;w&quot;, stdout);
+    &#x2F;&#x2F; freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.in&quot;, &quot;r&quot;, stdin);
+    &#x2F;&#x2F; freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.out&quot;, &quot;w&quot;, stdout);
+
+
+    cin &gt;&gt; dataGroupCnt;
+    while (dataGroupCnt--)
+    &#123;
+        cin &gt;&gt; opCnt;
+        for (int o &#x3D; 1; o &lt;&#x3D; opCnt; o++)
+        &#123;
+            cin &gt;&gt; curOp;
+
+            if (curOp &#x3D;&#x3D; &quot;Add&quot;) &#123;
+
+                scanf(&quot;%lld&quot;, &amp;curArg);
+                if (!windowsSet.count(curArg)) &#123;
+                    windowsSet.insert(curArg);
+                    windows.push_back(curArg);
+                    printf(&quot;%s%lld%s%s%s\n&quot;, opid, o, col, &quot;success&quot;, dot);
+                &#125;
+                else printf(&quot;%s%lld%s%s%s\n&quot;, opid, o, col, &quot;same likeness&quot;, dot);
+
+            &#125;
+            else if (curOp &#x3D;&#x3D; &quot;Close&quot;) &#123;
+
+                scanf(&quot;%lld&quot;, &amp;curArg);
+                if (windowsSet.count(curArg)) &#123;
+                    if (topped &#x3D;&#x3D; curArg)topped &#x3D; -1;
+
+                    windowsSet.erase(curArg);
+                    windows.erase(find(windows.begin(), windows.end(), curArg));
+                    printf(&quot;%s%lld%s%s%lld%s%lld%s\n&quot;, opid, o, col, &quot;close &quot;, curArg, &quot; with &quot;, chatsPerWindow[curArg], dot);
+                    chatsPerWindow[curArg] &#x3D; 0;
+                &#125;
+                else printf(&quot;%s%lld%s%s%s\n&quot;, opid, o, col, &quot;invalid likeness&quot;, dot);
+
+            &#125;
+            else if (curOp &#x3D;&#x3D; &quot;Chat&quot;) &#123;
+
+                scanf(&quot;%lld&quot;, &amp;curArg);
+                if (topped !&#x3D; -1) &#123;
+                    printf(&quot;%s%lld%s%s%s\n&quot;, opid, o, col, &quot;success&quot;, dot);
+                    chatsPerWindow[topped] +&#x3D; curArg;
+                &#125;
+                else &#123;
+                    if (!windows.empty()) &#123;
+                        printf(&quot;%s%lld%s%s%s\n&quot;, opid, o, col, &quot;success&quot;, dot);
+                        chatsPerWindow[windows.front()] +&#x3D; curArg;
+                    &#125;
+                    else printf(&quot;%s%lld%s%s%s\n&quot;, opid, o, col, &quot;empty&quot;, dot);
+                &#125;
+
+            &#125;
+            else if (curOp &#x3D;&#x3D; &quot;Rotate&quot;) &#123;
+
+                scanf(&quot;%lld&quot;, &amp;curArg);
+                if (curArg &gt; windows.size()||curArg&lt;1)printf(&quot;%s%lld%s%s%s\n&quot;, opid, o, col, &quot;out of range&quot;, dot);
+                else &#123;
+                    auto ite &#x3D; windows.begin();
+                    ite +&#x3D; curArg - 1;
+                    int value &#x3D; *ite;
+                    windows.erase(ite);
+                  
+                    windows.push_front(value);
+                    printf(&quot;%s%lld%s%s%s\n&quot;, opid, o, col, &quot;success&quot;, dot);
+                &#125;
+
+            &#125;
+            else if (curOp &#x3D;&#x3D; &quot;Prior&quot;) &#123;
+
+                if (!windows.empty()) &#123;
+                    int maxLikeness &#x3D; *(windowsSet.rbegin());
+                    auto ite &#x3D; find(windows.begin(), windows.end(), maxLikeness);
+                    int value &#x3D; *ite;
+                    windows.erase(ite);                   
+                    windows.push_front(value);
+                    printf(&quot;%s%lld%s%s%s\n&quot;, opid, o, col, &quot;success&quot;, dot);
+                &#125;
+                else printf(&quot;%s%lld%s%s%s\n&quot;, opid, o, col, &quot;empty&quot;, dot);
+
+            &#125;
+            else if (curOp &#x3D;&#x3D; &quot;Choose&quot;) &#123;
+
+                scanf(&quot;%lld&quot;, &amp;curArg);
+                if (windowsSet.count(curArg)) &#123;
+                    auto ite &#x3D; find(windows.begin(), windows.end(), curArg);
+                    int value &#x3D; *ite;
+                    windows.erase(ite);                               
+                    windows.push_front(value);
+                    printf(&quot;%s%lld%s%s%s\n&quot;, opid, o, col, &quot;success&quot;, dot);
+                &#125;
+                else printf(&quot;%s%lld%s%s%s\n&quot;, opid, o, col, &quot;invalid likeness&quot;, dot);
+
+            &#125;
+            else if (curOp &#x3D;&#x3D; &quot;Top&quot;) &#123;
+
+                scanf(&quot;%lld&quot;, &amp;curArg);
+                if (windowsSet.count(curArg)) &#123;
+                    topped &#x3D; curArg;
+                    printf(&quot;%s%lld%s%s%s\n&quot;, opid, o, col, &quot;success&quot;, dot);
+                &#125;
+                else printf(&quot;%s%lld%s%s%s\n&quot;, opid, o, col, &quot;invalid likeness&quot;, dot);
+            &#125;
+            else if (curOp &#x3D;&#x3D; &quot;Untop&quot;) &#123;
+
+                if (topped !&#x3D; -1) &#123;
+                    printf(&quot;%s%lld%s%s%s\n&quot;, opid, o, col, &quot;success&quot;, dot);
+                    topped &#x3D; -1;
+                &#125;
+                else printf(&quot;%s%lld%s%s%s\n&quot;, opid, o, col, &quot;no such person&quot;, dot);
+            &#125;
+
+
+&#x2F;&#x2F;  for(auto i&#x3D; windows.begin();i!&#x3D;windows.end();i++)cout&lt;&lt;*i&lt;&lt;&quot;,&quot;&lt;&lt;chatsPerWindow[*i]&lt;&lt;&quot; &quot;;
+&#x2F;&#x2F;         cout&lt;&lt;endl;
+        &#125;
+
+        int curUser &#x3D; 0;
+
+        &#x2F;&#x2F; for(auto i&#x3D; windows.begin();i!&#x3D;windows.end();i++)cout&lt;&lt;*i&lt;&lt;&quot;,&quot;&lt;&lt;chatsPerWindow[*i]&lt;&lt;&quot; &quot;;
+        &#x2F;&#x2F; cout&lt;&lt;endl;
+
+        if(topped!&#x3D;-1)&#123;
+            if (chatsPerWindow[topped])printf(&quot;%s%lld%s%s%lld%s%lld%s\n&quot;, opid, ++opCnt, col, &quot;Bye &quot;, topped, &quot;: &quot;, chatsPerWindow[topped], dot);
+            windows.erase(find(windows.begin(), windows.end(), topped));
+        &#125;
+        
+        while (!windows.empty())
+        &#123;
+            curUser &#x3D; windows.front();
+            if (chatsPerWindow[curUser]) printf(&quot;%s%lld%s%s%lld%s%lld%s\n&quot;, opid, ++opCnt, col, &quot;Bye &quot;, curUser, &quot;: &quot;, chatsPerWindow[curUser], dot);
+            windows.pop_front();
+        &#125;
+
+        topped &#x3D; -1;
+        windowsSet.clear();
+        chatsPerWindow.clear();
+
+    &#125;
+    return 0;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 
             </div>
@@ -287,9 +434,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/04/13/SDUOJ013/">
+                      <a href="/2021/04/12/SDUOJ010/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">SDUOJ 划分石头题解 (二分查找)</span>
+                        <span class="hidden-mobile">SDUOJ 公路修建题解 (并查集)</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -297,8 +444,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/04/12/SDUOJ009/">
-                        <span class="hidden-mobile">SDUOJ 时间复杂度题解 (模拟)</span>
+                      <a href="/2021/04/12/SDUOJ011/">
+                        <span class="hidden-mobile">SDUOJ 网络铺设题解 (BFS链式前向星)</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

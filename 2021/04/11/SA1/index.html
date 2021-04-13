@@ -93,18 +93,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                Home
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" target="_blank" rel="noopener" href="http://114.215.149.199/">
                 <i class="iconfont icon-tags-fill"></i>
                 个人项目/Projects
@@ -176,7 +164,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4.8k 字
+      5.1k 字
     </span>
   
 
@@ -186,7 +174,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      62
+      67
        分钟
     </span>
   
@@ -239,14 +227,90 @@
 <p>先将以下标[1…n]起始的各个子串拿出来，并以单调不降的升序排列。</p>
 <p>RK[i]的含义是以下标i为起始的子串，它在上述排列中排名第几（即第几小）。</p>
 <h4 id="RK和SA数组的关系"><a href="#RK和SA数组的关系" class="headerlink" title="RK和SA数组的关系"></a>RK和SA数组的关系</h4><p>显然有：</p>
-<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs prolog"><span class="hljs-symbol">RK</span>[<span class="hljs-symbol">SA</span>[i]]=i，<span class="hljs-symbol">SA</span>[<span class="hljs-symbol">RK</span>[i]]=i.<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">RK[SA[i]]&#x3D;i，SA[RK[i]]&#x3D;i.<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 
 <p>即它们是互逆运算。</p>
-<h2 id="生成后缀数组的朴素方法-堆排序"><a href="#生成后缀数组的朴素方法-堆排序" class="headerlink" title="生成后缀数组的朴素方法 (堆排序)"></a>生成后缀数组的朴素方法 (堆排序)</h2><h4 id="先看代码"><a href="#先看代码" class="headerlink" title="先看代码"></a>先看代码</h4><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">(<span class="hljs-keyword">int</span>* sa,<span class="hljs-keyword">int</span>* rk,<span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span>&amp; str)</span> </span>&#123;<br>	saString* suffixStrs = <span class="hljs-keyword">new</span> saString[str.length() + <span class="hljs-number">1</span>];<br>	<span class="hljs-built_in">priority_queue</span>&lt;saString&gt; heap;<br>	<span class="hljs-built_in">stack</span>&lt;saString&gt; stk;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= str.length(); i++) &#123;<br>		suffixStrs[i].val = str.substr(i - <span class="hljs-number">1</span>); <br>		suffixStrs[i].<span class="hljs-built_in">begin</span> = i;<br>		heap.push(suffixStrs[i]);<br>	&#125;<br>	<span class="hljs-keyword">while</span> (!heap.empty())&#123;<br>		stk.push(heap.top());<br>		heap.pop();<br>	&#125;<br>	<span class="hljs-keyword">int</span> rank = <span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">while</span> (!stk.empty())&#123;<br>		sa[++rank] = stk.top().<span class="hljs-built_in">begin</span>;<br>		rk[stk.top().<span class="hljs-built_in">begin</span>] = rank;<br>		stk.pop();<br>	&#125;<br>	<span class="hljs-keyword">delete</span>[]suffixStrs;<br>&#125;<span class="hljs-comment">//比较两个字符串的复杂度是O（n），堆排序是O（nlogn），故整体是O（n^2logn）.</span><br></code></pre></td></tr></table></figure>
+<h2 id="生成后缀数组的朴素方法-堆排序"><a href="#生成后缀数组的朴素方法-堆排序" class="headerlink" title="生成后缀数组的朴素方法 (堆排序)"></a>生成后缀数组的朴素方法 (堆排序)</h2><h4 id="先看代码"><a href="#先看代码" class="headerlink" title="先看代码"></a>先看代码</h4><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">void init(int* sa,int* rk,const string&amp; str) &#123;
+	saString* suffixStrs &#x3D; new saString[str.length() + 1];
+	priority_queue&lt;saString&gt; heap;
+	stack&lt;saString&gt; stk;
+	for (int i &#x3D; 1; i &lt;&#x3D; str.length(); i++) &#123;
+		suffixStrs[i].val &#x3D; str.substr(i - 1); 
+		suffixStrs[i].begin &#x3D; i;
+		heap.push(suffixStrs[i]);
+	&#125;
+	while (!heap.empty())&#123;
+		stk.push(heap.top());
+		heap.pop();
+	&#125;
+	int rank &#x3D; 0;
+	while (!stk.empty())&#123;
+		sa[++rank] &#x3D; stk.top().begin;
+		rk[stk.top().begin] &#x3D; rank;
+		stk.pop();
+	&#125;
+	delete[]suffixStrs;
+&#125;&#x2F;&#x2F;比较两个字符串的复杂度是O（n），堆排序是O（nlogn），故整体是O（n^2logn）.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 
 
-<h2 id="基于倍增算法的生成方法"><a href="#基于倍增算法的生成方法" class="headerlink" title="基于倍增算法的生成方法"></a>基于倍增算法的生成方法</h2><h4 id="先看代码-1"><a href="#先看代码-1" class="headerlink" title="先看代码"></a>先看代码</h4><figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><code class="hljs axapta"><span class="hljs-keyword">void</span> doubleHeapSort(compPair* cp,<span class="hljs-built_in">int</span>* <span class="hljs-keyword">order</span>,<span class="hljs-keyword">const</span> <span class="hljs-built_in">int</span>&amp; len,<span class="hljs-built_in">int</span>&amp; subLen) &#123;<br>	<span class="hljs-comment">//利用堆排序，时间复杂度为O（nlogn）</span><br>	<span class="hljs-comment">//cp:待比较的</span><br>	<span class="hljs-comment">//order:比较结果输出</span><br>	<span class="hljs-comment">//len:字符串长度</span><br>	<span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">1</span>; i &lt;= len; i++) &#123;<br>		<span class="hljs-keyword">if</span> (i + subLen &lt;= len) &#123;<br>			cp[i].first = <span class="hljs-keyword">order</span>[i];<br>			cp[i].second = <span class="hljs-keyword">order</span>[i + subLen];<br>		&#125;<br>		<span class="hljs-keyword">else</span> &#123;<br>			cp[i].first = <span class="hljs-keyword">order</span>[i]; <br>			cp[i].second = <span class="hljs-number">0</span>;<br>		&#125;<br>		cp[i].<span class="hljs-keyword">index</span> = i;<br>	&#125;<br>	priority_queue&lt;compPair&gt; heap;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">1</span>; i &lt;= len; i++) &#123; heap.push(cp[i]); &#125;<br>	<span class="hljs-built_in">int</span> rank = <span class="hljs-number">0</span>;<br>	compPair last;<br>	<span class="hljs-keyword">while</span> (!heap.empty())<br>	&#123;<br>		<span class="hljs-keyword">if</span> (heap.top() &lt; last) &#123;rank++; last = heap.top(); &#125;<br>		<span class="hljs-keyword">order</span>[heap.top().<span class="hljs-keyword">index</span>] = rank;<br>		heap.pop();<br>	&#125;<br>	subLen *= <span class="hljs-number">2</span>;<br>&#125;<br><br><span class="hljs-keyword">void</span> initMSA(<span class="hljs-built_in">int</span>* sa, <span class="hljs-built_in">int</span>* rk, <span class="hljs-keyword">const</span> string&amp; <span class="hljs-built_in">str</span>) &#123;<br>	<span class="hljs-comment">//为倍增进行初始化、对第一行进行初始排序，时间复杂度为O（nlogn）</span><br>	compChar* cc = <span class="hljs-keyword">new</span> compChar[<span class="hljs-built_in">str</span>.length()];<br>	<span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">str</span>.length(); i++) &#123;<br>		cc[i].c = <span class="hljs-built_in">str</span>[i]; <br>		cc[i].<span class="hljs-keyword">index</span> = i + <span class="hljs-number">1</span>;<br>	&#125;<br>	priority_queue&lt;compChar&gt; heapC;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">str</span>.length(); i++)heapC.push(cc[i]);<br>	<span class="hljs-built_in">int</span> stCRank = <span class="hljs-number">0</span>;<br>	<span class="hljs-built_in">char</span> last = <span class="hljs-number">0</span>;<br>	<span class="hljs-built_in">int</span>* <span class="hljs-keyword">order</span> = <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>[<span class="hljs-built_in">str</span>.length() + <span class="hljs-number">1</span>];<br>	<span class="hljs-keyword">while</span> (!heapC.empty())<br>	&#123;<br>		<span class="hljs-keyword">if</span> (heapC.top().c &gt; last) &#123; stCRank++; last = heapC.top().c; &#125;<br>		<span class="hljs-keyword">order</span>[heapC.top().<span class="hljs-keyword">index</span>] = stCRank;<br>		heapC.pop();<br>	&#125;<br>	<span class="hljs-comment">//循环执行倍增算法，时间复杂度为O（nlog^2(n)）</span><br>	compPair* cp = <span class="hljs-keyword">new</span> compPair[<span class="hljs-built_in">str</span>.length() + <span class="hljs-number">1</span>];<br>	<span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> subLen = <span class="hljs-number">1</span>; subLen*<span class="hljs-number">2</span>&lt;=<span class="hljs-built_in">str</span>.length();) doubleHeapSort(cp, <span class="hljs-keyword">order</span>, <span class="hljs-built_in">str</span>.length(),subLen);<br>	<span class="hljs-comment">//拷贝结果到rk数组,顺便生成sa数组</span><br>	<span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-built_in">str</span>.length(); i++) &#123;<br>		rk[i] = <span class="hljs-keyword">order</span>[i]; <br>		sa[rk[i]] = i;<br>	&#125;<br>	delete[]<span class="hljs-keyword">order</span>, cp;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="基于倍增算法的生成方法"><a href="#基于倍增算法的生成方法" class="headerlink" title="基于倍增算法的生成方法"></a>基于倍增算法的生成方法</h2><h4 id="先看代码-1"><a href="#先看代码-1" class="headerlink" title="先看代码"></a>先看代码</h4><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">void doubleHeapSort(compPair* cp,int* order,const int&amp; len,int&amp; subLen) &#123;
+	&#x2F;&#x2F;利用堆排序，时间复杂度为O（nlogn）
+	&#x2F;&#x2F;cp:待比较的
+	&#x2F;&#x2F;order:比较结果输出
+	&#x2F;&#x2F;len:字符串长度
+	for (int i &#x3D; 1; i &lt;&#x3D; len; i++) &#123;
+		if (i + subLen &lt;&#x3D; len) &#123;
+			cp[i].first &#x3D; order[i];
+			cp[i].second &#x3D; order[i + subLen];
+		&#125;
+		else &#123;
+			cp[i].first &#x3D; order[i]; 
+			cp[i].second &#x3D; 0;
+		&#125;
+		cp[i].index &#x3D; i;
+	&#125;
+	priority_queue&lt;compPair&gt; heap;
+	for (int i &#x3D; 1; i &lt;&#x3D; len; i++) &#123; heap.push(cp[i]); &#125;
+	int rank &#x3D; 0;
+	compPair last;
+	while (!heap.empty())
+	&#123;
+		if (heap.top() &lt; last) &#123;rank++; last &#x3D; heap.top(); &#125;
+		order[heap.top().index] &#x3D; rank;
+		heap.pop();
+	&#125;
+	subLen *&#x3D; 2;
+&#125;
+
+void initMSA(int* sa, int* rk, const string&amp; str) &#123;
+	&#x2F;&#x2F;为倍增进行初始化、对第一行进行初始排序，时间复杂度为O（nlogn）
+	compChar* cc &#x3D; new compChar[str.length()];
+	for (int i &#x3D; 0; i &lt; str.length(); i++) &#123;
+		cc[i].c &#x3D; str[i]; 
+		cc[i].index &#x3D; i + 1;
+	&#125;
+	priority_queue&lt;compChar&gt; heapC;
+	for (int i &#x3D; 0; i &lt; str.length(); i++)heapC.push(cc[i]);
+	int stCRank &#x3D; 0;
+	char last &#x3D; 0;
+	int* order &#x3D; new int[str.length() + 1];
+	while (!heapC.empty())
+	&#123;
+		if (heapC.top().c &gt; last) &#123; stCRank++; last &#x3D; heapC.top().c; &#125;
+		order[heapC.top().index] &#x3D; stCRank;
+		heapC.pop();
+	&#125;
+	&#x2F;&#x2F;循环执行倍增算法，时间复杂度为O（nlog^2(n)）
+	compPair* cp &#x3D; new compPair[str.length() + 1];
+	for (int subLen &#x3D; 1; subLen*2&lt;&#x3D;str.length();) doubleHeapSort(cp, order, str.length(),subLen);
+	&#x2F;&#x2F;拷贝结果到rk数组,顺便生成sa数组
+	for (int i &#x3D; 1; i &lt;&#x3D; str.length(); i++) &#123;
+		rk[i] &#x3D; order[i]; 
+		sa[rk[i]] &#x3D; i;
+	&#125;
+	delete[]order, cp;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 
 
@@ -261,7 +325,26 @@
 <h4 id="还有很大的优化空间"><a href="#还有很大的优化空间" class="headerlink" title="还有很大的优化空间"></a>还有很大的优化空间</h4><p>由于我们的RK数组的大小介于ASCII码个数（128）到源字符串长度之间，我们的RK数组的规模不会很大。如果我们将O（nlogn）的排序降低至O（n）的级别，那么是非常舒服的。</p>
 <p>我们将得到一个O（nlogn）的算法，或准确地说是O（2nlogn）的。</p>
 <p>因此引入通过两次执行计数排序，实现的双关键字基数排序的算法。</p>
-<h2 id="基于多关键字基数排序的倍增算法"><a href="#基于多关键字基数排序的倍增算法" class="headerlink" title="基于多关键字基数排序的倍增算法"></a>基于多关键字基数排序的倍增算法</h2><h3 id="先看代码-2"><a href="#先看代码-2" class="headerlink" title="先看代码"></a>先看代码</h3><figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs inform7">int i, m, p, w;<br>n = strlen(s + 1);<br>m = max(n, 128);//英文字符下，ASCII最多128个<br>for (int i = 1; i &lt;= n; i++)cnt<span class="hljs-comment">[rk<span class="hljs-comment">[i]</span> = s<span class="hljs-comment">[i]</span>]</span>++;<br>for (int i = 1; i &lt;= m; i++)cnt<span class="hljs-comment">[i]</span> += cnt<span class="hljs-comment">[i - 1]</span>;<br>for (int i = n; i &gt;= 1; i--)sa<span class="hljs-comment">[cnt<span class="hljs-comment">[rk<span class="hljs-comment">[i]</span>]</span>--]</span> = i;<br>for (w = 1; w &lt; n; w &lt;&lt;= 1) &#123;<br>    memset(cnt, 0, sizeof(cnt));<br>    memcpy(id, sa, sizeof(sa));<br>    for (int i = 1; i &lt;= n; i++)cnt<span class="hljs-comment">[rk<span class="hljs-comment">[sa<span class="hljs-comment">[i]</span>+w]</span>]</span>++;//+w在<span class="hljs-comment">[]</span>外面！<br>    for (int i = 1; i &lt;= m; i++)cnt<span class="hljs-comment">[i]</span> += cnt<span class="hljs-comment">[i - 1]</span>;<br>    for (int i = n; i &gt;= 1; i--)sa<span class="hljs-comment">[cnt<span class="hljs-comment">[rk<span class="hljs-comment">[id<span class="hljs-comment">[i]</span>+w]</span>]</span>--]</span> = id<span class="hljs-comment">[i]</span>;//此处是id<span class="hljs-comment">[i]</span>!<br>    memset(cnt, 0, sizeof(cnt));<br>    memcpy(id, sa, sizeof(sa));<br>    for (int i = 1; i &lt;= n; i++)cnt<span class="hljs-comment">[rk<span class="hljs-comment">[sa<span class="hljs-comment">[i]</span>]</span>]</span>++;<br>    for (int i = 1; i &lt;= m; i++)cnt<span class="hljs-comment">[i]</span> += cnt<span class="hljs-comment">[i - 1]</span>;<br>    for (int i = n; i &gt;= 1; i--)sa<span class="hljs-comment">[cnt<span class="hljs-comment">[rk<span class="hljs-comment">[id<span class="hljs-comment">[i]</span>]</span>]</span>--]</span> = id<span class="hljs-comment">[i]</span>;<br>    memcpy(oldrk, rk, sizeof(rk));<br>    for (p = 0, i = 1; i &lt;= n; i++) oldrk<span class="hljs-comment">[sa<span class="hljs-comment">[i]</span>]</span> == oldrk<span class="hljs-comment">[sa<span class="hljs-comment">[i - 1]</span>]</span> &amp;&amp; oldrk<span class="hljs-comment">[sa<span class="hljs-comment">[i]</span> + w]</span> == oldrk<span class="hljs-comment">[sa<span class="hljs-comment">[i - 1]</span> + w]</span> ? rk<span class="hljs-comment">[sa<span class="hljs-comment">[i]</span>]</span> = p : rk<span class="hljs-comment">[sa<span class="hljs-comment">[i]</span>]</span> = ++p;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="基于多关键字基数排序的倍增算法"><a href="#基于多关键字基数排序的倍增算法" class="headerlink" title="基于多关键字基数排序的倍增算法"></a>基于多关键字基数排序的倍增算法</h2><h3 id="先看代码-2"><a href="#先看代码-2" class="headerlink" title="先看代码"></a>先看代码</h3><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">int i, m, p, w;
+n &#x3D; strlen(s + 1);
+m &#x3D; max(n, 128);&#x2F;&#x2F;英文字符下，ASCII最多128个
+for (int i &#x3D; 1; i &lt;&#x3D; n; i++)cnt[rk[i] &#x3D; s[i]]++;
+for (int i &#x3D; 1; i &lt;&#x3D; m; i++)cnt[i] +&#x3D; cnt[i - 1];
+for (int i &#x3D; n; i &gt;&#x3D; 1; i--)sa[cnt[rk[i]]--] &#x3D; i;
+for (w &#x3D; 1; w &lt; n; w &lt;&lt;&#x3D; 1) &#123;
+    memset(cnt, 0, sizeof(cnt));
+    memcpy(id, sa, sizeof(sa));
+    for (int i &#x3D; 1; i &lt;&#x3D; n; i++)cnt[rk[sa[i]+w]]++;&#x2F;&#x2F;+w在[]外面！
+    for (int i &#x3D; 1; i &lt;&#x3D; m; i++)cnt[i] +&#x3D; cnt[i - 1];
+    for (int i &#x3D; n; i &gt;&#x3D; 1; i--)sa[cnt[rk[id[i]+w]]--] &#x3D; id[i];&#x2F;&#x2F;此处是id[i]!
+    memset(cnt, 0, sizeof(cnt));
+    memcpy(id, sa, sizeof(sa));
+    for (int i &#x3D; 1; i &lt;&#x3D; n; i++)cnt[rk[sa[i]]]++;
+    for (int i &#x3D; 1; i &lt;&#x3D; m; i++)cnt[i] +&#x3D; cnt[i - 1];
+    for (int i &#x3D; n; i &gt;&#x3D; 1; i--)sa[cnt[rk[id[i]]]--] &#x3D; id[i];
+    memcpy(oldrk, rk, sizeof(rk));
+    for (p &#x3D; 0, i &#x3D; 1; i &lt;&#x3D; n; i++) oldrk[sa[i]] &#x3D;&#x3D; oldrk[sa[i - 1]] &amp;&amp; oldrk[sa[i] + w] &#x3D;&#x3D; oldrk[sa[i - 1] + w] ? rk[sa[i]] &#x3D; p : rk[sa[i]] &#x3D; ++p;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 
 
@@ -320,16 +403,24 @@
 <h3 id="基础算法思想"><a href="#基础算法思想" class="headerlink" title="基础算法思想"></a>基础算法思想</h3><h4 id="第一趟计数排序"><a href="#第一趟计数排序" class="headerlink" title="第一趟计数排序"></a>第一趟计数排序</h4><p>先进行一趟计数排序，确定子串长度为1时的rk和sa。</p>
 <p>此处由于串长为1，故rk可以写入对应下标的char的ASCII码代替。它们天生有rk数组的那种对于字符串单调不降的性质。</p>
 <p>对于aabaaaab样例，此时的rk数组为：</p>
-<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">97 </span><span class="hljs-number">97</span> <span class="hljs-number">98</span> <span class="hljs-number">97</span> <span class="hljs-number">97</span> <span class="hljs-number">97</span> <span class="hljs-number">97</span> <span class="hljs-number">98</span> <br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">97 97 98 97 97 97 97 98 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 
 <p>其中，97是a的ASCII码，98是b的ASCII码。</p>
 <p>此时的sa数组为：</p>
-<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">1 </span><span class="hljs-number">2</span> <span class="hljs-number">4</span> <span class="hljs-number">5</span> <span class="hljs-number">6</span> <span class="hljs-number">7</span> <span class="hljs-number">3</span> <span class="hljs-number">8</span> <br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">1 2 4 5 6 7 3 8 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 
 <p>每个元素代表以其元素值开始的长度为1的子串的单调不降排序情况。</p>
 <p>即:1,2,3,5,6,7代表了a字符，3和8代表了b字符。</p>
 <h4 id="后续的双关键字基数排序"><a href="#后续的双关键字基数排序" class="headerlink" title="后续的双关键字基数排序"></a>后续的双关键字基数排序</h4><p>分别连续对两个关键字进行计数排序，称为双关键字的基数排序。</p>
-<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs inform7">for (w = 1; w &lt; n; w &lt;&lt;= 1)&#123;<br>    if(w&gt;=2)m = n;<br>    memset(cnt, 0, sizeof(cnt));//注意要初始化cnt数组，所有计数都从0开始。<br>    for (i = 1; i &lt;= n; ++i) id<span class="hljs-comment">[i]</span> = sa<span class="hljs-comment">[i]</span>;<br>    for (i = 1; i &lt;= n; ++i) ++cnt<span class="hljs-comment">[rk<span class="hljs-comment">[id<span class="hljs-comment">[i]</span> + w]</span>]</span>;<br>    for (i = 1; i &lt;= m; ++i) cnt<span class="hljs-comment">[i]</span> += cnt<span class="hljs-comment">[i - 1]</span>;<br>    for (i = n; i &gt;= 1; --i) sa<span class="hljs-comment">[cnt<span class="hljs-comment">[rk<span class="hljs-comment">[id<span class="hljs-comment">[i]</span> + w]</span>]</span>--]</span> = id<span class="hljs-comment">[i]</span>;<br>    ....//TODO: 再进行一轮对第一关键字的排序<br>&#125;<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">for (w &#x3D; 1; w &lt; n; w &lt;&lt;&#x3D; 1)&#123;
+    if(w&gt;&#x3D;2)m &#x3D; n;
+    memset(cnt, 0, sizeof(cnt));&#x2F;&#x2F;注意要初始化cnt数组，所有计数都从0开始。
+    for (i &#x3D; 1; i &lt;&#x3D; n; ++i) id[i] &#x3D; sa[i];
+    for (i &#x3D; 1; i &lt;&#x3D; n; ++i) ++cnt[rk[id[i] + w]];
+    for (i &#x3D; 1; i &lt;&#x3D; m; ++i) cnt[i] +&#x3D; cnt[i - 1];
+    for (i &#x3D; n; i &gt;&#x3D; 1; --i) sa[cnt[rk[id[i] + w]]--] &#x3D; id[i];
+    ....&#x2F;&#x2F;TODO: 再进行一轮对第一关键字的排序
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 <p>以第二关键字的计数排序为例，算法思想如下：</p>
 <p>先将排序前的sa数组存快照到id数组。</p>
@@ -340,38 +431,38 @@
 <p>因为当w=n时，sa[i]+w一般是&gt;w且&lt;2w的。</p>
 <p>如果rk不够大就会<code>当场RE</code>。</p>
 <p>而且，如果我们每次都把该数组初始化为全０，就能方便地达到”若第二关键字的子串不在源数组范围内，则使它的sa为0（也可认为是无穷小）“的效果。</p>
-<h5 id="关于计数各个子串的rank"><a href="#关于计数各个子串的rank" class="headerlink" title="关于计数各个子串的rank"></a>关于计数各个子串的rank</h5><figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs inform7">for (i = 1; i &lt;= n; ++i) ++cnt<span class="hljs-comment">[rk<span class="hljs-comment">[id<span class="hljs-comment">[i]</span> + w]</span>]</span>;<br></code></pre></td></tr></table></figure>
+<h5 id="关于计数各个子串的rank"><a href="#关于计数各个子串的rank" class="headerlink" title="关于计数各个子串的rank"></a>关于计数各个子串的rank</h5><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">for (i &#x3D; 1; i &lt;&#x3D; n; ++i) ++cnt[rk[id[i] + w]];<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 
 <p>id[i]是sa[i]的快照，随着i的增大，以其对应下标的元素为起始的长度为w/2的子串是依次呈单调不降排列的。</p>
 <p>因此我们只需要让i增加，其对应的rank就是单调不降地被枚举出来的。</p>
 <p>以这种次序，可以完成对各种可能的rank的计数。</p>
-<h5 id=""><a href="#" class="headerlink" title=""></a></h5><h5 id="关于求前缀和"><a href="#关于求前缀和" class="headerlink" title="关于求前缀和"></a>关于求前缀和</h5><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">for</span> (i = <span class="hljs-number">1</span>; i &lt;= m; ++i) cnt[i] += cnt[i - <span class="hljs-number">1</span>];<br></code></pre></td></tr></table></figure>
+<h5 id=""><a href="#" class="headerlink" title=""></a></h5><h5 id="关于求前缀和"><a href="#关于求前缀和" class="headerlink" title="关于求前缀和"></a>关于求前缀和</h5><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">for (i &#x3D; 1; i &lt;&#x3D; m; ++i) cnt[i] +&#x3D; cnt[i - 1];<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 
 <p>对于计数结果从小到大遍历求和，则可以得到各个计数对应元素的最后一个结果下标。</p>
 <p>这里的循环条件是遍历到m为止。m的定义是期望的计数元素。</p>
 <p>对于w=0情况下的计数排序，rank是以ASCII码的形式存储，故m应当不小于ASCII的最大值128.</p>
 <p>对于w&gt;=2情况下的计数排序，由于在w=1的那次计数排序中，已经更新rank为从1开始的int数，故rank中的值都必然小于等于源字符串的长度。（这个过程下文会介绍）</p>
 <p>因此w=0时，m的初始化如下:</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">m</span> = max(n, <span class="hljs-number">128</span>)<span class="hljs-comment">;//英文字符下，ASCII最多128个</span><br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">m &#x3D; max(n, 128);&#x2F;&#x2F;英文字符下，ASCII最多128个<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 
 <p>进入w&gt;=2的计数排序时，m剪枝为:</p>
-<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">if(w&gt;=<span class="hljs-number">2</span>) m = n<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">if(w&gt;&#x3D;2) m &#x3D; n;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 
 
 
 <h5 id="有序性"><a href="#有序性" class="headerlink" title="有序性"></a>有序性</h5><p>有序性即排序前B排在A的后面，则排序后B也要排在A的后面才行。由于cnt保存的是计数对应元素的最后一个结果下标，故其能记录下有序性。</p>
 <p>这里有序性是至关重要的。因为对于双关键字的基数排序，我们先对第二关键字进行排序，然后再对第一关键字排序。第一关键字排序是在第二关键字排序的结果基础上进行。在第一关键字排序中，如果两个元素的第一关键字不相等，则会直接抹去第二关键字排序中这两个元素的第二关键字的大小关系。反之，如果第一关键字排序中，这两个元素的关键字相等，则会保留第二关键字排序中原有的大小关系。这种”保留“需要依靠计数排序的稳定性。</p>
 <p>例如：在第二关键字排序上，升序排列为</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">xxxxabxxxx</span><br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">xxxxabxxxx<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 
 <p>然而a、b的第一关键字相等，则第一关键字排序后，排序结果仍为</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">xxxxabxxxx</span><br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">xxxxabxxxx<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 
 <p>但是设想如果破坏了稳定性，则可能出现</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">xxxxbaxxxx</span><br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">xxxxbaxxxx<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 
 <p>那么这样就不符合多关键字中的”先考虑第一关键字，如果相等才去考虑第二关键字“的原则了。只有保证了每一步的稳定性，才能确保规则100%成立。</p>
-<h5 id="关于导出排序结果"><a href="#关于导出排序结果" class="headerlink" title="关于导出排序结果"></a>关于导出排序结果</h5><figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs inform7">for (i = n; i &gt;= 1; --i) sa<span class="hljs-comment">[cnt<span class="hljs-comment">[rk<span class="hljs-comment">[id<span class="hljs-comment">[i]</span> + w]</span>]</span>--]</span> = id<span class="hljs-comment">[i]</span>;<br></code></pre></td></tr></table></figure>
+<h5 id="关于导出排序结果"><a href="#关于导出排序结果" class="headerlink" title="关于导出排序结果"></a>关于导出排序结果</h5><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">for (i &#x3D; n; i &gt;&#x3D; 1; --i) sa[cnt[rk[id[i] + w]]--] &#x3D; id[i];<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 
 <p><code>有序性</code>  以倒序遍历cnt数组，以保证排序结果的有序性。</p>
 <p>由于各个id作为下标的情况下，rk[id[i]]是单调不降数组，故我们正在逆序遍历cnt，符合计数排序最后一步的定义。</p>
@@ -379,7 +470,16 @@
 <p>（注：sa数组是不会出现重复元素的。因为它的元素代表子串的起始位置。而每个子串是唯一的。）</p>
 <h5 id="子串的归并"><a href="#子串的归并" class="headerlink" title="子串的归并"></a>子串的归并</h5><p><code>注</code>  虽然这里我们的排序对象是id[i]+w，但是我们的赋值是id[i]。这一个操作就实现了两个子串的<code>归并</code>。</p>
 <h4 id="计算新的rk数组"><a href="#计算新的rk数组" class="headerlink" title="计算新的rk数组"></a>计算新的rk数组</h4><p>按上述方法跑完两趟计数排序，就完成了双关键字的基数排序。</p>
-<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs inform7">   memcpy(oldrk, rk, sizeof(rk));//获得rk更新前的快照（因为接下来rk就要被更新了）<br>for (p = 0, i = 1; i &lt;= n; ++i) &#123;<br>     if (oldrk<span class="hljs-comment">[sa<span class="hljs-comment">[i]</span>]</span> == oldrk<span class="hljs-comment">[sa<span class="hljs-comment">[i - 1]</span>]</span> &amp;&amp;<br>         oldrk<span class="hljs-comment">[sa<span class="hljs-comment">[i]</span> + w]</span> == oldrk<span class="hljs-comment">[sa<span class="hljs-comment">[i - 1]</span> + w]</span>) &#123;<br>         rk<span class="hljs-comment">[sa<span class="hljs-comment">[i]</span>]</span> = p;<br>     &#125;<br>     else &#123;<br>         rk<span class="hljs-comment">[sa<span class="hljs-comment">[i]</span>]</span> = ++p;<br>     &#125;<br> &#125;<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">   memcpy(oldrk, rk, sizeof(rk));&#x2F;&#x2F;获得rk更新前的快照（因为接下来rk就要被更新了）
+for (p &#x3D; 0, i &#x3D; 1; i &lt;&#x3D; n; ++i) &#123;
+     if (oldrk[sa[i]] &#x3D;&#x3D; oldrk[sa[i - 1]] &amp;&amp;
+         oldrk[sa[i] + w] &#x3D;&#x3D; oldrk[sa[i - 1] + w]) &#123;
+         rk[sa[i]] &#x3D; p;
+     &#125;
+     else &#123;
+         rk[sa[i]] &#x3D; ++p;
+     &#125;
+ &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 
 
@@ -391,49 +491,71 @@
 <h3 id="小优化：使用及时终止的倍增算法"><a href="#小优化：使用及时终止的倍增算法" class="headerlink" title="小优化：使用及时终止的倍增算法"></a>小优化：使用及时终止的倍增算法</h3><p>在每次生成RK数组，都会维护一个p，其等于当前RK数组的值域。即：当前有多少个可区分的单调不降的名次。</p>
 <p>如果每个子串的RK互不相同，则我们认为后缀数组已经生成。利用这个特点，我们做以下优化：</p>
 <p>我们利用这个p，在每次倍增的结束时做以下判断，并直接生成最终的sa数组即可。算法提前结束。</p>
-<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs excel"><span class="hljs-built_in">if</span> (p == <span class="hljs-built_in">n</span>) &#123;<br>  for (<span class="hljs-built_in">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-built_in">n</span>; ++i) sa[rk[i]] = i;<br>  break;<br>&#125;<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">if (p &#x3D;&#x3D; n) &#123;
+  for (int i &#x3D; 1; i &lt;&#x3D; n; ++i) sa[rk[i]] &#x3D; i;
+  break;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 
 
 <h3 id="常数优化：减少O-n-次的计数排序"><a href="#常数优化：减少O-n-次的计数排序" class="headerlink" title="常数优化：减少O(n)次的计数排序"></a>常数优化：减少O(n)次的计数排序</h3><p>优化效果：让O(2nlogn)变成O(nlogn)</p>
 <p>老规矩先看代码：</p>
-<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs inform7">int i, m, p, w;<br>n = strlen(s + 1);<br>m = max(n, 128);<br>for (int i = 1; i &lt;= n; i++)cnt<span class="hljs-comment">[rk<span class="hljs-comment">[i]</span> = s<span class="hljs-comment">[i]</span>]</span>++;<br>for (int i = 1; i &lt;= m; i++)cnt<span class="hljs-comment">[i]</span> += cnt<span class="hljs-comment">[i - 1]</span>;<br>for (int i = n; i &gt;= 1; i--)sa<span class="hljs-comment">[cnt<span class="hljs-comment">[rk<span class="hljs-comment">[i]</span>]</span>--]</span> = i;<br>for (w = 1; w &lt; n; w &lt;&lt;= 1) &#123;<br>    memset(cnt, 0, sizeof(cnt));<br>    memcpy(id, sa, sizeof(sa));<br>    for (p = 0, i = n; i &gt; n - w; --i) id<span class="hljs-comment">[++p]</span> = i;<br>    for (i = 1; i &lt;= n; ++i) if (sa<span class="hljs-comment">[i]</span> &gt; w) id<span class="hljs-comment">[++p]</span> = sa<span class="hljs-comment">[i]</span> - w;<br>    memset(cnt, 0, sizeof(cnt));<br>    for (int i = 1; i &lt;= n; i++)cnt<span class="hljs-comment">[rk<span class="hljs-comment">[sa<span class="hljs-comment">[i]</span>]</span>]</span>++;<br>    for (int i = 1; i &lt;= m; i++)cnt<span class="hljs-comment">[i]</span> += cnt<span class="hljs-comment">[i - 1]</span>;<br>    for (int i = n; i &gt;= 1; i--)sa<span class="hljs-comment">[cnt<span class="hljs-comment">[rk<span class="hljs-comment">[id<span class="hljs-comment">[i]</span>]</span>]</span>--]</span> = id<span class="hljs-comment">[i]</span>;<br>    memcpy(oldrk, rk, sizeof(rk));<br>    for (p = 0, i = 1; i &lt;= n; i++) oldrk<span class="hljs-comment">[sa<span class="hljs-comment">[i]</span>]</span> == oldrk<span class="hljs-comment">[sa<span class="hljs-comment">[i - 1]</span>]</span> &amp;&amp; oldrk<span class="hljs-comment">[sa<span class="hljs-comment">[i]</span> + w]</span> == oldrk<span class="hljs-comment">[sa<span class="hljs-comment">[i - 1]</span> + w]</span>? rk<span class="hljs-comment">[sa<span class="hljs-comment">[i]</span>]</span> = p: rk<span class="hljs-comment">[sa<span class="hljs-comment">[i]</span>]</span> = ++p;<br>&#125;<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">int i, m, p, w;
+n &#x3D; strlen(s + 1);
+m &#x3D; max(n, 128);
+for (int i &#x3D; 1; i &lt;&#x3D; n; i++)cnt[rk[i] &#x3D; s[i]]++;
+for (int i &#x3D; 1; i &lt;&#x3D; m; i++)cnt[i] +&#x3D; cnt[i - 1];
+for (int i &#x3D; n; i &gt;&#x3D; 1; i--)sa[cnt[rk[i]]--] &#x3D; i;
+for (w &#x3D; 1; w &lt; n; w &lt;&lt;&#x3D; 1) &#123;
+    memset(cnt, 0, sizeof(cnt));
+    memcpy(id, sa, sizeof(sa));
+    for (p &#x3D; 0, i &#x3D; n; i &gt; n - w; --i) id[++p] &#x3D; i;
+    for (i &#x3D; 1; i &lt;&#x3D; n; ++i) if (sa[i] &gt; w) id[++p] &#x3D; sa[i] - w;
+    memset(cnt, 0, sizeof(cnt));
+    for (int i &#x3D; 1; i &lt;&#x3D; n; i++)cnt[rk[sa[i]]]++;
+    for (int i &#x3D; 1; i &lt;&#x3D; m; i++)cnt[i] +&#x3D; cnt[i - 1];
+    for (int i &#x3D; n; i &gt;&#x3D; 1; i--)sa[cnt[rk[id[i]]]--] &#x3D; id[i];
+    memcpy(oldrk, rk, sizeof(rk));
+    for (p &#x3D; 0, i &#x3D; 1; i &lt;&#x3D; n; i++) oldrk[sa[i]] &#x3D;&#x3D; oldrk[sa[i - 1]] &amp;&amp; oldrk[sa[i] + w] &#x3D;&#x3D; oldrk[sa[i - 1] + w]? rk[sa[i]] &#x3D; p: rk[sa[i]] &#x3D; ++p;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 
 
 <p>主要将针对第二关键字的计数排序修改为：</p>
-<figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs brainfuck"><span class="hljs-comment">memcpy(id</span><span class="hljs-string">,</span> <span class="hljs-comment">sa</span><span class="hljs-string">,</span> <span class="hljs-comment">sizeof(sa));</span><br><span class="hljs-comment">for</span> <span class="hljs-comment">(p</span> <span class="hljs-comment">=</span> <span class="hljs-comment">0</span><span class="hljs-string">,</span> <span class="hljs-comment">i</span> <span class="hljs-comment">=</span> <span class="hljs-comment">n;</span> <span class="hljs-comment">i</span> &gt; <span class="hljs-comment">n</span> <span class="hljs-literal">-</span> <span class="hljs-comment">w;</span> --<span class="hljs-comment">i)</span> <span class="hljs-comment">id</span><span class="hljs-title">[</span>++<span class="hljs-comment">p</span><span class="hljs-title">]</span> <span class="hljs-comment">=</span> <span class="hljs-comment">i;</span><br><span class="hljs-comment">for</span> <span class="hljs-comment">(i</span> <span class="hljs-comment">=</span> <span class="hljs-comment">1;</span> <span class="hljs-comment">i</span> &lt;<span class="hljs-comment">=</span> <span class="hljs-comment">n;</span> ++<span class="hljs-comment">i)</span> <span class="hljs-comment">if</span> <span class="hljs-comment">(sa</span><span class="hljs-title">[</span><span class="hljs-comment">i</span><span class="hljs-title">]</span> &gt; <span class="hljs-comment">w)</span> <span class="hljs-comment">id</span><span class="hljs-title">[</span>++<span class="hljs-comment">p</span><span class="hljs-title">]</span> <span class="hljs-comment">=</span> <span class="hljs-comment">sa</span><span class="hljs-title">[</span><span class="hljs-comment">i</span><span class="hljs-title">]</span> <span class="hljs-literal">-</span> <span class="hljs-comment">w;</span><br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">memcpy(id, sa, sizeof(sa));
+for (p &#x3D; 0, i &#x3D; n; i &gt; n - w; --i) id[++p] &#x3D; i;
+for (i &#x3D; 1; i &lt;&#x3D; n; ++i) if (sa[i] &gt; w) id[++p] &#x3D; sa[i] - w;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
 
 <p>并去掉针对第一关键字的计数排序的id数组初始化（减少一次赋值）。</p>
-<h4 id="将sa数组中，第二关键字为0的元素拿出来，放到id数组的最开始"><a href="#将sa数组中，第二关键字为0的元素拿出来，放到id数组的最开始" class="headerlink" title="将sa数组中，第二关键字为0的元素拿出来，放到id数组的最开始"></a>将sa数组中，第二关键字为0的元素拿出来，放到id数组的最开始</h4><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs brainfuck"><span class="hljs-comment">for</span> <span class="hljs-comment">(p</span> <span class="hljs-comment">=</span> <span class="hljs-comment">0</span><span class="hljs-string">,</span> <span class="hljs-comment">i</span> <span class="hljs-comment">=</span> <span class="hljs-comment">n;</span> <span class="hljs-comment">i</span> &gt; <span class="hljs-comment">n</span> <span class="hljs-literal">-</span> <span class="hljs-comment">w;</span> --<span class="hljs-comment">i)</span> <span class="hljs-comment">id</span><span class="hljs-title">[</span>++<span class="hljs-comment">p</span><span class="hljs-title">]</span> <span class="hljs-comment">=</span> <span class="hljs-comment">i;</span><br></code></pre></td></tr></table></figure>
+<h4 id="将sa数组中，第二关键字为0的元素拿出来，放到id数组的最开始"><a href="#将sa数组中，第二关键字为0的元素拿出来，放到id数组的最开始" class="headerlink" title="将sa数组中，第二关键字为0的元素拿出来，放到id数组的最开始"></a>将sa数组中，第二关键字为0的元素拿出来，放到id数组的最开始</h4><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">for (p &#x3D; 0, i &#x3D; n; i &gt; n - w; --i) id[++p] &#x3D; i;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 
 <p>这些元素不会存在第二关键字（或称第二关键字为0），所以这几个元素本身就是用于下一次计数排序的第一关键字了。</p>
 <p>因为这些元素的第二关键字为0，这些元素在优化前的第一次计数排序完成后，都是直接排在最开始的连续位置。（连续长度为w）。</p>
 <p>从下一次计数排序的视角讲，下一次计数排序只是在上一次给出的有序性的基础上进行。但是对于前面这几个元素来讲，它们第二关键字对应的rank一定都是0，即认为相等。（因为这些第二关键字的下标已经大于n了。而rk数组在初始化的时候，其&gt;n的部分都是0.）</p>
 <p>因为rk中这些第二关键字都是0，所以在后续生成新的rk数组时，凡是提到它们的第二关键字的rk，永远都是恒等于0的值。</p>
 <p>回想这段生成新rk数组的算法:</p>
-<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs inform7">for (p = 0, i = 1; i &lt;= n; i++) oldrk<span class="hljs-comment">[sa<span class="hljs-comment">[i]</span>]</span> == oldrk<span class="hljs-comment">[sa<span class="hljs-comment">[i - 1]</span>]</span> &amp;&amp; oldrk<span class="hljs-comment">[sa<span class="hljs-comment">[i]</span> + w]</span> == oldrk<span class="hljs-comment">[sa<span class="hljs-comment">[i - 1]</span> + w]</span>? rk<span class="hljs-comment">[sa<span class="hljs-comment">[i]</span>]</span> = p: rk<span class="hljs-comment">[sa<span class="hljs-comment">[i]</span>]</span> = ++p;<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">for (p &#x3D; 0, i &#x3D; 1; i &lt;&#x3D; n; i++) oldrk[sa[i]] &#x3D;&#x3D; oldrk[sa[i - 1]] &amp;&amp; oldrk[sa[i] + w] &#x3D;&#x3D; oldrk[sa[i - 1] + w]? rk[sa[i]] &#x3D; p: rk[sa[i]] &#x3D; ++p;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 
 <p>显然，这个条件：</p>
-<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs inform7">oldrk<span class="hljs-comment">[sa<span class="hljs-comment">[i]</span> + w]</span> == oldrk<span class="hljs-comment">[sa<span class="hljs-comment">[i - 1]</span> + w]</span><br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">oldrk[sa[i] + w] &#x3D;&#x3D; oldrk[sa[i - 1] + w]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 
 <p>是满足的。因为都是0.</p>
 <p>则无论这些元素的第一关键字如何排列，都不会影响它们生成rk数组时，关于”相等“的判断。</p>
 <p>所以我们可以任意把他们排列在sa的头w个位置，它们排列的情况有它们的全排列数种。</p>
 <p>这里为了方便，我们采用降序排列在这里。</p>
-<h4 id="将剩下的子串起始下标按在sa内的顺序，反推出其第一关键字下标，依次放进id"><a href="#将剩下的子串起始下标按在sa内的顺序，反推出其第一关键字下标，依次放进id" class="headerlink" title="将剩下的子串起始下标按在sa内的顺序，反推出其第一关键字下标，依次放进id"></a>将剩下的子串起始下标按在sa内的顺序，反推出其第一关键字下标，依次放进id</h4><figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs inform7">for (i = 1; i &lt;= n; ++i) if (sa<span class="hljs-comment">[i]</span> &gt; w) id<span class="hljs-comment">[++p]</span> = sa<span class="hljs-comment">[i]</span> - w;<br></code></pre></td></tr></table></figure>
+<h4 id="将剩下的子串起始下标按在sa内的顺序，反推出其第一关键字下标，依次放进id"><a href="#将剩下的子串起始下标按在sa内的顺序，反推出其第一关键字下标，依次放进id" class="headerlink" title="将剩下的子串起始下标按在sa内的顺序，反推出其第一关键字下标，依次放进id"></a>将剩下的子串起始下标按在sa内的顺序，反推出其第一关键字下标，依次放进id</h4><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">for (i &#x3D; 1; i &lt;&#x3D; n; ++i) if (sa[i] &gt; w) id[++p] &#x3D; sa[i] - w;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 
 <p>这里的这些起始下标在sa中，意味着它们是以上一轮基数排序的顺序排列（单调不降）。</p>
 <p>我们需要在这些下标中找到有可能成为第二关键字的下标，即筛选条件为：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">if (sa<span class="hljs-selector-attr">[i]</span> &gt; w)<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">if (sa[i] &gt; w)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 
 <p>按这些第二关键字的下标，反推其第一关键字的下标，并将这些下标放到id中。</p>
-<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs inform7">id<span class="hljs-comment">[++p]</span> = sa<span class="hljs-comment">[i]</span> - w;<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">id[++p] &#x3D; sa[i] - w;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 
 <p>这就相当于，当前id中保存了所有第一关键字按其第二关键字进行单调不降的排序的结果。</p>
 <p>我们如果再进行一次单调不降的计数排序，就得到了子串长度为w的sa数组。</p>
 <h3 id="常数优化：优化计数排序时关键字的值域"><a href="#常数优化：优化计数排序时关键字的值域" class="headerlink" title="常数优化：优化计数排序时关键字的值域"></a>常数优化：优化计数排序时关键字的值域</h3><p>该优化针对规模较大的源数组比较有用。</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">for</span> (w = <span class="hljs-number">1</span>; <span class="hljs-attribute">w</span> &lt; n; <span class="hljs-attribute">w</span> &lt;&lt;= <span class="hljs-number">1</span>，m = p) <br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">for (w &#x3D; 1; w &lt; n; w &lt;&lt;&#x3D; 1，m &#x3D; p) <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 
 <p>即：在for循环的操作中，每次将m更新为p。</p>
 <p>因为每轮生成新的RK数组时，p都被更新为当前RK数组的值域。</p>
@@ -442,10 +564,10 @@
 <h3 id="性能优化：减少不连续的访存"><a href="#性能优化：减少不连续的访存" class="headerlink" title="性能优化：减少不连续的访存"></a>性能优化：减少不连续的访存</h3><p>该优化针对规模较大的源数组比较有用。</p>
 <p>我们格外维护一个px[]数组，大小和rk相符，令其满足px[i]=rk[id[i]].</p>
 <p>在计数时，顺便把rk[id[i]]存给px[i]，如下：</p>
-<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs inform7">for (i = 1; i &lt;= n; ++i) ++cnt<span class="hljs-comment">[px<span class="hljs-comment">[i]</span> = rk<span class="hljs-comment">[id<span class="hljs-comment">[i]</span>]</span>]</span>;<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">for (i &#x3D; 1; i &lt;&#x3D; n; ++i) ++cnt[px[i] &#x3D; rk[id[i]]];<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 
 <p>在后续访问时，都将rk[id[i]]用px[i]代替即可，如下：</p>
-<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs inform7">for (i = n; i &gt;= 1; --i) sa<span class="hljs-comment">[cnt<span class="hljs-comment">[px<span class="hljs-comment">[i]</span>]</span>--]</span> = id<span class="hljs-comment">[i]</span>;<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">for (i &#x3D; n; i &gt;&#x3D; 1; --i) sa[cnt[px[i]]--] &#x3D; id[i];<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 
 
             </div>
@@ -491,8 +613,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/04/09/SDUOJ%20-%205/">
-                        <span class="hidden-mobile">SDUOJ 拉面馆题解 (编码和位运算)</span>
+                      <a href="/2021/04/09/SDUOJ%20-%206/">
+                        <span class="hidden-mobile">SDUOJ 看电影题解（流水线调度问题）</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

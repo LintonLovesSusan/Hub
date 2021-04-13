@@ -93,18 +93,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                Home
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" target="_blank" rel="noopener" href="http://114.215.149.199/">
                 <i class="iconfont icon-tags-fill"></i>
                 个人项目/Projects
@@ -176,7 +164,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      904 字
+      941 字
     </span>
   
 
@@ -232,9 +220,13 @@
 <h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一行一个整数 n<em>n</em> , 0\le n\le10^50≤<em>n</em>≤105<br>接下来有 n-1<em>n</em>−1 行，每行 a,b<em>a</em>,<em>b</em> 代表第 a<em>a</em> 个村庄，到第 b<em>b</em> 个村庄有一条路。<br>1\le a,b\le 10^51≤<em>a</em>,<em>b</em>≤105</p>
 <p>保证输入结构是一棵树</p>
 <h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>输出一行 n<em>n</em> 个数，表示答案</p>
-<h2 id="样例输入"><a href="#样例输入" class="headerlink" title="样例输入"></a>样例输入</h2><figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-number">5</span><br><span class="hljs-symbol">5 </span><span class="hljs-number">1</span><br><span class="hljs-symbol">1 </span><span class="hljs-number">2</span><br><span class="hljs-symbol">2 </span><span class="hljs-number">3</span><br><span class="hljs-symbol">3 </span><span class="hljs-number">4</span><br></code></pre></td></tr></table></figure>
+<h2 id="样例输入"><a href="#样例输入" class="headerlink" title="样例输入"></a>样例输入</h2><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">5
+5 1
+1 2
+2 3
+3 4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
-<h2 id="样例输出"><a href="#样例输出" class="headerlink" title="样例输出"></a>样例输出</h2><figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">3 </span><span class="hljs-number">2</span> <span class="hljs-number">3</span> <span class="hljs-number">4</span> <span class="hljs-number">4</span><br></code></pre></td></tr></table></figure>
+<h2 id="样例输出"><a href="#样例输出" class="headerlink" title="样例输出"></a>样例输出</h2><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">3 2 3 4 4<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 
 
 
@@ -296,7 +288,90 @@
 <p>写好构建双向边的函数：两次调用上述函数。</p>
 <h4 id="四次BFS解决问题"><a href="#四次BFS解决问题" class="headerlink" title="四次BFS解决问题"></a>四次BFS解决问题</h4><p>这里BFS需要额外加一个操作：每次BFS新节点入队时，记录新节点的距离是当前节点的+1.</p>
 <h2 id="关键问题"><a href="#关键问题" class="headerlink" title="关键问题"></a>关键问题</h2><p>无。</p>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;<br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MOD = <span class="hljs-number">1000000007</span>;<br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span></span><br><span class="hljs-class">&#123;</span><br>    <span class="hljs-keyword">int</span> next;<br>    <span class="hljs-keyword">int</span> num;<br>    Node() :next(<span class="hljs-number">-1</span>), num(<span class="hljs-number">-1</span>) &#123;&#125;;<br>&#125;;<br><br><span class="hljs-keyword">int</span> n, iv1, iv2, sn;<br><span class="hljs-keyword">int</span> max1[<span class="hljs-number">105001</span>], max2[<span class="hljs-number">105001</span>];<br>Node storage[<span class="hljs-number">300002</span>];<br>Node nodes[<span class="hljs-number">105001</span>];<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">createEdge</span><span class="hljs-params">(<span class="hljs-keyword">int</span> v1, <span class="hljs-keyword">int</span> v2)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> newNode = ++sn;<br>    storage[newNode].num = v2;<br>    storage[newNode].next = nodes[v1].next;<br>    nodes[v1].next = newNode;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">addNewEdge</span><span class="hljs-params">(<span class="hljs-keyword">int</span> v1, <span class="hljs-keyword">int</span> v2)</span> </span>&#123;<br>    createEdge(v1, v2);<br>    createEdge(v2, v1);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">bfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> start,<span class="hljs-keyword">bool</span> mode,<span class="hljs-keyword">bool</span> key)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> cur = nodes[start].next;<br>    <span class="hljs-keyword">int</span> last = start;<br>    <span class="hljs-built_in">queue</span>&lt;<span class="hljs-keyword">int</span>&gt; q;<br>    <span class="hljs-built_in">set</span>&lt;<span class="hljs-keyword">int</span>&gt; vis;<br>    <span class="hljs-keyword">while</span> (storage[cur].next!=<span class="hljs-number">-1</span>)<br>    &#123;<br>        q.push(storage[cur].num);<br>        cur = storage[cur].next;<br>    &#125;<br>    <span class="hljs-keyword">while</span> (!q.empty())<br>    &#123;<br>        <span class="hljs-keyword">int</span> theNum = q.front();<br>        q.pop();<br>        vis.insert(theNum);<br>        last = theNum;<br>        cur = nodes[theNum].next;<br>        <span class="hljs-keyword">while</span> (storage[cur].next != <span class="hljs-number">-1</span>)<br>        &#123;<br>            <span class="hljs-keyword">if</span> (!vis.count(storage[cur].num)) &#123;<br>                q.push(storage[cur].num); <br>                <span class="hljs-keyword">if</span> (mode)key ? max1[storage[cur].num] = max1[theNum] + <span class="hljs-number">1</span> : max2[storage[cur].num] = max2[theNum] + <span class="hljs-number">1</span>;<br>            &#125;<br>            cur = storage[cur].next;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> last;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">solve</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> far1 = bfs(<span class="hljs-number">1</span>,<span class="hljs-literal">false</span>,<span class="hljs-literal">false</span>);<br>    <span class="hljs-keyword">int</span> far2 = bfs(far1,<span class="hljs-literal">false</span>,<span class="hljs-literal">false</span>);<br>    bfs(far1, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>);<br>    bfs(far2, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>);<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++)<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>, max(max1[i]+<span class="hljs-number">1</span>, max2[i]+<span class="hljs-number">1</span>));<br>    <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">//freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.in&quot;, &quot;r&quot;, stdin);</span><br>    <span class="hljs-comment">//freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.out&quot;, &quot;w&quot;, stdout);</span><br>    <span class="hljs-built_in">cin</span> &gt;&gt; n;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>        <span class="hljs-keyword">int</span> newNode = ++sn;<br>        nodes[i].num = i; <br>        nodes[i].next = newNode;<span class="hljs-comment">//哨兵</span><br>    &#125;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n - <span class="hljs-number">1</span>; i++) &#123;<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d %d&quot;</span>, &amp;iv1, &amp;iv2);<br>        addNewEdge(iv1, iv2);<br>    &#125;<br>    solve();<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;bits&#x2F;stdc++.h&gt;
+
+using namespace std;
+typedef long long ll;
+const int MOD &#x3D; 1000000007;
+
+struct Node
+&#123;
+    int next;
+    int num;
+    Node() :next(-1), num(-1) &#123;&#125;;
+&#125;;
+
+int n, iv1, iv2, sn;
+int max1[105001], max2[105001];
+Node storage[300002];
+Node nodes[105001];
+
+void createEdge(int v1, int v2) &#123;
+    int newNode &#x3D; ++sn;
+    storage[newNode].num &#x3D; v2;
+    storage[newNode].next &#x3D; nodes[v1].next;
+    nodes[v1].next &#x3D; newNode;
+&#125;
+
+void addNewEdge(int v1, int v2) &#123;
+    createEdge(v1, v2);
+    createEdge(v2, v1);
+&#125;
+
+int bfs(int start,bool mode,bool key) &#123;
+    int cur &#x3D; nodes[start].next;
+    int last &#x3D; start;
+    queue&lt;int&gt; q;
+    set&lt;int&gt; vis;
+    while (storage[cur].next!&#x3D;-1)
+    &#123;
+        q.push(storage[cur].num);
+        cur &#x3D; storage[cur].next;
+    &#125;
+    while (!q.empty())
+    &#123;
+        int theNum &#x3D; q.front();
+        q.pop();
+        vis.insert(theNum);
+        last &#x3D; theNum;
+        cur &#x3D; nodes[theNum].next;
+        while (storage[cur].next !&#x3D; -1)
+        &#123;
+            if (!vis.count(storage[cur].num)) &#123;
+                q.push(storage[cur].num); 
+                if (mode)key ? max1[storage[cur].num] &#x3D; max1[theNum] + 1 : max2[storage[cur].num] &#x3D; max2[theNum] + 1;
+            &#125;
+            cur &#x3D; storage[cur].next;
+        &#125;
+    &#125;
+    return last;
+&#125;
+
+void solve() &#123;
+    int far1 &#x3D; bfs(1,false,false);
+    int far2 &#x3D; bfs(far1,false,false);
+    bfs(far1, true, true);
+    bfs(far2, true, false);
+    for (int i &#x3D; 1; i &lt;&#x3D; n; i++)printf(&quot;%d &quot;, max(max1[i]+1, max2[i]+1));
+    puts(&quot;\n&quot;);
+&#125;
+
+int main() &#123;
+    &#x2F;&#x2F;freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.in&quot;, &quot;r&quot;, stdin);
+    &#x2F;&#x2F;freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.out&quot;, &quot;w&quot;, stdout);
+    cin &gt;&gt; n;
+    for (int i &#x3D; 1; i &lt;&#x3D; n; i++) &#123;
+        int newNode &#x3D; ++sn;
+        nodes[i].num &#x3D; i; 
+        nodes[i].next &#x3D; newNode;&#x2F;&#x2F;哨兵
+    &#125;
+    for (int i &#x3D; 1; i &lt;&#x3D; n - 1; i++) &#123;
+        scanf(&quot;%d %d&quot;, &amp;iv1, &amp;iv2);
+        addNewEdge(iv1, iv2);
+    &#125;
+    solve();
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 
             </div>
@@ -334,9 +409,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/04/12/SDUOJ010/">
+                      <a href="/2021/04/12/SDUOJ008/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">SDUOJ 公路修建题解 (并查集)</span>
+                        <span class="hidden-mobile">SDUOJ TT与可怜的猫题解 (水题)</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -344,8 +419,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/04/12/SDUOJ012/">
-                        <span class="hidden-mobile">SDUOJ 水渠设计题解 (贪心、最小生成树)</span>
+                      <a href="/2021/04/12/SDUOJ009/">
+                        <span class="hidden-mobile">SDUOJ 时间复杂度题解 (模拟)</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -93,18 +93,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                Home
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" target="_blank" rel="noopener" href="http://114.215.149.199/">
                 <i class="iconfont icon-tags-fill"></i>
                 个人项目/Projects
@@ -176,7 +164,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      441 字
+      459 字
     </span>
   
 
@@ -235,7 +223,61 @@
 <p>对于每个要求，先从该要求的l遍历到r，收集这段区间内垃圾桶总个数（够了k就及时终止。）时间复杂度O（n）。</p>
 <p>之后，如果垃圾桶不够，就从r往l遍历，如果放了桶就跳过，如果没放过桶就ans++，并且更新此处的sts为true，并让exist++，代表该区间又多了一个桶。如果exist够了k，则及时终止。时间复杂度O（n）。</p>
 <p>输出结果即可。</p>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;algorithm&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unordered_map&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;set&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><span class="hljs-keyword">int</span> INF = <span class="hljs-number">1e9</span>;<br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">requirment</span></span><br><span class="hljs-class">&#123;</span><br>	<span class="hljs-keyword">int</span> l;<br>	<span class="hljs-keyword">int</span> r;<br>	<span class="hljs-keyword">int</span> k;<br><br>	<span class="hljs-keyword">bool</span> <span class="hljs-keyword">operator</span>&lt; (requirment re)<span class="hljs-keyword">const</span> &#123;<br>		<span class="hljs-keyword">return</span> r &lt; re.r;<br>	&#125;<br>	requirment(<span class="hljs-keyword">int</span> l_, <span class="hljs-keyword">int</span> r_, <span class="hljs-keyword">int</span> k_) :l(l_), r(r_), k(k_) &#123;&#125;<br>&#125;;<br><br><span class="hljs-keyword">int</span> n, m;<br><span class="hljs-keyword">int</span> l, r, k;<br><span class="hljs-keyword">int</span> exsist, ans;<br><span class="hljs-built_in">unordered_map</span>&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">bool</span>&gt; sts;<br><span class="hljs-built_in">multiset</span>&lt;requirment&gt; inputs;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-comment">//freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.in&quot;,&quot;r&quot;,stdin);</span><br>	<span class="hljs-comment">//freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.out&quot;, &quot;w&quot;, stdout);</span><br>	<span class="hljs-built_in">cin</span> &gt;&gt; n &gt;&gt; m;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> yq = <span class="hljs-number">1</span>; yq &lt;= m; yq++) &#123;<br>		<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d %d %d&quot;</span>, &amp;l, &amp;r, &amp;k);<br>		inputs.emplace(l, r, k);<br>	&#125;<br>	<span class="hljs-comment">//sort(inputs.begin(), inputs.end());</span><br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> ite = inputs.begin(); ite != inputs.end(); ite++) &#123;<br>		exsist = <span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = ite-&gt;r; i &gt;= ite-&gt;l; i--) <span class="hljs-keyword">if</span> (sts[i]) &#123;<br>			exsist++;<br>			<span class="hljs-keyword">if</span> (exsist &gt;= ite-&gt;k)<span class="hljs-keyword">break</span>;<br>		&#125;<br>		<span class="hljs-keyword">if</span> (exsist &lt; ite-&gt;k) &#123;<br>			<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = ite-&gt;r; i &gt;= ite-&gt;l; i--) &#123;<br>				<span class="hljs-keyword">if</span> (exsist &gt;= ite-&gt;k)<span class="hljs-keyword">break</span>;<br>				<span class="hljs-keyword">if</span> (!sts[i]) &#123;<br>					sts[i] = <span class="hljs-literal">true</span>;<br>					exsist++;<br>					ans++;<br>				&#125;<br>			&#125;<br>		&#125;<br>	&#125;<br>	<span class="hljs-built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="hljs-built_in">endl</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+#include &lt;unordered_map&gt;
+#include &lt;set&gt;
+#include &lt;iostream&gt;
+
+using namespace std;
+int INF &#x3D; 1e9;
+
+struct requirment
+&#123;
+	int l;
+	int r;
+	int k;
+
+	bool operator&lt; (requirment re)const &#123;
+		return r &lt; re.r;
+	&#125;
+	requirment(int l_, int r_, int k_) :l(l_), r(r_), k(k_) &#123;&#125;
+&#125;;
+
+int n, m;
+int l, r, k;
+int exsist, ans;
+unordered_map&lt;int, bool&gt; sts;
+multiset&lt;requirment&gt; inputs;
+
+int main() &#123;
+	&#x2F;&#x2F;freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.in&quot;,&quot;r&quot;,stdin);
+	&#x2F;&#x2F;freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.out&quot;, &quot;w&quot;, stdout);
+	cin &gt;&gt; n &gt;&gt; m;
+	for (int yq &#x3D; 1; yq &lt;&#x3D; m; yq++) &#123;
+		scanf(&quot;%d %d %d&quot;, &amp;l, &amp;r, &amp;k);
+		inputs.emplace(l, r, k);
+	&#125;
+	&#x2F;&#x2F;sort(inputs.begin(), inputs.end());
+	for (auto ite &#x3D; inputs.begin(); ite !&#x3D; inputs.end(); ite++) &#123;
+		exsist &#x3D; 0;
+		for (int i &#x3D; ite-&gt;r; i &gt;&#x3D; ite-&gt;l; i--) if (sts[i]) &#123;
+			exsist++;
+			if (exsist &gt;&#x3D; ite-&gt;k)break;
+		&#125;
+		if (exsist &lt; ite-&gt;k) &#123;
+			for (int i &#x3D; ite-&gt;r; i &gt;&#x3D; ite-&gt;l; i--) &#123;
+				if (exsist &gt;&#x3D; ite-&gt;k)break;
+				if (!sts[i]) &#123;
+					sts[i] &#x3D; true;
+					exsist++;
+					ans++;
+				&#125;
+			&#125;
+		&#125;
+	&#125;
+	cout &lt;&lt; ans &lt;&lt; endl;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 
             </div>
@@ -271,9 +313,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/04/09/SDUOJ%20-%206/">
+                      <a href="/2021/04/09/SDUOJ%20-%205/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">SDUOJ 看电影题解（流水线调度问题）</span>
+                        <span class="hidden-mobile">SDUOJ 拉面馆题解 (编码和位运算)</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
