@@ -18,7 +18,7 @@
   <meta name="author" content="Just Linton">
   <meta name="keywords" content="">
   
-  <title>SDUOJ 划分石头题解 (二分查找) - Just Linton | 个人博客</title>
+  <title>节拍发生器的原理 - Just Linton | 个人博客</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -155,9 +155,9 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="SDUOJ 划分石头题解 (二分查找)">
+            <span class="h2" id="subtitle" title="节拍发生器的原理">
               
-                SDUOJ 划分石头题解 (二分查找)
+                节拍发生器的原理
               
             </span>
 
@@ -167,8 +167,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-04-13 15:13" pubdate>
-        April 13, 2021 pm
+      <time datetime="2021-04-14 15:13" pubdate>
+        April 14, 2021 pm
       </time>
     </span>
   
@@ -179,7 +179,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      591 字
+      806 字
     </span>
   
 
@@ -227,87 +227,42 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">SDUOJ 划分石头题解 (二分查找)</h1>
+            <h1 style="display: none">节拍发生器的原理</h1>
             
             <div class="markdown-body">
-              <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>海边有很多好看的石头🪨，war把它们收集起来依次排成一排，一共n个，第i个石头的重量为w_i<em>w**i</em>。他想将其分成m段，每一段连续，并且<strong>重量和</strong>最大的段的<strong>和最小</strong>。请你帮帮他～</p>
-<h2 id="输入描述"><a href="#输入描述" class="headerlink" title="输入描述"></a>输入描述</h2><p>第一行为n(1≤n≤10^5)(1≤<em>n</em>≤105)，m(m≤n)(<em>m</em>≤<em>n</em>)。</p>
-<p>第二行n个数，第i个数为w_i(0≤wi≤10^9)<em>w**i</em>(0≤<em>w**i</em>≤109)，中间有空格。</p>
-<h2 id="输出描述"><a href="#输出描述" class="headerlink" title="输出描述"></a>输出描述</h2><p>输出只有一个数，<strong>重量和</strong>最大的段的和。</p>
-<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><h4 id="算法数据"><a href="#算法数据" class="headerlink" title="算法数据"></a>算法数据</h4><table>
+              <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><h2 id="连续节拍发生器"><a href="#连续节拍发生器" class="headerlink" title="连续节拍发生器"></a>连续节拍发生器</h2><p><img src="https://z3.ax1x.com/2021/04/14/c6YWPf.jpg" srcset="/img/loading.gif" lazyload></p>
+<h3 id="D-触发器的原理"><a href="#D-触发器的原理" class="headerlink" title="D-触发器的原理"></a>D-触发器的原理</h3><h4 id="D-触发器"><a href="#D-触发器" class="headerlink" title="D-触发器"></a>D-触发器</h4><p>D-触发器就是一个一位的寄存器。</p>
+<h4 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h4><p>对于D触发器，其CLR的优先级大于PRN，PRN优先级又大于CLK。</p>
+<table>
 <thead>
 <tr>
-<th>标识符</th>
-<th>解释</th>
+<th>引脚</th>
+<th>作用</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>stones[0..100010]</td>
-<td>存储石头的重量</td>
+<td>CLK</td>
+<td>上升沿触发，相当于把D的值存进触发器，使Q的值一直为D，除非被清零。</td>
 </tr>
 <tr>
-<td>maxMass</td>
-<td>界定二分查找的下界</td>
+<td>PRN</td>
+<td>让Q强制输出1。不管CLK如何。</td>
 </tr>
 <tr>
-<td>inputSum</td>
-<td>界定二分查找的上界</td>
+<td>CLR</td>
+<td>清零。只要其有效，Q端就是0.</td>
 </tr>
 </tbody></table>
-<h2 id="算法设计"><a href="#算法设计" class="headerlink" title="算法设计"></a>算法设计</h2><h4 id="二分答案：最小化最大值"><a href="#二分答案：最小化最大值" class="headerlink" title="二分答案：最小化最大值"></a>二分答案：最小化最大值</h4><p>根据输入，确定上述上下界，开始二分查找。</p>
-<p>判断函数的关键，在于输入一个判断值d作为每段的质量，判断尽量<code>以此为最小质量</code>，能否分得<code>&lt;=m</code>段。因为如果d过小，显然分段数量要很大。如果d足够大了，分段数量就可以&lt;=m，那么显然<code>能满足</code>“可以分到m段”的条件。</p>
-<p>具体实现方式在于，按顺序遍历所有石头，并计算当前段的质量和。如果当前质量和+下一石头质量超过了d，则分段数++，其余量归零。</p>
-<h2 id="关键问题"><a href="#关键问题" class="headerlink" title="关键问题"></a>关键问题</h2><p>可以通过输入来确定二分答案的上下界，加快速度。</p>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;bits&#x2F;stdc++.h&gt;
-
-using namespace std;
-const int INF &#x3D; 1e9;
-
-unordered_map&lt;int, int&gt; stones;
-int n, m;
-int maxMass, inputSum;
-
-bool C(int d) &#123;
-	int massSum &#x3D; 0, divides &#x3D; 0;
-
-	for (int i &#x3D; 1; i &lt;&#x3D; n; i++) &#123;
-		if (massSum + stones[i] &gt; d) &#123;
-			divides++;
-			massSum &#x3D; stones[i];
-		&#125;
-		else massSum +&#x3D; stones[i];
-	&#125;
-	if (divides &gt;&#x3D; m)return false;
-	return true;
-&#125;
-
-void solve() &#123;
-	int lb &#x3D; maxMass, ub &#x3D; inputSum, mid &#x3D; 0, ans &#x3D; 0;
-	while (lb&lt;&#x3D;ub)
-	&#123;
-		mid &#x3D; (ub + lb) &#x2F; 2;
-		if (C(mid)) &#123;
-			ans &#x3D; mid;
-			ub &#x3D; mid - 1;
-		&#125;
-		else lb &#x3D; mid + 1;
-	&#125;
-	cout &lt;&lt; ans &lt;&lt; endl;
-&#125;
-
-int main() &#123;
-	&#x2F;&#x2F;freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.in&quot;,&quot;r&quot;,stdin);
-	&#x2F;&#x2F;freopen(&quot;C:\\Users\\Lenovo\\Desktop\\a.out&quot;, &quot;w&quot;, stdout);
-	cin &gt;&gt; n &gt;&gt; m;
-	for (int i &#x3D; 1; i &lt;&#x3D; n; i++) &#123;
-		cin &gt;&gt; stones[i]; 
-		if (stones[i] &gt; maxMass)maxMass &#x3D; stones[i];
-		inputSum +&#x3D; stones[i];
-	&#125;
-	solve();
-&#125;
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
-
+<h3 id="连续节拍发生器原理"><a href="#连续节拍发生器原理" class="headerlink" title="连续节拍发生器原理"></a>连续节拍发生器原理</h3><p>一开始RST为0，节拍2、3、4对应的触发器的CLR处于有效状态，输出都是0；节拍1对应的触发器的PRN有效，在不受CLK的控制下强制输出1，所以脉冲会呈现第一拍常亮的状态；</p>
+<p>将RST置为1，则第二拍触发器立即置为1，并输出1；与此同时第一拍触发器立即置为0，并输出0.</p>
+<p>在第二拍内，四个触发器的Q端分别是0100.下一脉冲到达时，第三拍触发器被第二排的输出置1，同时第二拍触发器置0.以此类推。随着拍数增加，拍子的编号总是对4取模的。当发生器工作了起来，四个触发器就是平等的了。</p>
+<p>当RST变为0时，2、3、4拍的触发器都被清零并无法被赋值。节拍停止发生。</p>
+<h2 id="单步节拍发生器"><a href="#单步节拍发生器" class="headerlink" title="单步节拍发生器"></a>单步节拍发生器</h2><p><img src="https://z3.ax1x.com/2021/04/14/c6Y2IP.jpg" srcset="/img/loading.gif" lazyload></p>
+<h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>这个发生器和前者的区别在于它由五个触发器构成。</p>
+<h4 id="关于顶上那个或非门"><a href="#关于顶上那个或非门" class="headerlink" title="关于顶上那个或非门"></a>关于顶上那个或非门</h4><p>第一拍的输入是由四个节拍的脉冲或非而来。这意味着，如果发生器正在工作，则第一拍永远输入0，这样可以防止错乱（即在后续的脉冲点亮的时候，第一拍又发出一次脉冲）。</p>
+<h4 id="如何实现暂停发生"><a href="#如何实现暂停发生" class="headerlink" title="如何实现暂停发生"></a>如何实现暂停发生</h4><p>在第五拍的整个过程中，第五个触发器都是输出高电平，但是此过程中节拍信号是先下降沿，后上升沿。下降沿发生在节拍的中间位置，上升沿发生在节拍末尾。由于第五拍的输出与节拍进行或运算，在第五拍中，实际到达触发器的CLK信号都是恒为高电平。</p>
+<p>因此可以认为，第五排拍，第五个触发器的持续高电平把CLK的上升沿掩盖了。触发器需要上升沿才能被触发，但是所有触发器都收不到上升沿（包括关键的第一号触发器），整个发生器就处于暂停状态了。</p>
+<h4 id="如何恢复节拍发生"><a href="#如何恢复节拍发生" class="headerlink" title="如何恢复节拍发生"></a>如何恢复节拍发生</h4><p>但是注意：在第五拍时，第五个触发器输出1，且前四个触发器都是0，此时第一个触发器有1的输入。这意味着，虽然发生器暂停了工作，但是一号触发器是一直有高电平输入的。因此，如果此时给予一个清零信号，五号触发器被清零，则上升沿将不再被掩盖，一号触发器就可以在收到上升沿时直接触发一个高电平信号，整个发生器又开始运行了。</p>
 
             </div>
             <hr>
@@ -317,9 +272,9 @@ int main() &#123;
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                      <a class="hover-with-bg" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E4%B8%8E%E8%AE%BE%E8%AE%A1/">计算机组成与设计</a>
                     
-                      <a class="hover-with-bg" href="/categories/%E7%AE%97%E6%B3%95/SDUOJ/">SDUOJ</a>
+                      <a class="hover-with-bg" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E4%B8%8E%E8%AE%BE%E8%AE%A1/%E5%AE%9E%E9%AA%8C/">实验</a>
                     
                   </div>
                 
@@ -344,18 +299,12 @@ int main() &#123;
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/04/14/CCEXP07/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">节拍发生器的原理</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/04/12/SDUOJ008/">
-                        <span class="hidden-mobile">SDUOJ TT与可怜的猫题解 (水题)</span>
+                      <a href="/2021/04/13/SDUOJ013/">
+                        <span class="hidden-mobile">SDUOJ 划分石头题解 (二分查找)</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
